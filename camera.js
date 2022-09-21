@@ -1,5 +1,4 @@
 // tourner la camera
-import "./main";
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 export class Camera extends THREE.PerspectiveCamera{
