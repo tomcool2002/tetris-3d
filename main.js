@@ -49,9 +49,9 @@ function CreatePlayGround() {
   PlayGround.add(Hline1)
   }
   for(let i = 0; i < 10; i++){
-    const Hline1 = VecticalLine();
-  Hline1.position.x = -2.5*i + 11.25;
-  PlayGround.add(Hline1)
+    const Vline1 = VecticalLine();
+  Vline1.position.x = -2.5*i + 11.25;
+  PlayGround.add(Vline1)
   }
   let geometry = new THREE.BoxGeometry(45, 1, 5);
   const texture = new THREE.MeshBasicMaterial({ color: 0xff0000 });
