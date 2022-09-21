@@ -2,7 +2,7 @@
 import "./main";
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
-class Camera {
+export class Camera {
     constructor(renderer = new THREE.WebGLRenderer({ antialias: false })){
         this.camera = new THREE.PerspectiveCamera(
             45,
