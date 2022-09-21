@@ -1,9 +1,9 @@
 
 import * as THREE from 'three';
+import {Camera} from "./camera";
 
 
-
-let scene, camera, renderer, cube, line, geometry, material, controls;
+let scene, renderer, cube, line, geometry, material, controls,cam;
 
 function init() {
 
@@ -15,6 +15,10 @@ function init() {
   renderer = new THREE.WebGLRenderer({ antialias: false });
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.body.appendChild(renderer.domElement);
+
+  cam = new Camera(renderer);
+
+
   let PlayGround1 = CreatePlayGround();
   scene.add(PlayGround1);
   let PlayGround2 = CreatePlayGround();
@@ -67,12 +71,13 @@ function CreatePlayGround() {
 function animate() {
   // controls.update();
   requestAnimationFrame(animate);
-  renderer.render(scene, camera);
+  renderer.render(scene, cam.camera);
 }
-
-
-window.addEventListener("resize", onWindowResize, false);
-
 
 init();
 animate();
+
+window.addEventListener("resize", cam.onWindowResize(), false);
+
+
+
