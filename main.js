@@ -77,7 +77,7 @@ function animate() {
 init();
 animate();
 
-window.addEventListener("resize", cam.onWindowResize(), false);
+window.addEventListener("resize", onWindowResize, false);
 
 
 
