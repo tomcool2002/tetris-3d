@@ -14,8 +14,7 @@ function init() {
     0.1,
     500
   );
-  camera.lookAt(0, 0, 0);
-  camera.position.set(0, 0, 100);
+ 
 
   renderer = new THREE.WebGLRenderer({ antialias: false });
   renderer.setSize(window.innerWidth, window.innerHeight);
@@ -76,13 +75,7 @@ function animate() {
   renderer.render(scene, camera);
 }
 
-function onWindowResize() {
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-}
 
-window.addEventListener("resize", onWindowResize, false);
 
 init();
 animate();
