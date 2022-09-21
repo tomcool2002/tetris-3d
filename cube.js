@@ -4,6 +4,13 @@ class Cube extends THREE.Group{
     constructor()
 
 
+    createCube(size, colour) {
+        var geometry = new THREE.BoxGeometry(size, size, size);
+        var material = new THREE.MeshPhongMaterial({ color: colour });
+        var cube = new THREE.Mesh(geometry, material);
+    
+        return cube;
+    }
 
     getRandomColour() {
     var letters = "0123456789ABCDEF";
@@ -13,7 +20,7 @@ class Cube extends THREE.Group{
     }
     return colour;
 
-    
+
 }  
 }
 
