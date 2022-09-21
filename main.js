@@ -53,10 +53,10 @@ function CreatePlayGround() {
   Vline1.position.x = -2.5*i + 11.25;
   PlayGround.add(Vline1)
   }
-  let geometry = new THREE.BoxGeometry(45, 1, 5);
+  let geometry = new THREE.BoxGeometry(22.5, 1, 5);
   const texture = new THREE.MeshBasicMaterial({ color: 0xff0000 });
   let base = new THREE.Mesh(geometry,texture);
-  base.position.y = -50;
+  base.position.y = -25;
   PlayGround.add(base);
 
   //let geometry2 = new THREE.BoxGeometry(5,5,1);
