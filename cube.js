@@ -2,11 +2,7 @@ import * as THREE from "three";
 
 export class Cube extends THREE.Group {
   static createRandomColorCube(size) {
-    let colour = new THREE.Color(
-      this.getRandomColour(),
-      this.getRandomColour(),
-      this.getRandomColour()
-    );
+    let colour = new THREE.Color(`rgb(${this.getRandomColour()}, ${this.getRandomColour()}, ${this.getRandomColour()})`);
     let geometry = new THREE.BoxGeometry(size, size, size);
     console.log(colour);
     let material = new THREE.MeshBasicMaterial({ color: colour });
