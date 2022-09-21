@@ -8,12 +8,7 @@ function init() {
 
   scene = new THREE.Scene();
   scene.add(line);
-  camera = new THREE.PerspectiveCamera(
-    45,
-    window.innerWidth / window.innerHeight,
-    0.1,
-    500
-  );
+  
  
 
   renderer = new THREE.WebGLRenderer({ antialias: false });
@@ -69,11 +64,13 @@ function CreatePlayGround() {
 
 
 function animate() {
-  controls.update();
+  // controls.update();
   requestAnimationFrame(animate);
   renderer.render(scene, camera);
 }
 
+
+window.addEventListener("resize", onWindowResize, false);
 
 
 init();
