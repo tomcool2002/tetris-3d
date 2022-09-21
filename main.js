@@ -39,7 +39,7 @@ function init() {
 }
 
 function horizontalLine() {
-  const geometry = new THREE.BoxGeometry(100, 0.1, 0.01);
+  const geometry = new THREE.BoxGeometry(45, 0.1, 0.01);
   const texture = new THREE.MeshBasicMaterial({ color: 0x333333 });
   const line = new THREE.Mesh(geometry,texture);
   return line;
@@ -59,11 +59,21 @@ function CreatePlayGround() {
   Hline1.position.y = -5*i + 50;
   PlayGround.add(Hline1)
   }
-  for(let i = 0; i < 21; i++){
+  for(let i = 0; i < 10; i++){
     const Hline1 = VecticalLine();
-  Hline1.position.x = -5*i + 50;
+  Hline1.position.x = -5*i + 22.5;
   PlayGround.add(Hline1)
   }
+  let geometry = new THREE.BoxGeometry(45, 1, 5);
+  const texture = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+  let base = new THREE.Mesh(geometry,texture);
+  base.position.y = -50;
+  PlayGround.add(base);
+  //let geometry2 = new THREE.BoxGeometry(5,5,1);
+  //let texture2 = new THREE.MeshBasicMaterial({color: 0xfff000});
+  //let cubetest = new THREE.Mesh(geometry2,texture2);
+  //cubetest.position.y = 2.5;
+  //PlayGround.add(cubetest);
   return PlayGround;
 }
 
