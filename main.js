@@ -28,14 +28,14 @@ function init() {
 }
 
 function horizontalLine() {
-  const geometry = new THREE.BoxGeometry(22.5, 0.1, 0.02);
+  const geometry = new THREE.BoxGeometry(22.5, 0.5, 0.02);
   const texture = new THREE.MeshBasicMaterial({ color: 0x333333 });
   const line = new THREE.Mesh(geometry,texture);
   return line;
 }
 
 function VecticalLine() {
-  const geometry = new THREE.BoxGeometry(0.1, 50, 0.02);
+  const geometry = new THREE.BoxGeometry(0.5, 50, 0.02);
   const texture = new THREE.MeshBasicMaterial({ color: 0x555555 });
   const line = new THREE.Mesh(geometry,texture);
   return line;
