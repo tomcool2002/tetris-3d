@@ -1,6 +1,7 @@
 
 import * as THREE from 'three';
 import {Camera} from "./camera";
+import {Cube} from "./cube";
 
 
 
@@ -25,6 +26,9 @@ function init() {
   let PlayGround2 = CreatePlayGround();
   PlayGround2.position.z = -5;
   scene.add(PlayGround2);
+  let cube = Cube.createRandomColorCube(2.5);
+  console.log(cube.material.color);
+  scene.add(cube);
 }
 
 function horizontalLine() {
