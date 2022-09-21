@@ -70,7 +70,7 @@ function CreatePlayGround() {
 
 
 function animate() {
-  // controls.update();
+  cam.reposition();
   requestAnimationFrame(animate);
   renderer.render(scene, cam);
 }
