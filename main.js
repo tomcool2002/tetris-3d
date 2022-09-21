@@ -78,7 +78,13 @@ function animate() {
 init();
 animate();
 
-window.addEventListener("resize", cam.onWindowResize(), false);
+function onWindowResize() {
+  cam.aspect = window.innerWidth / window.innerHeight;
+  cam.updateProjectionMatrix();
+  cam.renderer.setSize(window.innerWidth, window.innerHeight);
+}
+
+window.addEventListener("resize", onWindowResize, false);
 
 
 
