@@ -1,9 +1,10 @@
 // tourner la camera
 
- // camera.lookAt(0, 0, 0);
-  // camera.position.set(0, 0, 100);
+controls = new OrbitControls(camera,renderer.domElement);
+camera.lookAt(0, 0, 0);
+camera.position.set(0, 0, 100);
 
-  
+
 function onWindowResize() {
     camera.aspect = window.innerWidth / window.innerHeight;
     // camera.updateProjectionMatrix();

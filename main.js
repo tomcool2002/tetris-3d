@@ -19,7 +19,6 @@ function init() {
   renderer = new THREE.WebGLRenderer({ antialias: false });
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.body.appendChild(renderer.domElement);
-  controls = new OrbitControls(camera,renderer.domElement);
   let PlayGround1 = CreatePlayGround();
   scene.add(PlayGround1);
   let PlayGround2 = CreatePlayGround();
