@@ -4,8 +4,7 @@ import {Camera} from "./camera";
 
 
 
-let scene, renderer, cube, line, geometry, material, controls;
-const cam = null;
+let scene, renderer, cube, line, geometry, material, controls,cam;
 
 function init() {
 
@@ -73,13 +72,13 @@ function CreatePlayGround() {
 function animate() {
   // controls.update();
   requestAnimationFrame(animate);
-  renderer.render(scene, cam.camera);
+  renderer.render(scene, cam);
 }
 
 init();
 animate();
 
-window.addEventListener("resize", onWindowResize, false);
+window.addEventListener("resize", cam.onWindowResize(), false);
 
 
 
