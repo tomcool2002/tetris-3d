@@ -3,20 +3,10 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 let scene, camera, renderer, cube, line, geometry, material, controls;
-const points = [];
 
 function init() {
 
-  points.push(new THREE.Vector3(0, 0, 0));
-  points.push(new THREE.Vector3(10, 0, 0));
-  points.push(new THREE.Vector3(0, 10, 0));
-  points.push(new THREE.Vector3(-10, 0, 0));
-  points.push(new THREE.Vector3(0, 0, 0));
-
-  geometry = new THREE.BufferGeometry().setFromPoints(points);
   scene = new THREE.Scene();
-  material = new THREE.LineBasicMaterial({ color: 0x0000ff });
-  line = new THREE.Line(geometry, material);
   scene.add(line);
   camera = new THREE.PerspectiveCamera(
     45,
@@ -39,14 +29,14 @@ function init() {
 }
 
 function horizontalLine() {
-  const geometry = new THREE.BoxGeometry(45, 0.1, 0.01);
+  const geometry = new THREE.BoxGeometry(45, 0.1, 0.02);
   const texture = new THREE.MeshBasicMaterial({ color: 0x333333 });
   const line = new THREE.Mesh(geometry,texture);
   return line;
 }
 
 function VecticalLine() {
-  const geometry = new THREE.BoxGeometry(0.1, 100, 0.01);
+  const geometry = new THREE.BoxGeometry(0.1, 100, 0.02);
   const texture = new THREE.MeshBasicMaterial({ color: 0x555555 });
   const line = new THREE.Mesh(geometry,texture);
   return line;
@@ -69,11 +59,13 @@ function CreatePlayGround() {
   let base = new THREE.Mesh(geometry,texture);
   base.position.y = -50;
   PlayGround.add(base);
+
   //let geometry2 = new THREE.BoxGeometry(5,5,1);
   //let texture2 = new THREE.MeshBasicMaterial({color: 0xfff000});
   //let cubetest = new THREE.Mesh(geometry2,texture2);
   //cubetest.position.y = 2.5;
   //PlayGround.add(cubetest);
+
   return PlayGround;
 }
 
