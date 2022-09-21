@@ -29,14 +29,14 @@ function init() {
 }
 
 function horizontalLine() {
-  const geometry = new THREE.BoxGeometry(45, 0.1, 0.02);
+  const geometry = new THREE.BoxGeometry(22.5, 0.1, 0.02);
   const texture = new THREE.MeshBasicMaterial({ color: 0x333333 });
   const line = new THREE.Mesh(geometry,texture);
   return line;
 }
 
 function VecticalLine() {
-  const geometry = new THREE.BoxGeometry(0.1, 100, 0.02);
+  const geometry = new THREE.BoxGeometry(0.1, 50, 0.02);
   const texture = new THREE.MeshBasicMaterial({ color: 0x555555 });
   const line = new THREE.Mesh(geometry,texture);
   return line;
@@ -46,12 +46,12 @@ function CreatePlayGround() {
   let PlayGround = new THREE.Group();
   for(let i = 0; i < 21; i++){
     const Hline1 = horizontalLine();
-  Hline1.position.y = -5*i + 50;
+  Hline1.position.y = -2.5*i + 25;
   PlayGround.add(Hline1)
   }
   for(let i = 0; i < 10; i++){
     const Hline1 = VecticalLine();
-  Hline1.position.x = -5*i + 22.5;
+  Hline1.position.x = -2.5*i + 11.25;
   PlayGround.add(Hline1)
   }
   let geometry = new THREE.BoxGeometry(45, 1, 5);
