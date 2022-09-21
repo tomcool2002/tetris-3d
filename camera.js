@@ -15,11 +15,12 @@ export class Camera extends THREE.PerspectiveCamera{
         this.lookAt(0, 0, 0);
         this.position.set(0, 0, 100);
         // this.controls = new OrbitControls(renderer);
+        this.controls.enabled = false;
     }
 
 
     reposition(){
-
+        this.autorotate = true;
     }
 
     
