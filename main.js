@@ -3,7 +3,9 @@ import * as THREE from 'three';
 import {Camera} from "./camera";
 
 
-let scene, renderer, cube, line, geometry, material, controls,cam;
+
+let scene, renderer, cube, line, geometry, material, controls;
+const cam = null;
 
 function init() {
 
@@ -78,6 +80,7 @@ init();
 animate();
 
 window.addEventListener("resize", onWindowResize, false);
+
 
 
 
