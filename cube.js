@@ -2,11 +2,10 @@ import * as THREE from "three";
 
 export class Cube extends THREE.Group {
   static createRandomColorCube(size) {
-    let colour = new THREE.Color(`rgb(${this.getRandomColour()}, ${this.getRandomColour()}, ${this.getRandomColour()})`);
+    let colour = new THREE.Color(this.getRandomColour());
     let geometry = new THREE.BoxGeometry(size, size, size);
-    // console.log(colour);
+
     let material = new THREE.MeshBasicMaterial({ color: colour });
-    // console.log(material.color);
     let cube = new THREE.Mesh(geometry, material);
     // console.log(cube.material.color)
 
@@ -14,7 +13,11 @@ export class Cube extends THREE.Group {
   }
 
   static getRandomColour() {
-    let colour = Math.floor(Math.random() * 256) + 0;
+    var letters = "0123456789ABCDEF";
+    var colour = "#";
+    for (var i = 0; i < 6; i++) {
+      colour += letters[Math.floor(Math.random() * 16)];
+    }
     return colour;
   }
 }

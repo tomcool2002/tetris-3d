@@ -1,13 +1,12 @@
 
 import * as THREE from 'three';
-import { CullFaceNone } from 'three';
 import {Camera} from "./camera";
 import {Cube} from "./cube";
 
 
 
-let scene, renderer, cube, line,cam, base;
-
+let scene, renderer, line,cam, base;
+let cube;
 
 
 
@@ -33,10 +32,7 @@ function init() {
   scene.add(PlayGround2);
   cube = Cube.createRandomColorCube(2.5);
 
-  // ajout de julian
   cube.position.set(0,1,-2);
-
-  // console.log(cube.material.color);
   scene.add(cube);
 }
 
@@ -96,7 +92,6 @@ function animate() {
         cube.position.y -= 2;
         lastUpdate = new Date().getSeconds();
         updated = true;
-        // console.log(cube.position.y)
       }
     }
   } else updated = false;
