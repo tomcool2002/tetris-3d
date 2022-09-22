@@ -1,11 +1,16 @@
 
 import * as THREE from 'three';
+import { CullFaceNone } from 'three';
 import {Camera} from "./camera";
 import {Cube} from "./cube";
 
 
 
-let scene, renderer, cube, line, geometry, material, controls,cam;
+let scene, renderer, cube, line,cam, base;
+
+
+
+
 
 function init() {
 
@@ -26,8 +31,12 @@ function init() {
   let PlayGround2 = CreatePlayGround();
   PlayGround2.position.z = -5;
   scene.add(PlayGround2);
-  let cube = Cube.createRandomColorCube(2.5);
-  console.log(cube.material.color);
+  cube = Cube.createRandomColorCube(2.5);
+
+  // ajout de julian
+  cube.position.set(0,1,-2);
+
+  // console.log(cube.material.color);
   scene.add(cube);
 }
 
@@ -45,6 +54,7 @@ function VecticalLine() {
   return line;
 }
 
+
 function CreatePlayGround() {
   let PlayGround = new THREE.Group();
   for(let i = 0; i < 21; i++){
@@ -59,9 +69,10 @@ function CreatePlayGround() {
   }
   let geometry = new THREE.BoxGeometry(22.5, 1, 5);
   const texture = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-  let base = new THREE.Mesh(geometry,texture);
+  base = new THREE.Mesh(geometry,texture);
   base.position.y = -25;
   PlayGround.add(base);
+
 
   //let geometry2 = new THREE.BoxGeometry(5,5,1);
   //let texture2 = new THREE.MeshBasicMaterial({color: 0xfff000});
@@ -73,14 +84,37 @@ function CreatePlayGround() {
 }
 
 
+let lastUpdate = new Date().getSeconds();
+let updated = false;
+
 function animate() {
+  let now = new Date().getSeconds();
+  
+  if(now > lastUpdate + 0.1){
+    if(updated == false){
+      if(-23 < cube.position.y){
+        cube.position.y -= 2;
+        lastUpdate = new Date().getSeconds();
+        updated = true;
+        // console.log(cube.position.y)
+      }
+    }
+  } else updated = false;
   cam.reposition();
   requestAnimationFrame(animate);
   renderer.render(scene, cam);
 }
 
+
+
+
+
+
 init();
 animate();
+
+
+
 
 function onWindowResize() {
   cam.aspect = window.innerWidth / window.innerHeight;

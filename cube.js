@@ -4,11 +4,11 @@ export class Cube extends THREE.Group {
   static createRandomColorCube(size) {
     let colour = new THREE.Color(`rgb(${this.getRandomColour()}, ${this.getRandomColour()}, ${this.getRandomColour()})`);
     let geometry = new THREE.BoxGeometry(size, size, size);
-    console.log(colour);
+    // console.log(colour);
     let material = new THREE.MeshBasicMaterial({ color: colour });
-    console.log(material.color);
+    // console.log(material.color);
     let cube = new THREE.Mesh(geometry, material);
-    console.log(cube.material.color)
+    // console.log(cube.material.color)
 
     return cube;
   }
