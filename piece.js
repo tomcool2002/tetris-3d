@@ -9,13 +9,13 @@ export class Piece extends THREE.Group {
     this.Piece = this.createRandomPiece();
   }
 
-  createRandomColorCube(size,color,position) {
+  createRandomColorCube(size,color,x,y,z) {
     let colour = new THREE.Color(color);
     let geometry = new THREE.BoxGeometry(size, size, size);
 
     let material = new THREE.MeshBasicMaterial({ color: colour });
     let cube = new THREE.Mesh(geometry, material);
-    cube.position.set(position);
+    cube.position.set(x,y,z);
     // console.log(cube.material.color)
 
     return cube;
@@ -32,30 +32,42 @@ export class Piece extends THREE.Group {
 
   createRandomPiece() {
     //random number 1-7
-    //let rand = Math.floor(Math.random() * 7) + 1;
-    let rand = 1;
+    let rand= 3//Math.floor(Math.random() * 7) + 1;
     let piece = new THREE.Group();
+    let color = this.getRandomColour();
 
+    console.log(rand);
     switch (rand) {
       case 1: // I Shape
 
-        piece.add(this.createRandomColorCube(2.5,this.getRandomColour(),new Vector3(0,0,0)))
-        piece.add(this.createRandomColorCube(2.5,this.getRandomColour(),new Vector3(2.5,2.5,0)))
-        piece.add(this.createRandomColorCube(2.5,this.getRandomColour(),new Vector3(5,5,0)))
-        piece.add(this.createRandomColorCube(2.5,this.getRandomColour(),new Vector3(7.5,7.5,0)))
-
+        piece.add(this.createRandomColorCube(2.5,color,0,0,-2.5))
+        piece.add(this.createRandomColorCube(2.5,color,0,2.5,-2.5))
+        piece.add(this.createRandomColorCube(2.5,color,0,5,-2.5))
+        piece.add(this.createRandomColorCube(2.5,color,0,7.5,-2.5))
         break;
-      case 2:
+      case 2: // j Shape
+        piece.add(this.createRandomColorCube(2.5,color,0,0,-2.5))
+        piece.add(this.createRandomColorCube(2.5,color,2.5,0,-2.5))
+        piece.add(this.createRandomColorCube(2.5,color,2.5,2.5,-2.5))
+        piece.add(this.createRandomColorCube(2.5,color,2.5,5,-2.5))
         break;
-      case 3:
+      case 3: // L Shape
+      piece.add(this.createRandomColorCube(2.5,color,0,0,-2.5))
+      piece.add(this.createRandomColorCube(2.5,color,-2.5,0,-2.5))
+      piece.add(this.createRandomColorCube(2.5,color,-2.5,2.5,-2.5))
+      piece.add(this.createRandomColorCube(2.5,color,-2.5,5,-2.5))
         break;
-      case 4:
+      case 4: // O Shape
+      piece.add(this.createRandomColorCube(2.5,color,0,0,-2.5))
+      piece.add(this.createRandomColorCube(2.5,color,2.5,0,-2.5))
+      piece.add(this.createRandomColorCube(2.5,color,2.5,2.5,-2.5))
+      piece.add(this.createRandomColorCube(2.5,color,0,2.5,-2.5))
         break;
-      case 5:
+      case 5: // Z Shape
         break;
-      case 6:
+      case 6: // T Shape
         break;
-      case 7:
+      case 7: // S Shape
         break;
     }
     return piece;

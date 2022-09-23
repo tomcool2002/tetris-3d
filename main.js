@@ -4,6 +4,7 @@ import {Camera} from "./camera";
 import {Piece} from "./piece";
 
 let scene, renderer,cam, base;
+let pieceInit;
 
 function init() {
 
@@ -26,10 +27,10 @@ function init() {
   PlayGround2.position.z = -5;
   World.add(PlayGround2);
 
-  World.position.x = -2.5;
+  World.position.y = 1;
 
 
-  let pieceInit = new Piece();
+  pieceInit = new Piece();
 
   scene.add(pieceInit.Piece);
 
@@ -85,16 +86,15 @@ let lastUpdate = new Date().getSeconds();
 let updated = false;
 
 function animate() {
-  let p = new Piece();
   let now = new Date().getSeconds();
   
   if(now > lastUpdate + 0.5){
     if(updated == false){
-      //if(-23 < cube.position.y){
-        //cube.position.y -= 2;
+      if(-23 < pieceInit.position.y){
+        pieceInit.position.y -= 2;
         lastUpdate = new Date().getSeconds();
         updated = true;
-      //}
+      }
     }
   } else updated = false;
   cam.reposition();
