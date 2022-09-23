@@ -15,7 +15,7 @@ function init() {
 
   cam = new Camera(renderer);
 
-  let World = new THREE.Group;
+  let World = new THREE.Group();
 
   let PlayGround1 = CreatePlayGround();
   World.add(PlayGround1);
@@ -26,6 +26,7 @@ function init() {
   World.position.x = -2.5;
 
   scene.add(World);
+
 }
 
 function horizontalLine() {
