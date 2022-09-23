@@ -85,7 +85,6 @@ let lastUpdate = new Date().getSeconds();
 let updated = false;
 
 function animate() {
-  let p = new Piece();
   let now = new Date().getSeconds();
   
   if(now > lastUpdate + 0.5){
