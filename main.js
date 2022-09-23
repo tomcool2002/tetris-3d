@@ -31,6 +31,8 @@ function init() {
 
   let pieceInit = new Piece();
 
+  scene.add(pieceInit.Piece);
+
   scene.add(World);
 
 }
