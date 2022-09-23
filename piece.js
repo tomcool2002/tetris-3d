@@ -32,7 +32,7 @@ export class Piece extends THREE.Group {
 
   createRandomPiece() {
     //random number 1-7
-    let rand= 3//Math.floor(Math.random() * 7) + 1;
+    let rand = 5 //Math.floor(Math.random() * 7) + 1;
     let piece = new THREE.Group();
     let color = this.getRandomColour();
 
@@ -63,11 +63,23 @@ export class Piece extends THREE.Group {
       piece.add(this.createRandomColorCube(2.5,color,2.5,2.5,-2.5))
       piece.add(this.createRandomColorCube(2.5,color,0,2.5,-2.5))
         break;
-      case 5: // Z Shape
+      case 5: // Z Shape      
+      piece.add(this.createRandomColorCube(2.5,color,0,0,-2.5))
+      piece.add(this.createRandomColorCube(2.5,color,2.5,0,-2.5))
+      piece.add(this.createRandomColorCube(2.5,color,0,2.5,-2.5))
+      piece.add(this.createRandomColorCube(2.5,color,-2.5,2.5,-2.5))
         break;
       case 6: // T Shape
+      piece.add(this.createRandomColorCube(2.5,color,0,0,-2.5))
+      piece.add(this.createRandomColorCube(2.5,color,-2.5,0,-2.5))
+      piece.add(this.createRandomColorCube(2.5,color,2.5,0,-2.5))
+      piece.add(this.createRandomColorCube(2.5,color,0,2.5,-2.5))
         break;
       case 7: // S Shape
+      piece.add(this.createRandomColorCube(2.5,color,0,0,-2.5))
+      piece.add(this.createRandomColorCube(2.5,color,-2.5,0,-2.5))
+      piece.add(this.createRandomColorCube(2.5,color,0,2.5,-2.5))
+      piece.add(this.createRandomColorCube(2.5,color,2.5,2.5,-2.5))
         break;
     }
     return piece;

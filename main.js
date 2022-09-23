@@ -90,8 +90,8 @@ function animate() {
   
   if(now > lastUpdate + 0.5){
     if(updated == false){
-      if(-23 < pieceInit.position.y){
-        pieceInit.position.y -= 2;
+      if(-21 < pieceInit.Piece.position.y){
+        pieceInit.Piece.position.y -= 2.5;
         lastUpdate = new Date().getSeconds();
         updated = true;
       }
