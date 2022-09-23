@@ -1,22 +1,13 @@
 
 import * as THREE from 'three';
 import {Camera} from "./camera";
-import {Cube} from "./cube";
+import {Piece} from "./piece";
 
-
-
-let scene, renderer, line,cam, base;
-let cube;
-
-
-
+let scene, renderer,cam, base;
 
 function init() {
 
   scene = new THREE.Scene();
-  scene.add(line);
-  
- 
 
   renderer = new THREE.WebGLRenderer({ antialias: false });
   renderer.setSize(window.innerWidth, window.innerHeight);
@@ -24,16 +15,17 @@ function init() {
 
   cam = new Camera(renderer);
 
+  let World = new THREE.Group;
 
   let PlayGround1 = CreatePlayGround();
-  scene.add(PlayGround1);
+  World.add(PlayGround1);
   let PlayGround2 = CreatePlayGround();
   PlayGround2.position.z = -5;
-  scene.add(PlayGround2);
-  cube = Cube.createRandomColorCube(2.5);
+  World.add(PlayGround2);
 
-  cube.position.set(0,1,-2);
-  scene.add(cube);
+  World.position.x = -2.5;
+
+  scene.add(World);
 }
 
 function horizontalLine() {
@@ -84,15 +76,16 @@ let lastUpdate = new Date().getSeconds();
 let updated = false;
 
 function animate() {
+  let p = new Piece();
   let now = new Date().getSeconds();
   
   if(now > lastUpdate + 0.5){
     if(updated == false){
-      if(-23 < cube.position.y){
-        cube.position.y -= 2;
+      //if(-23 < cube.position.y){
+        //cube.position.y -= 2;
         lastUpdate = new Date().getSeconds();
         updated = true;
-      }
+      //}
     }
   } else updated = false;
   cam.reposition();
@@ -102,14 +95,8 @@ function animate() {
 
 
 
-
-
-
 init();
 animate();
-
-
-
 
 function onWindowResize() {
   cam.aspect = window.innerWidth / window.innerHeight;
