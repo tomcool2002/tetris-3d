@@ -28,6 +28,9 @@ function init() {
 
   World.position.x = -2.5;
 
+
+  let pieceInit = new Piece();
+
   scene.add(World);
 
 }

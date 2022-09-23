@@ -9,18 +9,19 @@ export class Piece extends THREE.Group {
     this.Piece = this.createRandomPiece();
   }
 
-  createRandomColorCube(size,position) {
-    let colour = new THREE.Color(this.getRandomColour());
+  createRandomColorCube(size,color,position) {
+    let colour = new THREE.Color(color);
     let geometry = new THREE.BoxGeometry(size, size, size);
 
     let material = new THREE.MeshBasicMaterial({ color: colour });
     let cube = new THREE.Mesh(geometry, material);
-    cube.position = position;
+    cube.position.set(position);
     // console.log(cube.material.color)
 
     return cube;
   }
-  static getRandomColour() {
+
+  getRandomColour() {
     var letters = "0123456789ABCDEF";
     var colour = "#";
     for (var i = 0; i < 6; i++) {
@@ -38,10 +39,11 @@ export class Piece extends THREE.Group {
     switch (rand) {
       case 1: // I Shape
 
-        piece.add(this.createRandomColorCube(2.5,new Vector3(0,0,0)))
-        piece.add(this.createRandomColorCube(2.5,new Vector3(2.5,2.5,0)))
-        piece.add(this.createRandomColorCube(2.5,new Vector3(5,5,0)))
-        piece.add(this.createRandomColorCube(2.5,new Vector3(7.5,7.5,0)))
+        piece.add(this.createRandomColorCube(2.5,this.getRandomColour(),new Vector3(0,0,0)))
+        piece.add(this.createRandomColorCube(2.5,this.getRandomColour(),new Vector3(2.5,2.5,0)))
+        piece.add(this.createRandomColorCube(2.5,this.getRandomColour(),new Vector3(5,5,0)))
+        piece.add(this.createRandomColorCube(2.5,this.getRandomColour(),new Vector3(7.5,7.5,0)))
+
         break;
       case 2:
         break;
