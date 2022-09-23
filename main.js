@@ -6,6 +6,13 @@ import {Piece} from "./piece";
 let scene, renderer,cam, base;
 let pieceInit;
 
+const gamewidth = 9;
+const gameHeight = 20;
+
+let gameArray =[];
+
+
+
 function init() {
 
   scene = new THREE.Scene();
