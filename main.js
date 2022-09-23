@@ -9,9 +9,12 @@ function init() {
 
   scene = new THREE.Scene();
 
-  renderer = new THREE.WebGLRenderer({ antialias: false });
+  renderer = new THREE.WebGLRenderer({ 
+    canvas:document.querySelector("#bg"),
+    antialias: false
+  });
   renderer.setSize(window.innerWidth, window.innerHeight);
-  document.body.appendChild(renderer.domElement);
+  // document.body.appendChild(renderer.domElement);
 
   cam = new Camera(renderer);
 
