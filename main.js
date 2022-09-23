@@ -79,7 +79,7 @@ function animate() {
   let p = new Piece();
   let now = new Date().getSeconds();
   
-  if(now > lastUpdate + 0.1){
+  if(now > lastUpdate + 0.5){
     if(updated == false){
       //if(-23 < cube.position.y){
         //cube.position.y -= 2;
