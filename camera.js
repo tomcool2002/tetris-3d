@@ -9,8 +9,8 @@ export class Camera extends THREE.PerspectiveCamera{
             0.1,
             500);
 
-        this.renderer = renderer;
-        this.controls = new OrbitControls(this,this.renderer.domElement);
+        // this.renderer = renderer;
+        this.controls = new OrbitControls(this,renderer.domElement);
         
         this.lookAt(0, 0, 0);
         this.position.set(0, 0, 100);

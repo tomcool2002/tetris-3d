@@ -2,14 +2,17 @@
 import * as THREE from 'three';
 import {Camera} from "./camera";
 import {Piece} from "./piece";
-
+import {MouseClicker} from "./mouseClicker"
 let scene, renderer,cam, base;
 let pieceInit;
 
 const gamewidth = 9;
 const gameHeight = 20;
 
-let gameArray =[];
+// let gameArray =[];
+
+
+
 
 
 
@@ -22,7 +25,6 @@ function init() {
     antialias: false
   });
   renderer.setSize(window.innerWidth, window.innerHeight);
-  // document.body.appendChild(renderer.domElement);
 
   cam = new Camera(renderer);
 
@@ -40,6 +42,8 @@ function init() {
   pieceInit = new Piece();
 
   scene.add(pieceInit.Piece);
+  pieceInit.Piece.name = "a piece of game baby";
+  console.log(pieceInit.Piece.name);
 
   scene.add(World);
 
@@ -89,8 +93,44 @@ function CreatePlayGround() {
 }
 
 
+init();
+
+
+
+
+const clickPosition = {x: 0, y: 0};
+let mouseClicker = new MouseClicker();
+clearClickPosition();
+let canvas = document.querySelector("#bg");
+
+function getCanvasRelativePosition(event) {
+  const rect = canvas.getBoundingClientRect();
+  return {
+    x: event.clientX - rect.left,
+    y: event.clientY - rect.top,
+  };
+}
+
+function clearClickPosition() {
+  clickPosition.x = -100000;
+  clickPosition.y = -100000;
+}
+
+function setClickPosition(event) {
+  const pos = getCanvasRelativePosition(event);
+  clickPosition.x = (pos.x / canvas.clientWidth ) *  2 - 1;
+  clickPosition.y = (pos.y / canvas.clientHeight) * -2 + 1;  // note we flip Y
+}
+
+
+window.addEventListener('mousedown', setClickPosition);
+window.addEventListener('mouseup', clearClickPosition);
+
+
+
 let lastUpdate = new Date().getSeconds();
 let updated = false;
+
 
 function animate() {
   let now = new Date().getSeconds();
@@ -105,13 +145,13 @@ function animate() {
     }
   } else updated = false;
   cam.reposition();
+  mouseClicker.click(clickPosition, scene, cam)
   requestAnimationFrame(animate);
   renderer.render(scene, cam);
 }
 
 
 
-init();
 animate();
 
 function onWindowResize() {
