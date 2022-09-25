@@ -114,6 +114,7 @@ function getCanvasRelativePosition(event) {
 function clearClickPosition() {
   clickPosition.x = -100000;
   clickPosition.y = -100000;
+  mouseClicker.reset();
 }
 
 function setClickPosition(event) {
