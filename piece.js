@@ -32,11 +32,11 @@ export class Piece extends THREE.Group {
 
   createRandomPiece() {
     //random number 1-7
-    let rand = 5 //Math.floor(Math.random() * 7) + 1;
+    let rand = Math.floor(Math.random() * 7) + 1;
     let piece = new THREE.Group();
     let color = this.getRandomColour();
 
-    console.log(rand);
+    //console.log(rand);
     switch (rand) {
       case 1: // I Shape
 
