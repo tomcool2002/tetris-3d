@@ -17,6 +17,10 @@ export class MouseClicker {
         this.objectClicked = intersectedObjects[0].object;
         // this.previousColour = this.objectClicked.material.color;
         // this.objectClicked.material.color.setHex( 0xffffff );
+        console.log(this.objectClicked.name);
+        if(this.objectClicked.name == "Cirle")
+          return true
+        return false
         // console.log(`clicked: ${this.objectClicked.name}`);
       }
     }

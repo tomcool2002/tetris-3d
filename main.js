@@ -9,6 +9,8 @@ import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js';
 let scene, renderer,cam, base;
 let pieceInit;
 
+let pause;
+
 const gamewidth = 9;
 const gameHeight = 20;
 
@@ -54,14 +56,16 @@ function init() {
   // pause for now, add to ui later
   const loader = new GLTFLoader();
   loader.load('./pause/pauseModel.gltf', function(gltfScene){
-    gltfScene.scene.scale(10,10,10);
-    gltfScene.texture = 
+    gltfScene.scene.scale.set(5,5,5);
+    gltfScene.scene.position.x = 20;
+    gltfScene.scene.position.y = 20;
+    gltfScene.scene.position.z = -2.5;
     scene.add(gltfScene.scene); 
   });
 
   const light = new THREE.AmbientLight(0x404040 );
   scene.add(light);
-
+  pause = false;
 }
 
 function horizontalLine() {
@@ -149,21 +153,29 @@ let updated = false;
 
 
 function animate() {
-  let now = new Date().getSeconds();
+//  console.log(pause);
+  if(!pause){
+    let now = new Date().getSeconds();
   
-  if(now > lastUpdate + 0.5){
-    if(updated == false){
-      if(-21 < pieceInit.Piece.position.y){
-        pieceInit.Piece.position.y -= 2.5;
-        lastUpdate = new Date().getSeconds();
-        updated = true;
+    if(now > lastUpdate + 0.5){
+      if(updated == false){
+        if(-21 < pieceInit.Piece.position.y){
+          pieceInit.Piece.position.y -= 2.5;
+          lastUpdate = new Date().getSeconds();
+          updated = true;
+        }
       }
+    } else updated = false;
+    cam.reposition();
+    if(mouseClicker.click(clickPosition, scene, cam) == true){
+      pause = true;
     }
-  } else updated = false;
-  cam.reposition();
-  mouseClicker.click(clickPosition, scene, cam)
-  requestAnimationFrame(animate);
-  renderer.render(scene, cam);
+    requestAnimationFrame(animate);
+    renderer.render(scene, cam);
+  } else {
+    cam.pause()
+  }
+
 }
 
 
