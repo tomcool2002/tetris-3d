@@ -136,10 +136,13 @@ function setupKeyControls(SelectedBlock) {
   document.onkeydown = function(e) {
     switch (e.key) {
       case "ArrowUp":
-        //pas utilise
+        SelectedBlock.Piece.position.y += 2.5;
         break;
       case "ArrowDown":
-        //pas utilise
+        if(-21 < pieceInit.Piece.position.y){
+        SelectedBlock.Piece.position.y += -2.5;
+        }
+
         break;
       case "ArrowRight":
         // console.log(SelectedBlock.Piece.position.x);

@@ -7,6 +7,7 @@ export class Piece extends THREE.Group {
     this.orientation = orientation;
     this.pos = pos;
     this.Piece = this.createRandomPiece();
+    this.isControlled = false;
   }
 
   createRandomColorCube(size,color,x,y,z) {
