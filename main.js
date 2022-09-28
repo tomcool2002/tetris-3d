@@ -181,84 +181,18 @@ window.addEventListener('mouseup', clearClickPosition);
 let lastUpdate = new Date().getSeconds();
 let updated = false;
 
+function gameLoop(timeAtPlay){
 
+  let timeAtPaused;
 
-
-
-
-
-// function gameLoop(timeAtPlay){
-
-//   let timeAtPaused;
-
-//   if(pause == false){
-//     let now = new Date().getSeconds();
-
-//     if(now > lastUpdate + 0.5){
-
-//       // changes block position
-//       if(updated == false){
-//         if(-21 < pieceInit.Piece.position.y){
-//           pieceInit.Piece.position.y -= 2.5;
-//           lastUpdate = new Date().getSeconds();
-//           updated = true;
-//         }
-//       }
-//     } else updated = false;
-//     cam.reposition();
-
-//     //pause game
-//     if(timeAtPlay != undefined){
-//       if(mouseClicker.click(clickPosition, scene, cam) && timeAtPlay + 100 < Date.now()){
-//         pause = true;
-//         timeAtPaused = Date.now();
-//         timeAtPlay = undefined;
-//         cam.pause()
-//       }
-//     } else {
-//       if(mouseClicker.click(clickPosition, scene, cam)){
-//         pause = true;
-//         timeAtPaused = Date.now();
-//         timeAtPlay = undefined;
-//         cam.pause()
-//       }
-//     } 
-//   } 
-
-
-//   if (timeAtPaused != undefined){
-//     if(mouseClicker.click(clickPosition, scene, cam) == true && timeAtPaused + 100 < Date.now()){
-//       pause = false;
-//       cam.play();
-//       timeAtPlay = Date.now();
-//     }
-//   }else{
-//     if(mouseClicker.click(clickPosition, scene, cam) == true && pause == true){
-//       pause = false;
-//       cam.play();
-//       timeAtPlay = Date.now();
-//     }
-//   }
-//   // how much time since last click
-
-//   return timeAtPlay;
-
-// }
-
-
-let timeAtPlay;
-let timeAtPaused;
-function animate() {
-
-  // timeAtPlay =  gameLoop(timeAtPlay);
-  if (pause == false) {
+  if(pause == false){
     let now = new Date().getSeconds();
 
-    if (now > lastUpdate + 0.5) {
+    if(now > lastUpdate + 0.5){
 
       // changes block position
-      if (updated == false) {
-        if (-21 < pieceInit.Piece.position.y) {
+      if(updated == false){
+        if(-21 < pieceInit.Piece.position.y){
           pieceInit.Piece.position.y -= 2.5;
           lastUpdate = new Date().getSeconds();
           updated = true;
@@ -268,28 +202,96 @@ function animate() {
     cam.reposition();
 
     //pause game
-    if (timeAtPlay != undefined) {
-      if (mouseClicker.click(clickPosition, scene, cam) && timeAtPlay + 100 < Date.now()) {
+    if(timeAtPlay != undefined){
+      let autoRotatechose = Date.now();
+      let isTrue = ( Date.now() - timeAtPlay >= 100);
+      if(mouseClicker.click(clickPosition, scene, cam) && Date.now() - timeAtPlay >= 100){
         pause = true;
         timeAtPaused = Date.now();
         // timeAtPlay = undefined;
         cam.pause()
       }
     } else {
-      if (mouseClicker.click(clickPosition, scene, cam)) {
+      if(mouseClicker.click(clickPosition, scene, cam) && pause == false){
         pause = true;
         timeAtPaused = Date.now();
         // timeAtPlay = undefined;
         cam.pause()
       }
+    } 
+  } 
+
+  if (timeAtPaused != undefined){
+    let time = Date.now();
+    timeAtPaused;
+    let test = Date.now() - timeAtPaused;
+    // let truechose = (timeAtPaused + 100 < Date.now());
+    let truechose = (Date.now() - timeAtPaused >= 100);
+    if(mouseClicker.click(clickPosition, scene, cam) == true && truechose == true ){
+      pause = false;
+      cam.play();
+      timeAtPlay = Date.now();
+    }
+  }else{
+    if(mouseClicker.click(clickPosition, scene, cam) == true && pause == true && Date.now() - timeAtPlay >= 100){
+      pause = false;
+      cam.play();
+      timeAtPlay = Date.now();
     }
   }
+  // how much time since last click
 
-  if (mouseClicker.click(clickPosition, scene, cam) == true && timeAtPaused + 100 < Date.now()) {
-    pause = false;
-    cam.play();
-    timeAtPlay = Date.now();
-  }
+  return timeAtPlay;
+
+}
+
+
+let timeAtPlay;
+// let timeAtPaused;
+function animate() {
+
+  timeAtPlay =  gameLoop(timeAtPlay);
+
+  // if (pause == false) {
+  //   let now = new Date().getSeconds();
+
+  //   if (now > lastUpdate + 0.5) {
+
+  //     // changes block position
+  //     if (updated == false) {
+  //       if (-21 < pieceInit.Piece.position.y) {
+  //         pieceInit.Piece.position.y -= 2.5;
+  //         lastUpdate = new Date().getSeconds();
+  //         updated = true;
+  //       }
+  //     }
+  //   } else updated = false;
+
+  //   //pause game
+  //   if (timeAtPlay != undefined) {
+  //     if (mouseClicker.click(clickPosition, scene, cam) && timeAtPlay + 100 < Date.now()) {
+  //       pause = true;
+  //       timeAtPaused = Date.now();
+  //       // timeAtPlay = undefined;
+  //       cam.pause()
+  //     }
+  //   } else {
+  //     if (mouseClicker.click(clickPosition, scene, cam)) {
+  //       pause = true;
+  //       timeAtPaused = Date.now();
+  //       // timeAtPlay = undefined;
+  //       cam.pause()
+  //     }
+  //   }
+
+  //   cam.reposition();
+  // }
+
+  // if (mouseClicker.click(clickPosition, scene, cam) == true && timeAtPaused + 100 < Date.now()) {
+  //   pause = false;
+  //   cam.play();
+  //   timeAtPlay = Date.now();
+  // }
 
   requestAnimationFrame(animate);
   renderer.render(scene, cam);
