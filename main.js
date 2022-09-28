@@ -48,6 +48,7 @@ function init() {
   pieceInit = new Piece();
 
   scene.add(pieceInit.Piece);
+  setupKeyControls(pieceInit);
   pieceInit.Piece.name = "a piece of game baby";
   console.log(pieceInit.Piece.name);
 
@@ -128,6 +129,28 @@ function getCanvasRelativePosition(event) {
   return {
     x: event.clientX - rect.left,
     y: event.clientY - rect.top,
+  };
+}
+
+function setupKeyControls(SelectedBlock) {
+  document.onkeydown = function(e) {
+    switch (e.key) {
+      case "ArrowUp":
+        //pas utilise
+        break;
+      case "ArrowDown":
+        //pas utilie
+        break;
+      case "ArrowRight":
+        console.log(SelectedBlock.Piece.position.x);
+        SelectedBlock.Piece.position.x += 2.5;
+        break;
+      case "ArrowLeft":
+        console.log(SelectedBlock.Piece.position.x);
+        SelectedBlock.Piece.position.x -= 2.5;
+        break;
+
+    }
   };
 }
 
