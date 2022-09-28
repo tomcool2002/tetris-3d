@@ -139,7 +139,7 @@ function setupKeyControls(SelectedBlock) {
         //pas utilise
         break;
       case "ArrowDown":
-        //pas utilie
+        //pas utilise
         break;
       case "ArrowRight":
         // console.log(SelectedBlock.Piece.position.x);
