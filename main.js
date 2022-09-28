@@ -1,12 +1,12 @@
 
 import * as THREE from 'three';
-import {Camera} from "./camera";
-import {Piece} from "./piece";
-import {MouseClicker} from "./mouseClicker";
-import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { Camera } from "./camera";
+import { Piece } from "./piece";
+import { MouseClicker } from "./mouseClicker";
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 
-let scene, renderer,cam, base;
+let scene, renderer, cam, base;
 let pieceInit;
 
 let pause;
@@ -25,14 +25,15 @@ function init() {
 
   scene = new THREE.Scene();
 
-  renderer = new THREE.WebGLRenderer({ 
-    canvas:document.querySelector("#bg"),
+  renderer = new THREE.WebGLRenderer({
+    canvas: document.querySelector("#bg"),
     antialias: false
   });
   renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setClearColor( 0x10deb5, 1 );
+  renderer.setClearColor(0x10deb5, 1);
 
   cam = new Camera(renderer);
+  pause = false;
 
   let World = new THREE.Group();
 
@@ -56,50 +57,49 @@ function init() {
 
   // pause for now, add to ui later
   const loader = new GLTFLoader();
-  loader.load('./pause/pauseModel.glb', function(gltfScene){
-    gltfScene.scene.scale.set(5,5,5);
+  loader.load('./pause/pauseModel.glb', function (gltfScene) {
+    gltfScene.scene.scale.set(5, 5, 5);
     gltfScene.scene.position.x = 20;
     gltfScene.scene.position.y = 20;
     gltfScene.scene.position.z = -2.5;
     // console.log(gltfScene.scene);
-    scene.add(gltfScene.scene); 
+    scene.add(gltfScene.scene);
   });
 
-  const light = new THREE.AmbientLight(0x404040 );
+  const light = new THREE.AmbientLight(0x404040);
   scene.add(light);
-  pause = false;
 }
 
 function horizontalLine() {
   const geometry = new THREE.BoxGeometry(22.5, 0.5, 0.02);
   const texture = new THREE.MeshBasicMaterial({ color: 0x333333 });
-  const line = new THREE.Mesh(geometry,texture);
+  const line = new THREE.Mesh(geometry, texture);
   return line;
 }
 
 function VecticalLine() {
   const geometry = new THREE.BoxGeometry(0.5, 50, 0.02);
   const texture = new THREE.MeshBasicMaterial({ color: 0x555555 });
-  const line = new THREE.Mesh(geometry,texture);
+  const line = new THREE.Mesh(geometry, texture);
   return line;
 }
 
 
 function CreatePlayGround() {
   let PlayGround = new THREE.Group();
-  for(let i = 0; i < 21; i++){
+  for (let i = 0; i < 21; i++) {
     const Hline1 = horizontalLine();
-    Hline1.position.y = -2.5*i + 25;
+    Hline1.position.y = -2.5 * i + 25;
     PlayGround.add(Hline1)
   }
-  for(let i = 0; i < 10; i++){
+  for (let i = 0; i < 10; i++) {
     const Vline1 = VecticalLine();
-  Vline1.position.x = -2.5*i + 11.25;
-  PlayGround.add(Vline1)
+    Vline1.position.x = -2.5 * i + 11.25;
+    PlayGround.add(Vline1)
   }
   let geometry = new THREE.BoxGeometry(22.5, 1, 5);
   const texture = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-  base = new THREE.Mesh(geometry,texture);
+  base = new THREE.Mesh(geometry, texture);
   base.position.y = -25;
   PlayGround.add(base);
 
@@ -119,7 +119,7 @@ init();
 
 
 
-const clickPosition = {x: 0, y: 0};
+const clickPosition = { x: 0, y: 0 };
 let mouseClicker = new MouseClicker();
 clearClickPosition();
 let canvas = document.querySelector("#bg");
@@ -133,27 +133,30 @@ function getCanvasRelativePosition(event) {
 }
 
 function setupKeyControls(SelectedBlock) {
-  document.onkeydown = function(e) {
-    switch (e.key) {
-      case "ArrowUp":
-        SelectedBlock.Piece.position.y += 2.5;
-        break;
-      case "ArrowDown":
-        if(-21 < pieceInit.Piece.position.y){
-        SelectedBlock.Piece.position.y += -2.5;
-        }
+  document.onkeydown = function (e) {
+    if (pause == false) {
+      switch (e.key) {
+        case "ArrowUp":
+          SelectedBlock.Piece.position.y += 2.5;
+          break;
+        case "ArrowDown":
+          if (-21 < pieceInit.Piece.position.y) {
+            SelectedBlock.Piece.position.y += -2.5;
+          }
 
-        break;
-      case "ArrowRight":
-        // console.log(SelectedBlock.Piece.position.x);
-        SelectedBlock.Piece.position.x += 2.5;
-        break;
-      case "ArrowLeft":
-        // console.log(SelectedBlock.Piece.position.x);
-        SelectedBlock.Piece.position.x -= 2.5;
-        break;
+          break;
+        case "ArrowRight":
+          // console.log(SelectedBlock.Piece.position.x);
+          SelectedBlock.Piece.position.x += 2.5;
+          break;
+        case "ArrowLeft":
+          // console.log(SelectedBlock.Piece.position.x);
+          SelectedBlock.Piece.position.x -= 2.5;
+          break;
 
+      }
     }
+
   };
 }
 
@@ -165,7 +168,7 @@ function clearClickPosition() {
 
 function setClickPosition(event) {
   const pos = getCanvasRelativePosition(event);
-  clickPosition.x = (pos.x / canvas.clientWidth ) *  2 - 1;
+  clickPosition.x = (pos.x / canvas.clientWidth) * 2 - 1;
   clickPosition.y = (pos.y / canvas.clientHeight) * -2 + 1;  // note we flip Y
 }
 
@@ -190,7 +193,7 @@ let updated = false;
 
 //   if(pause == false){
 //     let now = new Date().getSeconds();
-    
+
 //     if(now > lastUpdate + 0.5){
 
 //       // changes block position
@@ -203,7 +206,7 @@ let updated = false;
 //       }
 //     } else updated = false;
 //     cam.reposition();
-    
+
 //     //pause game
 //     if(timeAtPlay != undefined){
 //       if(mouseClicker.click(clickPosition, scene, cam) && timeAtPlay + 100 < Date.now()){
@@ -221,7 +224,7 @@ let updated = false;
 //       }
 //     } 
 //   } 
-  
+
 
 //   if (timeAtPaused != undefined){
 //     if(mouseClicker.click(clickPosition, scene, cam) == true && timeAtPaused + 100 < Date.now()){
@@ -237,9 +240,9 @@ let updated = false;
 //     }
 //   }
 //   // how much time since last click
-  
+
 //   return timeAtPlay;
-  
+
 // }
 
 
@@ -248,14 +251,14 @@ let timeAtPaused;
 function animate() {
 
   // timeAtPlay =  gameLoop(timeAtPlay);
-  if(pause == false){
+  if (pause == false) {
     let now = new Date().getSeconds();
-    
-    if(now > lastUpdate + 0.5){
+
+    if (now > lastUpdate + 0.5) {
 
       // changes block position
-      if(updated == false){
-        if(-21 < pieceInit.Piece.position.y){
+      if (updated == false) {
+        if (-21 < pieceInit.Piece.position.y) {
           pieceInit.Piece.position.y -= 2.5;
           lastUpdate = new Date().getSeconds();
           updated = true;
@@ -263,26 +266,26 @@ function animate() {
       }
     } else updated = false;
     cam.reposition();
-    
+
     //pause game
-    if(timeAtPlay != undefined){
-      if(mouseClicker.click(clickPosition, scene, cam) && timeAtPlay + 100 < Date.now()){
+    if (timeAtPlay != undefined) {
+      if (mouseClicker.click(clickPosition, scene, cam) && timeAtPlay + 100 < Date.now()) {
         pause = true;
         timeAtPaused = Date.now();
         // timeAtPlay = undefined;
         cam.pause()
       }
     } else {
-      if(mouseClicker.click(clickPosition, scene, cam)){
+      if (mouseClicker.click(clickPosition, scene, cam)) {
         pause = true;
         timeAtPaused = Date.now();
         // timeAtPlay = undefined;
         cam.pause()
       }
-    } 
-  } 
+    }
+  }
 
-  if(mouseClicker.click(clickPosition, scene, cam) == true && timeAtPaused + 100 < Date.now()){
+  if (mouseClicker.click(clickPosition, scene, cam) == true && timeAtPaused + 100 < Date.now()) {
     pause = false;
     cam.play();
     timeAtPlay = Date.now();
