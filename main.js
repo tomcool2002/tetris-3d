@@ -136,6 +136,14 @@ function setupKeyControls(SelectedBlock) {
   document.onkeydown = function (e) {
     if (pause == false) {
       switch (e.key) {
+        case "q":
+        //console.log(SelectedBlock.Piece.rotation);
+        SelectedBlock.Piece.rotation.z += Math.PI/2;
+        break;
+        case "e":
+          //console.log(SelectedBlock.Piece.rotation);
+          SelectedBlock.Piece.rotation.z -= Math.PI/2;
+          break;         
         case "ArrowUp":
           SelectedBlock.Piece.position.y += 2.5;
           break;
@@ -143,7 +151,6 @@ function setupKeyControls(SelectedBlock) {
           if (-21 < pieceInit.Piece.position.y) {
             SelectedBlock.Piece.position.y += -2.5;
           }
-
           break;
         case "ArrowRight":
           // console.log(SelectedBlock.Piece.position.x);
