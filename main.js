@@ -154,58 +154,116 @@ let updated = false;
 
 
 
-let timeAtPaused;
-let timeAtPlay;
-function animate() {
+
+
+
+
+// function gameLoop(timeAtPlay){
+
+//   let timeAtPaused;
+
+//   if(pause == false){
+//     let now = new Date().getSeconds();
+    
+//     if(now > lastUpdate + 0.5){
+
+//       // changes block position
+//       if(updated == false){
+//         if(-21 < pieceInit.Piece.position.y){
+//           pieceInit.Piece.position.y -= 2.5;
+//           lastUpdate = new Date().getSeconds();
+//           updated = true;
+//         }
+//       }
+//     } else updated = false;
+//     cam.reposition();
+    
+//     //pause game
+//     if(timeAtPlay != undefined){
+//       if(mouseClicker.click(clickPosition, scene, cam) && timeAtPlay + 100 < Date.now()){
+//         pause = true;
+//         timeAtPaused = Date.now();
+//         timeAtPlay = undefined;
+//         cam.pause()
+//       }
+//     } else {
+//       if(mouseClicker.click(clickPosition, scene, cam)){
+//         pause = true;
+//         timeAtPaused = Date.now();
+//         timeAtPlay = undefined;
+//         cam.pause()
+//       }
+//     } 
+//   } 
   
-  //  console.log(pause);
-  if(pause != true){
+
+//   if (timeAtPaused != undefined){
+//     if(mouseClicker.click(clickPosition, scene, cam) == true && timeAtPaused + 100 < Date.now()){
+//       pause = false;
+//       cam.play();
+//       timeAtPlay = Date.now();
+//     }
+//   }else{
+//     if(mouseClicker.click(clickPosition, scene, cam) == true && pause == true){
+//       pause = false;
+//       cam.play();
+//       timeAtPlay = Date.now();
+//     }
+//   }
+//   // how much time since last click
+  
+//   return timeAtPlay;
+  
+// }
+
+
+let timeAtPlay;
+let timeAtPaused;
+function animate() {
+
+  // timeAtPlay =  gameLoop(timeAtPlay);
+  if(pause == false){
     let now = new Date().getSeconds();
     
     if(now > lastUpdate + 0.5){
+
+      // changes block position
       if(updated == false){
         if(-21 < pieceInit.Piece.position.y){
           pieceInit.Piece.position.y -= 2.5;
           lastUpdate = new Date().getSeconds();
           updated = true;
-          // pauseTime = new Date().getSeconds();
         }
       }
     } else updated = false;
     cam.reposition();
-
+    
     //pause game
-
     if(timeAtPlay != undefined){
       if(mouseClicker.click(clickPosition, scene, cam) && timeAtPlay + 100 < Date.now()){
         pause = true;
         timeAtPaused = Date.now();
-        timeAtPlay = undefined;
+        // timeAtPlay = undefined;
         cam.pause()
       }
     } else {
       if(mouseClicker.click(clickPosition, scene, cam)){
         pause = true;
         timeAtPaused = Date.now();
-        timeAtPlay = undefined;
+        // timeAtPlay = undefined;
         cam.pause()
       }
-    }
-
-    
-    
+    } 
   } 
-  requestAnimationFrame(animate);
-  renderer.render(scene, cam);
-  // console.log('pauseNow:',pauseNow);
-  // console.log('pauseTime:',pauseTime);
 
   if(mouseClicker.click(clickPosition, scene, cam) == true && timeAtPaused + 100 < Date.now()){
     pause = false;
     cam.play();
     timeAtPlay = Date.now();
   }
-
+  
+  requestAnimationFrame(animate);
+  renderer.render(scene, cam);
 }
 
 
