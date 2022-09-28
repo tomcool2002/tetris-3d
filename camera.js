@@ -9,13 +9,12 @@ export class Camera extends THREE.PerspectiveCamera{
             0.1,
             500);
 
-        // this.renderer = renderer;
         this.controls = new OrbitControls(this,renderer.domElement);
         
         this.lookAt(0, 0, 0);
         this.position.set(0, 0, 100);
 
-        this.controls.enabled = true;
+        // this.controls.enabled = true;
         this.controls.autoRotate  = true;
         this.controls.autoRotateSpeed = 1;
         this.controls.enablePan = false;
@@ -27,7 +26,14 @@ export class Camera extends THREE.PerspectiveCamera{
         this.controls.autoRotateSpeed = 0;
         this.controls.enablePan = true;
         this.controls.enableRotate = true;
-        console.log("paused");
+        // console.log("paused");
+    }
+
+    play(){
+        this.controls.autoRotate  = true;
+        this.controls.autoRotateSpeed = 1;
+        this.controls.enablePan = false;
+        this.controls.enableRotate = false;
     }
 
     reposition(){

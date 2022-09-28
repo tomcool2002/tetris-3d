@@ -55,11 +55,12 @@ function init() {
 
   // pause for now, add to ui later
   const loader = new GLTFLoader();
-  loader.load('./pause/pauseModel.gltf', function(gltfScene){
+  loader.load('./pause/pauseModel.glb', function(gltfScene){
     gltfScene.scene.scale.set(5,5,5);
     gltfScene.scene.position.x = 20;
     gltfScene.scene.position.y = 20;
     gltfScene.scene.position.z = -2.5;
+    // console.log(gltfScene.scene);
     scene.add(gltfScene.scene); 
   });
 
@@ -152,28 +153,57 @@ let lastUpdate = new Date().getSeconds();
 let updated = false;
 
 
+
+let timeAtPaused;
+let timeAtPlay;
 function animate() {
-//  console.log(pause);
-  if(!pause){
-    let now = new Date().getSeconds();
   
+  //  console.log(pause);
+  if(pause != true){
+    let now = new Date().getSeconds();
+    
     if(now > lastUpdate + 0.5){
       if(updated == false){
         if(-21 < pieceInit.Piece.position.y){
           pieceInit.Piece.position.y -= 2.5;
           lastUpdate = new Date().getSeconds();
           updated = true;
+          // pauseTime = new Date().getSeconds();
         }
       }
     } else updated = false;
     cam.reposition();
-    if(mouseClicker.click(clickPosition, scene, cam) == true){
-      pause = true;
+
+    //pause game
+
+    if(timeAtPlay != undefined){
+      if(mouseClicker.click(clickPosition, scene, cam) && timeAtPlay + 100 < Date.now()){
+        pause = true;
+        timeAtPaused = Date.now();
+        timeAtPlay = undefined;
+        cam.pause()
+      }
+    } else {
+      if(mouseClicker.click(clickPosition, scene, cam)){
+        pause = true;
+        timeAtPaused = Date.now();
+        timeAtPlay = undefined;
+        cam.pause()
+      }
     }
-    requestAnimationFrame(animate);
-    renderer.render(scene, cam);
-  } else {
-    cam.pause()
+
+    
+    
+  } 
+  requestAnimationFrame(animate);
+  renderer.render(scene, cam);
+  // console.log('pauseNow:',pauseNow);
+  // console.log('pauseTime:',pauseTime);
+
+  if(mouseClicker.click(clickPosition, scene, cam) == true && timeAtPaused + 100 < Date.now()){
+    pause = false;
+    cam.play();
+    timeAtPlay = Date.now();
   }
 
 }
@@ -185,7 +215,7 @@ animate();
 function onWindowResize() {
   cam.aspect = window.innerWidth / window.innerHeight;
   cam.updateProjectionMatrix();
-  cam.renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
 window.addEventListener("resize", onWindowResize, false);
