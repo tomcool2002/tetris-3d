@@ -15,13 +15,13 @@ export class MouseClicker {
       if (intersectedObjects.length) {
         // pick the first object. It's the closest one
         this.objectClicked = intersectedObjects[0].object;
-        this.previousColour = this.objectClicked.material.color;
-        this.objectClicked.material.color.setHex( 0xffffff );
+        // this.previousColour = this.objectClicked.material.color;
+        // this.objectClicked.material.color.setHex( 0xffffff );
         // console.log(`clicked: ${this.objectClicked.name}`);
       }
     }
-    reset(){
-        if(this.objectClicked != null)
-            this.objectClicked.material.color.setHex( this.previousColour );
-    }
+    // reset(){
+    //     if(this.objectClicked != null)
+    //         this.objectClicked.material.color.setHex( this.previousColour );
+    // }
   }

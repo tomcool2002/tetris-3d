@@ -2,7 +2,10 @@
 import * as THREE from 'three';
 import {Camera} from "./camera";
 import {Piece} from "./piece";
-import {MouseClicker} from "./mouseClicker"
+import {MouseClicker} from "./mouseClicker";
+import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js';
+
+
 let scene, renderer,cam, base;
 let pieceInit;
 
@@ -25,6 +28,7 @@ function init() {
     antialias: false
   });
   renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setClearColor( 0x10deb5, 1 );
 
   cam = new Camera(renderer);
 
@@ -47,6 +51,17 @@ function init() {
 
   scene.add(World);
 
+  // pause for now, add to ui later
+  const loader = new GLTFLoader();
+  loader.load('./pause/pauseModel.gltf', function(gltfScene){
+    gltfScene.scene.scale(10,10,10);
+    gltfScene.texture = 
+    scene.add(gltfScene.scene); 
+  });
+
+  const light = new THREE.AmbientLight(0x404040 );
+  scene.add(light);
+
 }
 
 function horizontalLine() {
@@ -68,8 +83,8 @@ function CreatePlayGround() {
   let PlayGround = new THREE.Group();
   for(let i = 0; i < 21; i++){
     const Hline1 = horizontalLine();
-  Hline1.position.y = -2.5*i + 25;
-  PlayGround.add(Hline1)
+    Hline1.position.y = -2.5*i + 25;
+    PlayGround.add(Hline1)
   }
   for(let i = 0; i < 10; i++){
     const Vline1 = VecticalLine();
@@ -114,7 +129,7 @@ function getCanvasRelativePosition(event) {
 function clearClickPosition() {
   clickPosition.x = -100000;
   clickPosition.y = -100000;
-  mouseClicker.reset();
+  // mouseClicker.reset();
 }
 
 function setClickPosition(event) {
