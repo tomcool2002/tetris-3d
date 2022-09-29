@@ -259,47 +259,6 @@ function animate() {
 
   timeAtPlay =  gameLoop(timeAtPlay);
 
-  // if (pause == false) {
-  //   let now = new Date().getSeconds();
-
-  //   if (now > lastUpdate + 0.5) {
-
-  //     // changes block position
-  //     if (updated == false) {
-  //       if (-21 < pieceInit.Piece.position.y) {
-  //         pieceInit.Piece.position.y -= 2.5;
-  //         lastUpdate = new Date().getSeconds();
-  //         updated = true;
-  //       }
-  //     }
-  //   } else updated = false;
-
-  //   //pause game
-  //   if (timeAtPlay != undefined) {
-  //     if (mouseClicker.click(clickPosition, scene, cam) && timeAtPlay + 100 < Date.now()) {
-  //       pause = true;
-  //       timeAtPaused = Date.now();
-  //       // timeAtPlay = undefined;
-  //       cam.pause()
-  //     }
-  //   } else {
-  //     if (mouseClicker.click(clickPosition, scene, cam)) {
-  //       pause = true;
-  //       timeAtPaused = Date.now();
-  //       // timeAtPlay = undefined;
-  //       cam.pause()
-  //     }
-  //   }
-
-  //   cam.reposition();
-  // }
-
-  // if (mouseClicker.click(clickPosition, scene, cam) == true && timeAtPaused + 100 < Date.now()) {
-  //   pause = false;
-  //   cam.play();
-  //   timeAtPlay = Date.now();
-  // }
-
   requestAnimationFrame(animate);
   renderer.render(scene, cam);
 }

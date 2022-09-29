@@ -8,6 +8,8 @@ export class Piece extends THREE.Group {
     this.pos = pos;
     this.Piece = this.createRandomPiece();
     this.isControlled = false;
+    this.xright;
+    this.xleft;
   }
 
   createRandomColorCube(size,color,x,y,z) {
@@ -33,7 +35,8 @@ export class Piece extends THREE.Group {
 
   createRandomPiece() {
     //random number 1-7
-    let rand = Math.floor(Math.random() * 7) + 1;
+    // let rand = Math.floor(Math.random() * 7) + 1;
+    let rand = 1;
     let piece = new THREE.Group();
     let color = this.getRandomColour();
 
