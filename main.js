@@ -30,7 +30,7 @@ function init() {
     antialias: false
   });
   renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setClearColor(0x10deb5, 1);
+  renderer.setClearColor(0x6b6362, 1);
 
   cam = new Camera(renderer);
   pause = false;
@@ -187,11 +187,9 @@ window.addEventListener('mouseup', clearClickPosition);
 
 let lastUpdate = new Date().getSeconds();
 let updated = false;
+let timeAtPaused;
 
 function gameLoop(timeAtPlay){
-
-  let timeAtPaused;
-
   if(pause == false){
     let now = new Date().getSeconds();
 
@@ -240,10 +238,12 @@ function gameLoop(timeAtPlay){
       timeAtPlay = Date.now();
     }
   }else{
-    if(mouseClicker.click(clickPosition, scene, cam) == true && pause == true && Date.now() - timeAtPlay >= 100){
+    let thing = Date.now() - timeAtPlay >= 100;
+    if(mouseClicker.click(clickPosition, scene, cam) == true && pause == true){
       pause = false;
       cam.play();
       timeAtPlay = Date.now();
+      let el = 15;
     }
   }
   // how much time since last click
