@@ -6,10 +6,9 @@ export class Piece extends THREE.Group {
     super();
     this.orientation = orientation;
     this.pos = pos;
+    this.listeCube = [];
     this.Piece = this.createRandomPiece();
     this.isControlled = false;
-    this.xright;
-    this.xleft;
   }
 
   createRandomColorCube(size,color,x,y,z) {
@@ -33,6 +32,9 @@ export class Piece extends THREE.Group {
     return colour;
   }
 
+  enleveCube(){
+    this.remove(this.listeCube[0]);
+  }
   createRandomPiece() {
     //random number 1-7
     //let rand = Math.floor(Math.random() * 7) + 1;
@@ -43,11 +45,17 @@ export class Piece extends THREE.Group {
     //console.log(rand);
     switch (rand) {
       case 1: // I Shape
+        let cube = this.createRandomColorCube(2.5,color,0,0,-2.5);
+        piece.add(cube);
+        this.listeCube.push(cube)
 
-        piece.add(this.createRandomColorCube(2.5,color,0,0,-2.5))
+
+
+
         piece.add(this.createRandomColorCube(2.5,color,0,2.5,-2.5))
         piece.add(this.createRandomColorCube(2.5,color,0,5,-2.5))
         piece.add(this.createRandomColorCube(2.5,color,0,7.5,-2.5))
+        piece.remove()
         break;
       case 2: // j Shape
         piece.add(this.createRandomColorCube(2.5,color,0,0,-2.5))

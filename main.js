@@ -14,7 +14,7 @@ let pause;
 const gamewidth = 9;
 const gameHeight = 20;
 
-// let gameArray =[];
+
 
 
 
@@ -44,6 +44,7 @@ function init() {
   World.add(PlayGround2);
 
   World.position.y = 1;
+  let D2array = [20][19]
 
 
   pieceInit = new Piece();
@@ -52,6 +53,8 @@ function init() {
   setupKeyControls(pieceInit);
   pieceInit.Piece.name = "a piece of game baby";
   // console.log(pieceInit.Piece.name);
+
+  pieceInit.enleveCube();
 
   scene.add(World);
 
@@ -208,29 +211,21 @@ function gameLoop(timeAtPlay){
 
     //pause game
     if(timeAtPlay != undefined){
-      let autoRotatechose = Date.now();
-      let isTrue = ( Date.now() - timeAtPlay >= 100);
       if(mouseClicker.click(clickPosition, scene, cam) && Date.now() - timeAtPlay >= 100){
         pause = true;
         timeAtPaused = Date.now();
-        // timeAtPlay = undefined;
         cam.pause()
       }
     } else {
       if(mouseClicker.click(clickPosition, scene, cam) && pause == false){
         pause = true;
         timeAtPaused = Date.now();
-        // timeAtPlay = undefined;
         cam.pause()
       }
     } 
   } 
 
   if (timeAtPaused != undefined){
-    let time = Date.now();
-    timeAtPaused;
-    let test = Date.now() - timeAtPaused;
-    // let truechose = (timeAtPaused + 100 < Date.now());
     let truechose = (Date.now() - timeAtPaused >= 100);
     if(mouseClicker.click(clickPosition, scene, cam) == true && truechose == true ){
       pause = false;
@@ -238,15 +233,12 @@ function gameLoop(timeAtPlay){
       timeAtPlay = Date.now();
     }
   }else{
-    let thing = Date.now() - timeAtPlay >= 100;
     if(mouseClicker.click(clickPosition, scene, cam) == true && pause == true){
       pause = false;
       cam.play();
       timeAtPlay = Date.now();
-      let el = 15;
     }
   }
-  // how much time since last click
 
   return timeAtPlay;
 
