@@ -43,7 +43,6 @@ export class Piece extends THREE.Group {
     //console.log(rand);
     switch (rand) {
       case 1: // I Shape
-
         piece.add(this.createRandomColorCube(2.5,color,0,0,-2.5))
         piece.add(this.createRandomColorCube(2.5,color,0,2.5,-2.5))
         piece.add(this.createRandomColorCube(2.5,color,0,5,-2.5))
