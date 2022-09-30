@@ -13,7 +13,7 @@ export class Piece extends THREE.Group {
 
   createRandomColorCube(size,color,x,y,z) {
     let colour = new THREE.Color(color);
-    let geometry = new THREE.BoxGeometry(size, size, size);
+    let geometry = new THREE.BoxGeometry (size, size, size);
 
     let material = new THREE.MeshBasicMaterial({ color: colour });
     let cube = new THREE.Mesh(geometry, material);
