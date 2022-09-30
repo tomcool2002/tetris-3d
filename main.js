@@ -1,5 +1,6 @@
 
 import * as THREE from 'three';
+import { Data } from './Data';
 import { Camera } from "./camera";
 import { Piece } from "./piece";
 import { MouseClicker } from "./mouseClicker";
@@ -8,6 +9,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 let scene, renderer, cam, base;
 let pieceInit;
+let data;
 
 let pause;
 
@@ -17,11 +19,9 @@ const gameHeight = 20;
 
 
 
-
-
-
-
 function init() {
+
+  data = new Data();
 
   scene = new THREE.Scene();
 
