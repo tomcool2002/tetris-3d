@@ -147,9 +147,9 @@ function setupKeyControls(SelectedBlock) {
           //console.log(SelectedBlock.Piece.rotation);
           SelectedBlock.Piece.rotation.z -= Math.PI/2;
           break;         
-        case "ArrowUp":
-          SelectedBlock.Piece.position.y += 2.5;
-          break;
+        // case "ArrowUp":
+        //   SelectedBlock.Piece.position.y += 2.5;
+        //   break;
         case "ArrowDown":
           if (-21 < pieceInit.Piece.position.y) {
             SelectedBlock.Piece.position.y += -2.5;
