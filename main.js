@@ -49,8 +49,6 @@ function init() {
   pieceInit = new Piece();
   data = new Data();
   pieceInit.listeCube[3].name = 'hello';
-  let theName = pieceInit.listeCube[3].name;
-  debugger
   
   data.AjouterCubesTableau(pieceInit.listeCube)
   data.AfficherTableau2D();
@@ -60,13 +58,16 @@ function init() {
   for(let i = 0; i < pieceInit.listeCube.length; i++){
     scene.add(pieceInit.listeCube[i]);
   }
-  debugger
-  scene.remove(scene.getObjectByName('hello'));
-  scene.remove(pieceInit.listeCube[3]);
+
+  // remove cube
+  // scene.remove(scene.getObjectByName('hello'));
+
+  
+  // scene.remove(pieceInit.listeCube[3]);
   // scene.add(pieceInit.Piece);
   //console.log(pieceInit.Piece)
-  setupKeyControls(pieceInit);
-  pieceInit.Piece.name = "a piece of game baby";
+  setupKeyControls();
+  // pieceInit.Piece.name = "a piece of game baby";
   //console.log(pieceInit.Piece.name);
 
   //pieceInit.enleveCube();
@@ -150,19 +151,19 @@ function getCanvasRelativePosition(event) {
   };
 }
 
-function setupKeyControls(SelectedBlock) {
+function setupKeyControls() {
   document.onkeydown = function (e) {
     if (pause == false) {
       switch (e.key) {
-        case "q":
-        //console.log(SelectedBlock.Piece.rotation);
-        SelectedBlock.Piece.rotation.z += Math.PI/2;
-        break;
-        case "e":
-          //console.log(SelectedBlock.Piece.rotation);
-          SelectedBlock.Piece.rotation.z -= Math.PI/2;4
-          // data.pieceI.x +=1;
-          break;  
+        // case "q":
+        // //console.log(SelectedBlock.Piece.rotation);
+        // SelectedBlock.Piece.rotation.z += Math.PI/2;
+        // break;
+        // case "e":
+        //   //console.log(SelectedBlock.Piece.rotation);
+        //   SelectedBlock.Piece.rotation.z -= Math.PI/2;4
+        //   // data.pieceI.x +=1;
+        //   break;  
         // case "ArrowDown":
         //   if (-21 < pieceInit.Piece.position.y) {
         //     SelectedBlock.Piece.position.y += -2.5;
