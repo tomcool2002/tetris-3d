@@ -41,14 +41,20 @@ export class Data {
         return x_transformer,y_transformer;
     }
 
-    AfficherTableau(){
-        // for(let y = 0; y < this.tableau.length; y++){
-        //     for(let x = 0; x < this.tableau[y].length; x++){
-        //         // this.AfficherCube(this.tableau[y][x],x,y);
-        //     }
-        // }
-        console.log(this.tableau);
-    }
+    AfficherTableau() {
+
+        for (let y = 0; y < this.tableau.length; y++) {
+            let stringLigne = "";
+          for (let x = 0; x < this.tableau[y].length; x++) {
+            stringLigne += this.tableau[y][x][0];
+            //this.AfficherCube(this.tableau[y][x],x,y);
+          }
+          stringLigne += y;
+          console.log(stringLigne)
+    
+        }
+        //console.log(this.tableau);
+      }
 
   AfficherCube(cube = new Cube(), x, y) {
     //methode qui va afficher tout ce qui se trouve dans le tableau
