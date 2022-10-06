@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import Cube from './cube';
 
 
 export class Data{
@@ -10,8 +11,16 @@ export class Data{
 
     }
 
-
     AfficherTableau(){
+
+        for(const y = 0; i < this.tableau.length; y++){
+            for(const x = 0; i < this.tableau[i].length; x++){
+                
+            }
+        }
+    }
+
+    AfficherCube(val, cube){
         //methode qui va afficher tout ce qui se trouve dans le tableau
         
 
