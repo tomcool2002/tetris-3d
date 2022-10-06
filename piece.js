@@ -7,7 +7,7 @@ export class Piece extends THREE.Group {
     super();
     this.orientation = orientation;
     this.pos = pos;
-   // this.listeCube = [];
+    this.listeCube = [];
     this.Piece = this.createRandomPiece();
     this.isControlled = false;
   }
@@ -47,10 +47,18 @@ export class Piece extends THREE.Group {
 
     switch (rand) {
       case 1: // I Shape
-        piece.add(new Cube(2.5,color,0,0,-2.5))
-        piece.add(new Cube(2.5,color,0,2.5,-2.5))
-        piece.add(new Cube(2.5,color,0,5,-2.5))
-        piece.add(new Cube(2.5,color,0,7.5,-2.5))
+
+        let cube1 = new Cube(2.5,color,0,0,-2.5);
+        let cube2 = new Cube(2.5,color,0,2.5,-2.5);
+        let cube3 = new Cube(2.5,color,0,5,-2.5);
+        let cube4 = new Cube(2.5,color,0,7.5,-2.5);
+        this.listeCube.push(cube1);
+
+        piece.add(cube1.Cube);
+        piece.add(cube2.Cube);
+        piece.add(cube3.Cube);
+        piece.add(cube4.Cube);
+        
         break;
       case 2: // j Shape
         piece.add(this.createRandomColorCube(2.5,color,0,0,-2.5))
