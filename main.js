@@ -50,11 +50,12 @@ function init() {
   pieceInit = new Piece();
 
   scene.add(pieceInit.Piece);
+  console.log(pieceInit.Piece)
   setupKeyControls(pieceInit);
   pieceInit.Piece.name = "a piece of game baby";
-  // console.log(pieceInit.Piece.name);
+  //console.log(pieceInit.Piece.name);
 
-  pieceInit.enleveCube();
+  //pieceInit.enleveCube();
 
   scene.add(World);
 

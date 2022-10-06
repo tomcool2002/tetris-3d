@@ -1,13 +1,13 @@
 import * as THREE from "three";
 import { Vector3 } from "three";
-import { cube } from "./cube";
+import { Cube } from "./cube";
 
 export class Piece extends THREE.Group {
   constructor(pos, orientation) {
     super();
     this.orientation = orientation;
     this.pos = pos;
-    this.listeCube = [];
+   // this.listeCube = [];
     this.Piece = this.createRandomPiece();
     this.isControlled = false;
   }
@@ -33,9 +33,9 @@ export class Piece extends THREE.Group {
     return colour;
   }
 
-  enleveCube(){
-    this.remove(this.listeCube[0]);
-  }
+  //enleveCube(){
+  //  this.remove(this.listeCube[0]);
+  //}
 
   createRandomPiece() {
     //random number 1-7
@@ -43,18 +43,14 @@ export class Piece extends THREE.Group {
     let rand = 1;
     let piece = new THREE.Group();
     let color = this.getRandomColour();
-
     //console.log(rand);
+
     switch (rand) {
       case 1: // I Shape
-        let cube = this.createRandomColorCube(2.5,color,0,0,-2.5);
-        piece.add(cube);
-        this.listeCube.push(cube)
-
-        piece.add(this.createRandomColorCube(2.5,color,0,2.5,-2.5))
-        piece.add(this.createRandomColorCube(2.5,color,0,5,-2.5))
-        piece.add(this.createRandomColorCube(2.5,color,0,7.5,-2.5))
-        piece.remove()
+        piece.add(new Cube(2.5,color,0,0,-2.5))
+        piece.add(new Cube(2.5,color,0,2.5,-2.5))
+        piece.add(new Cube(2.5,color,0,5,-2.5))
+        piece.add(new Cube(2.5,color,0,7.5,-2.5))
         break;
       case 2: // j Shape
         piece.add(this.createRandomColorCube(2.5,color,0,0,-2.5))
