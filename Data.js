@@ -7,6 +7,10 @@ export class Data{
         this.tableau = this.createBaseTableau();
     }
 
+    CheckLine(){
+        
+    }
+
     AjouterCubesTableau(listeCube){
         listeCube.forEach(cube => {
             
