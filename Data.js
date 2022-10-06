@@ -24,11 +24,10 @@ export class Data {
                         
                         if (this.tableau[y + 1][x][0] == 'v') {
                             // camera, the position is changed, but the camera is not updated?
-                            let char = this.tableau[y][x][0];
-                            let cube = this.tableau[y][x][1];
+                            // let char = this.tableau[y][x][0];
+                            // let cube = this.tableau[y][x][1];
                             // debugger;
                             this.tableau[y][x][1].position.y = this.TransformerPosition(x,y,true)[1] - 2.5;
-                            cube;
 
 
                             this.tableau[y + 1][x][0] = 'i';
