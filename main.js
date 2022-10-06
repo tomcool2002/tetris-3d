@@ -48,11 +48,22 @@ function init() {
 
   pieceInit = new Piece();
   data = new Data();
-  // pieceInit.listeCube;
+  pieceInit.listeCube[3].name = 'hello';
+  let theName = pieceInit.listeCube[3].name;
+  debugger
+  
   data.AjouterCubesTableau(pieceInit.listeCube)
   data.AfficherTableau2D();
+  // pieceInit.listeCube.pop()
 
-  scene.add(pieceInit.Piece);
+
+  for(let i = 0; i < pieceInit.listeCube.length; i++){
+    scene.add(pieceInit.listeCube[i]);
+  }
+  debugger
+  scene.remove(scene.getObjectByName('hello'));
+  scene.remove(pieceInit.listeCube[3]);
+  // scene.add(pieceInit.Piece);
   //console.log(pieceInit.Piece)
   setupKeyControls(pieceInit);
   pieceInit.Piece.name = "a piece of game baby";

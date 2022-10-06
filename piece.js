@@ -2,9 +2,9 @@ import * as THREE from "three";
 import { Vector3 } from "three";
 import { Cube } from "./cube";
 
-export class Piece extends THREE.Group {
+export class Piece  {
   constructor(ajouterCubeTableau) {
-    super();
+    // super();
     // this.orientation = orientation;
     // this.pos = pos;
     this.listeCube = [];
