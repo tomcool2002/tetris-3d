@@ -48,9 +48,9 @@ function init() {
 
   pieceInit = new Piece();
   data = new Data();
-  pieceInit.listeCube;
+  // pieceInit.listeCube;
   data.AjouterCubesTableau(pieceInit.listeCube)
-  data.AfficherTableau();
+  data.AfficherTableau2D();
 
   scene.add(pieceInit.Piece);
   //console.log(pieceInit.Piece)
@@ -205,13 +205,12 @@ function gameLoop(timeAtPlay){
     if(now > lastUpdate + 0.5){
 
       // changes block position
-      // if(updated == false){
-      //   if(-21 < pieceInit.Piece.position.y){
-      //     pieceInit.Piece.position.y -= 2.5;
-      //     lastUpdate = new Date().getSeconds();
-      //     updated = true;
-      //   }
-      // }
+      if(updated == false){
+        data.HighwayToHell();
+        lastUpdate = new Date().getSeconds();
+        updated = true;
+        data.AfficherTableau2D();
+      }
     } else updated = false;
     cam.reposition();
 
@@ -256,9 +255,10 @@ let timeAtPlay;
 function animate() {
 
   timeAtPlay =  gameLoop(timeAtPlay);
-
+  // data.HighwayToHell();
   requestAnimationFrame(animate);
   renderer.render(scene, cam);
+  // data.AfficherTableau2D();
 }
 
 
