@@ -151,22 +151,22 @@ function setupKeyControls(SelectedBlock) {
           //console.log(SelectedBlock.Piece.rotation);
           SelectedBlock.Piece.rotation.z -= Math.PI/2;4
           // data.pieceI.x +=1;
-          break;         
-        // case "ArrowUp":
-        //   SelectedBlock.Piece.position.y += 2.5;
+          break;  
+        // case "ArrowDown":
+        //   if (-21 < pieceInit.Piece.position.y) {
+        //     SelectedBlock.Piece.position.y += -2.5;
+        //   }
         //   break;
-        case "ArrowDown":
-          if (-21 < pieceInit.Piece.position.y) {
-            SelectedBlock.Piece.position.y += -2.5;
-          }
-          break;
         case "ArrowRight":
           // console.log(SelectedBlock.Piece.position.x);
-          SelectedBlock.Piece.position.x += 2.5;
+          // SelectedBlock.Piece.position.x += 2.5;
+          data.Deplacement('d');
           break;
         case "ArrowLeft":
           // console.log(SelectedBlock.Piece.position.x);
-          SelectedBlock.Piece.position.x -= 2.5;
+          // SelectedBlock.Piece.position.x -= 2.5;
+          data.Deplacement('g');
+
           break;
 
       }

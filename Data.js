@@ -11,10 +11,6 @@ export class Data {
         this.tableau = this.createBaseTableau();
     }
 
-    CheckLine() {
-
-    }
-
     HighwayToHell() {
         for (let y = this.HAUTEUR - 1; y >= 0; y--) {
             for (let x = this.LONGEUR - 1; x >= 0; x--) {
@@ -51,11 +47,54 @@ export class Data {
                 
             }
         }
-
-        // console.log(positions_cube)
-        // this.AfficherTableau();
     }
 
+    Deplacement(dir){
+        let mouv_2D = 0;
+        let mouv_3D = 0;
+        // let canMouve = false;
+        switch(dir){
+            case 'g':
+                mouv_2D = -1;
+                mouv_3D = -2.5;
+                break;
+            case 'd':
+                mouv_2D = 1;
+                mouv_3D = 2.5;;
+                break;
+        }
+        for (let y = this.HAUTEUR - 1; y >= 0; y--) {
+            let bouger = false;
+            for (let x = this.LONGEUR - 1; x >= 0; x--) {
+                if(bouger == false){
+                    if (this.tableau[y][x][0] == 'i') {
+                        if(x != 0 && dir == 'g'){
+                            this.mouveDirection(x,y,mouv_2D, mouv_3D);
+                            bouger = true;
+                        }
+                        else if(x != this.LONGEUR -1 && dir == 'd'){
+                            this.mouveDirection(x,y,mouv_2D, mouv_3D);
+                            bouger = true;
+                        }
+    
+                    }
+                }
+            }
+        }
+        
+    }
+
+    mouveDirection(x,y,mouv_2D, mouv_3D){
+        if (this.tableau[y][x + mouv_2D][0] == 'v') {
+            let cube =   this.tableau[y][x][1].position.x;
+            this.tableau[y][x][1].position.x = this.TransformerPosition(x,y,true)[0] + mouv_3D;
+            cube =   this.tableau[y][x][1].position.x;
+            this.tableau[y][x + mouv_2D][0] = 'i';
+            this.tableau[y][x + mouv_2D][1] = this.tableau[y][x][1];
+            this.tableau[y][x][0] = 'v';
+            this.tableau[y][x][1] = null;
+        }
+    }
     AjouterCubesTableau(listeCube) {
         listeCube.forEach(cube => {
             let pos = this.TransformerPosition(cube.position.x, cube.position.y, false);
@@ -102,20 +141,26 @@ export class Data {
         //console.log(this.tableau);
     }
 
-    AfficherTableau3D(){
-        for (let y = 0; y < this.HAUTEUR; y++) {
-            for (let x = 0; x < this.LONGEUR; x++) {
-                // this.AfficherCube(this.tableau[y][x],x,y);
-                // let cube = this.tableau[x][y]
-            }
-        }
-    }
+    CheckLine(){
+        let TableauligneComplete = [];
 
-    // AfficherCube(cube = new Cube(), x, y) {
-    //     //methode qui va afficher tout ce qui se trouve dans le tableau
-        
-    //     console.log(this.tableau[y][x]);
-    // }
+        for (let y = 0; y < this.tableau.length; y++) {
+            let complete = true;
+            for (let x = 0; x < this.tableau[y].length; x++) {
+
+                if(this.tableau[y][x][0] != 'x'){
+                    complete = false;
+                }
+
+            }
+            if(complete){
+                TableauligneComplete.push(y);
+            }
+
+        }
+        //console.log(TableauligneComplete);
+        return TableauligneComplete;
+    }
 
     createBaseTableau() {
 
