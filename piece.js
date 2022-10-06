@@ -111,10 +111,10 @@ export class Piece  {
     this.listeCube.push(cube3.Cube);
     this.listeCube.push(cube4.Cube);
 
-    piece.add(cube1.Cube);
-    piece.add(cube2.Cube);
-    piece.add(cube3.Cube);
-    piece.add(cube4.Cube);
+    // piece.add(cube1.Cube);
+    // piece.add(cube2.Cube);
+    // piece.add(cube3.Cube);
+    // piece.add(cube4.Cube);
     return piece;
   }
 }
