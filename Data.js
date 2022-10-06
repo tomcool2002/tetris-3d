@@ -11,6 +11,10 @@ export class Data{
     }
 
 
+    AfficherTableau(){
+        
+    }
+
     createBaseTableau(){
         const Longueur = 9;
         const Hauteur = 20;
@@ -23,13 +27,10 @@ export class Data{
 
         for( let i =0; i<Hauteur; i++){
             for(let j=0; j< Longueur; j++){
-                Tableau[i][j] ='v';
+                Tableau[i][j] =('v',null);
             }
         }
-
         return Tableau;
-
-
     }
 
 

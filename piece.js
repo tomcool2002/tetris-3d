@@ -36,6 +36,7 @@ export class Piece extends THREE.Group {
   enleveCube(){
     this.remove(this.listeCube[0]);
   }
+
   createRandomPiece() {
     //random number 1-7
     //let rand = Math.floor(Math.random() * 7) + 1;
@@ -49,9 +50,6 @@ export class Piece extends THREE.Group {
         let cube = this.createRandomColorCube(2.5,color,0,0,-2.5);
         piece.add(cube);
         this.listeCube.push(cube)
-
-
-
 
         piece.add(this.createRandomColorCube(2.5,color,0,2.5,-2.5))
         piece.add(this.createRandomColorCube(2.5,color,0,5,-2.5))
