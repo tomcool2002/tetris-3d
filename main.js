@@ -7,7 +7,6 @@ import { MouseClicker } from "./mouseClicker";
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { Cube } from './cube';
 
-
 let scene, renderer, cam, base;
 let pieceInit;
 let data;
@@ -22,7 +21,7 @@ const gameHeight = 20;
 
 function init() {
 
-  data = new Data();
+  
 
   scene = new THREE.Scene();
 
@@ -47,8 +46,11 @@ function init() {
   World.position.y = 1;
   let D2array = [20][19]
 
-
   pieceInit = new Piece();
+  data = new Data();
+  pieceInit.listeCube;
+  data.AjouterCubesTableau(pieceInit.listeCube)
+  data.AfficherTableau();
 
   scene.add(pieceInit.Piece);
   //console.log(pieceInit.Piece)
@@ -147,7 +149,8 @@ function setupKeyControls(SelectedBlock) {
         break;
         case "e":
           //console.log(SelectedBlock.Piece.rotation);
-          SelectedBlock.Piece.rotation.z -= Math.PI/2;
+          SelectedBlock.Piece.rotation.z -= Math.PI/2;4
+          // data.pieceI.x +=1;
           break;         
         // case "ArrowUp":
         //   SelectedBlock.Piece.position.y += 2.5;
@@ -197,17 +200,18 @@ let timeAtPaused;
 function gameLoop(timeAtPlay){
   if(pause == false){
     let now = new Date().getSeconds();
+    
 
     if(now > lastUpdate + 0.5){
 
       // changes block position
-      if(updated == false){
-        if(-21 < pieceInit.Piece.position.y){
-          pieceInit.Piece.position.y -= 2.5;
-          lastUpdate = new Date().getSeconds();
-          updated = true;
-        }
-      }
+      // if(updated == false){
+      //   if(-21 < pieceInit.Piece.position.y){
+      //     pieceInit.Piece.position.y -= 2.5;
+      //     lastUpdate = new Date().getSeconds();
+      //     updated = true;
+      //   }
+      // }
     } else updated = false;
     cam.reposition();
 

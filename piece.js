@@ -3,11 +3,12 @@ import { Vector3 } from "three";
 import { Cube } from "./cube";
 
 export class Piece extends THREE.Group {
-  constructor(pos, orientation) {
+  constructor( ajouterCubeTableau) {
     super();
-    this.orientation = orientation;
-    this.pos = pos;
+    // this.orientation = orientation;
+    // this.pos = pos;
     this.listeCube = [];
+    this.ajouterCubeTableau = ajouterCubeTableau;
     this.Piece = this.createRandomPiece();
     this.isControlled = false;
   }
@@ -48,19 +49,26 @@ export class Piece extends THREE.Group {
     switch (rand) {
       case 1: // I Shape
 
-        let cube1 = new Cube(2.5,color,0,0,-2.5);
-        let cube2 = new Cube(2.5,color,0,2.5,-2.5);
-        let cube3 = new Cube(2.5,color,0,5,-2.5);
-        let cube4 = new Cube(2.5,color,0,7.5,-2.5);
-        this.listeCube.push(cube1);
-        this.listeCube.push(cube2);
-        this.listeCube.push(cube3);
-        this.listeCube.push(cube4);
+        // let cube1 = new Cube(2.5,color,0,,-2.5);
+        let cube1 = new Cube(2.5,color,0,25,-2.5);
+        let cube2 = new Cube(2.5,color,0,22.5,-2.5);
+        let cube3 = new Cube(2.5,color,0,20,-2.5);
+        let cube4 = new Cube(2.5,color,0,17.5,-2.5);
+        this.listeCube.push(cube1.Cube);
+        this.listeCube.push(cube2.Cube);
+        this.listeCube.push(cube3.Cube);
+        this.listeCube.push(cube4.Cube);
+        
+        
 
         piece.add(cube1.Cube);
         piece.add(cube2.Cube);
         piece.add(cube3.Cube);
         piece.add(cube4.Cube);
+        // this.ajouterCubeTableau(cube1.Cube);
+        // this.ajouterCubeTableau(cube2.Cube);
+        // this.ajouterCubeTableau(cube3.Cube);
+        // this.ajouterCubeTableau(cube4.Cube);
 
         break;
       case 2: // j Shape
