@@ -20,7 +20,9 @@ export class Data{
         }
     }
 
-    AfficherCube(val, cube = Cube){
+    AfficherCube(val, cube){
+        //methode qui va afficher tout ce qui se trouve dans le tableau
+        
 
     }
 
@@ -36,7 +38,7 @@ export class Data{
 
         for( let i =0; i<Hauteur; i++){
             for(let j=0; j< Longueur; j++){
-                Tableau[i][j] =('v',null);
+                Tableau[i][j] =('v',null); // tuple (char represantant la case, l'objet cube)
             }
         }
         return Tableau;

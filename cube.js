@@ -1,6 +1,6 @@
 import * as THREE from "three";
 
-export class cube extends THREE.Mesh {
+export class Cube extends THREE.Mesh {
   constructor(size, color, x, y, z) {
     super();
     this.size = size;
@@ -21,14 +21,5 @@ export class cube extends THREE.Mesh {
     cube.position.set(x, y, z);
 
     return cube;
-  }
-
-  getRandomColour() {
-    var letters = "0123456789ABCDEF";
-    var colour = "#";
-    for (var i = 0; i < 6; i++) {
-      colour += letters[Math.floor(Math.random() * 16)];
-    }
-    return colour;
   }
 }
