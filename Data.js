@@ -12,17 +12,16 @@ export class Data{
     }
 
     AfficherTableau(){
-
         for(const y = 0; y < this.tableau.length; y++){
             for(const x = 0; x < this.tableau[i].length; x++){
-                
+                this.AfficherCube(this.tableau[y][x][1],x,y)
             }
         }
     }
 
-    AfficherCube(val, cube = new Cube(), x, y){
+    AfficherCube(cube = new Cube(), x, y){
         //methode qui va afficher tout ce qui se trouve dans le tableau
-        
+        console.log(this.tableau[y][x]);
 
     }
 
