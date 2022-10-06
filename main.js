@@ -5,6 +5,7 @@ import { Camera } from "./camera";
 import { Piece } from "./piece";
 import { MouseClicker } from "./mouseClicker";
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { Cube } from './cube';
 
 
 let scene, renderer, cam, base;
@@ -50,7 +51,7 @@ function init() {
   pieceInit = new Piece();
 
   scene.add(pieceInit.Piece);
-  console.log(pieceInit.Piece)
+  //console.log(pieceInit.Piece)
   setupKeyControls(pieceInit);
   pieceInit.Piece.name = "a piece of game baby";
   //console.log(pieceInit.Piece.name);
