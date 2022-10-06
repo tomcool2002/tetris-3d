@@ -12,9 +12,9 @@ export class Data {
 
     AjouterCubesTableau(listeCube){
         listeCube.forEach(cube => {
-            
-
-            let x, y = this.TransformerPosition(cube.position.x, cube.position.y, false);
+            let pos = this.TransformerPosition(cube.position.x, cube.position.y, false);
+            let x = pos[0];
+            let y = pos[1];
             // let x = (cube.position.x/2.5) + 4;
             // let y = ((cube.position.y/2.5) - 10) / -1;
             // console.log(x,y)
@@ -24,13 +24,12 @@ export class Data {
             this.tableau[y][x][0] = 'i';
             // console.log(this.tableau[y][x])
         });
-        
     }
 
     TransformerPosition(x,y, duTableau){
         let x_transformer;
         let y_transformer;
-        if(!duTableau){
+        if(duTableau == false){
             x_transformer = (x/2.5) + 4;
             y_transformer = ((y/2.5) - 10) / -1;
         }else{
@@ -38,7 +37,7 @@ export class Data {
             y_transformer = ((y * -1) + 10) * 2.5;
         }
        
-        return x_transformer,y_transformer;
+        return [x_transformer, y_transformer];
     }
 
     AfficherTableau() {
