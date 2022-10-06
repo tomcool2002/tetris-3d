@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import { Vector3 } from "three";
+import { cube } from "./cube";
 
 export class Piece extends THREE.Group {
   constructor(pos, orientation) {
