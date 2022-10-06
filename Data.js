@@ -1,11 +1,10 @@
-import * as THREE from 'three';
+import * as THREE from "three";
 import { Cube } from "./cube";
 
-
-export class Data{
-    constructor(){
-        this.tableau = this.createBaseTableau();
-    }
+export class Data {
+  constructor() {
+    this.tableau = this.createBaseTableau();
+  }
 
     CheckLine(){
         
@@ -51,30 +50,26 @@ export class Data{
         console.log(this.tableau);
     }
 
-    AfficherCube(cube = new Cube(), x, y){
-        //methode qui va afficher tout ce qui se trouve dans le tableau
-        console.log(this.tableau[y][x]);
+  AfficherCube(cube = new Cube(), x, y) {
+    //methode qui va afficher tout ce qui se trouve dans le tableau
+    console.log(this.tableau[y][x]);
+  }
 
+  createBaseTableau() {
+    const Longueur = 9;
+    const Hauteur = 20;
+
+    let Tableau = new Array(Hauteur);
+
+    for (let i = 0; i < Hauteur; i++) {
+      Tableau[i] = new Array(Longueur);
     }
 
-    createBaseTableau(){
-        const Longueur = 9;
-        const Hauteur = 20;
-
-        let Tableau = new Array(Hauteur)
-
-        for(let i=0; i< Hauteur; i++){
-            Tableau[i] = new Array(Longueur);
-        }
-
-        for( let i =0; i<Hauteur; i++){
-            for(let j=0; j< Longueur; j++){
-                Tableau[i][j] = ['x', null]; // tuple (char represantant la case, l'objet cube)
-            }
-        }
-        return Tableau;
+    for (let i = 0; i < Hauteur; i++) {
+      for (let j = 0; j < Longueur; j++) {
+        Tableau[i][j] = ["x", null]; // tuple (char represantant la case, l'objet cube)
+      }
     }
-
-
+    return Tableau;
+  }
 }
-
