@@ -3,7 +3,7 @@ import { Vector3 } from "three";
 import { Cube } from "./cube";
 
 export class Piece extends THREE.Group {
-  constructor( ajouterCubeTableau) {
+  constructor(ajouterCubeTableau) {
     super();
     // this.orientation = orientation;
     // this.pos = pos;
@@ -13,13 +13,13 @@ export class Piece extends THREE.Group {
     this.isControlled = false;
   }
 
-  createRandomColorCube(size,color,x,y,z) {
+  createRandomColorCube(size, color, x, y, z) {
     let colour = new THREE.Color(color);
-    let geometry = new THREE.BoxGeometry (size, size, size);
+    let geometry = new THREE.BoxGeometry(size, size, size);
 
     let material = new THREE.MeshBasicMaterial({ color: colour });
     let cube = new THREE.Mesh(geometry, material);
-    cube.position.set(x,y,z);
+    cube.position.set(x, y, z);
     // console.log(cube.material.color)
 
     return cube;
@@ -41,30 +41,23 @@ export class Piece extends THREE.Group {
   createRandomPiece() {
     //random number 1-7
     //let rand = Math.floor(Math.random() * 7) + 1;
-    let rand = 1;
+    let rand = 4;
     let piece = new THREE.Group();
     let color = this.getRandomColour();
     //console.log(rand);
+    let cube1;
+    let cube2;
+    let cube3;
+    let cube4;
 
     switch (rand) {
       case 1: // I Shape
-
         // let cube1 = new Cube(2.5,color,0,,-2.5);
-        let cube1 = new Cube(2.5,color,0,25,-2.5);
-        let cube2 = new Cube(2.5,color,0,22.5,-2.5);
-        let cube3 = new Cube(2.5,color,0,20,-2.5);
-        let cube4 = new Cube(2.5,color,0,17.5,-2.5);
-        this.listeCube.push(cube1.Cube);
-        this.listeCube.push(cube2.Cube);
-        this.listeCube.push(cube3.Cube);
-        this.listeCube.push(cube4.Cube);
-        
-        
+        cube1 = new Cube(2.5, color, 0, 5, -2.5);
+        cube2 = new Cube(2.5, color, 0, 2.5, -2.5);
+        cube3 = new Cube(2.5, color, 0, 0, -2.5);
+        cube4 = new Cube(2.5, color, 0, -2.5, -2.5);
 
-        piece.add(cube1.Cube);
-        piece.add(cube2.Cube);
-        piece.add(cube3.Cube);
-        piece.add(cube4.Cube);
         // this.ajouterCubeTableau(cube1.Cube);
         // this.ajouterCubeTableau(cube2.Cube);
         // this.ajouterCubeTableau(cube3.Cube);
@@ -72,42 +65,56 @@ export class Piece extends THREE.Group {
 
         break;
       case 2: // j Shape
-        piece.add(this.createRandomColorCube(2.5,color,0,0,-2.5))
-        piece.add(this.createRandomColorCube(2.5,color,2.5,0,-2.5))
-        piece.add(this.createRandomColorCube(2.5,color,2.5,2.5,-2.5))
-        piece.add(this.createRandomColorCube(2.5,color,2.5,5,-2.5))
+        cube1 = new Cube(2.5, color, 0, 0, -2.5);
+        cube2 = new Cube(2.5, color, 2.5, 0, -2.5);
+        cube3 = new Cube(2.5, color, 2.5, 2.5, -2.5);
+        cube4 = new Cube(2.5, color, 2.5, 5, -2.5);
         break;
       case 3: // L Shape
-      piece.add(this.createRandomColorCube(2.5,color,0,0,-2.5))
-      piece.add(this.createRandomColorCube(2.5,color,-2.5,0,-2.5))
-      piece.add(this.createRandomColorCube(2.5,color,-2.5,2.5,-2.5))
-      piece.add(this.createRandomColorCube(2.5,color,-2.5,5,-2.5))
+        cube1 = new Cube(2.5, color, 0, 0, -2.5);
+        cube2 = new Cube(2.5, color, -2.5, 0, -2.5);
+        cube3 = new Cube(2.5, color, -2.5, 2.5, -2.5);
+        cube4 = new Cube(2.5, color, -2.5, 5, -2.5);
         break;
       case 4: // O Shape
-      piece.add(this.createRandomColorCube(2.5,color,0,0,-2.5))
-      piece.add(this.createRandomColorCube(2.5,color,2.5,0,-2.5))
-      piece.add(this.createRandomColorCube(2.5,color,2.5,2.5,-2.5))
-      piece.add(this.createRandomColorCube(2.5,color,0,2.5,-2.5))
+        cube1 = new Cube(2.5, color, 0, 0, -2.5);
+        cube2 = new Cube(2.5, color, 2.5, 0, -2.5);
+        cube3 = new Cube(2.5, color, 2.5, 2.5, -2.5);
+        cube4 = new Cube(2.5, color, 0, 2.5, -2.5);
         break;
-      case 5: // Z Shape      
-      piece.add(this.createRandomColorCube(2.5,color,0,0,-2.5))
-      piece.add(this.createRandomColorCube(2.5,color,2.5,0,-2.5))
-      piece.add(this.createRandomColorCube(2.5,color,0,2.5,-2.5))
-      piece.add(this.createRandomColorCube(2.5,color,-2.5,2.5,-2.5))
+      case 5: // Z Shape
+        cube1 = new Cube(2.5, color, 0, 0, -2.5);
+        cube2 = new Cube(2.5, color, 2.5, 0, -2.5);
+        cube3 = new Cube(2.5, color, 0, 2.5, -2.5);
+        cube4 = new Cube(2.5, color, -2.5, 2.5, -2.5);
         break;
       case 6: // T Shape
-      piece.add(this.createRandomColorCube(2.5,color,0,0,-2.5))
-      piece.add(this.createRandomColorCube(2.5,color,-2.5,0,-2.5))
-      piece.add(this.createRandomColorCube(2.5,color,2.5,0,-2.5))
-      piece.add(this.createRandomColorCube(2.5,color,0,2.5,-2.5))
+        cube1 = new Cube(2.5, color, 0, 0, -2.5);
+        cube2 = new Cube(2.5, color, -2.5, 0, -2.5);
+        cube3 = new Cube(2.5, color, 2.5, 0, -2.5);
+        cube4 = new Cube(2.5, color, 0, 2.5, -2.5);
         break;
       case 7: // S Shape
-      piece.add(this.createRandomColorCube(2.5,color,0,0,-2.5))
-      piece.add(this.createRandomColorCube(2.5,color,-2.5,0,-2.5))
-      piece.add(this.createRandomColorCube(2.5,color,0,2.5,-2.5))
-      piece.add(this.createRandomColorCube(2.5,color,2.5,2.5,-2.5))
+      cube1 = new Cube(2.5, color, 0, 0, -2.5);
+      cube2 = new Cube(2.5, color, -2.5, 0, -2.5);
+      cube3 = new Cube(2.5, color, 0, 2.5, -2.5);
+      cube4 = new Cube(2.5, color, 2.5, 2.5, -2.5);
         break;
     }
+
+    cube1.Cube.position.y += 20;
+    cube2.Cube.position.y += 20;
+    cube3.Cube.position.y += 20;
+    cube4.Cube.position.y += 20;
+    this.listeCube.push(cube1.Cube);
+    this.listeCube.push(cube2.Cube);
+    this.listeCube.push(cube3.Cube);
+    this.listeCube.push(cube4.Cube);
+
+    piece.add(cube1.Cube);
+    piece.add(cube2.Cube);
+    piece.add(cube3.Cube);
+    piece.add(cube4.Cube);
     return piece;
   }
 }

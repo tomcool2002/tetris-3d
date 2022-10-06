@@ -25,7 +25,6 @@ export class Data {
                             // debugger;
                             this.tableau[y][x][1].position.y = this.TransformerPosition(x,y,true)[1] - 2.5;
 
-
                             this.tableau[y + 1][x][0] = 'i';
                             this.tableau[y + 1][x][1] = this.tableau[y][x][1];
                             // debugger;
