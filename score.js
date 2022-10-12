@@ -74,6 +74,7 @@ export class Score extends THREE.Group {
             scene.add(this.theNumbers.Zero);
         } else{
             // remove previous score
+            scene.remove(scene.getObjectByName('Zero'));
             scene.remove(scene.getObjectByName('One'));
             scene.remove(scene.getObjectByName('Two'));
             scene.remove(scene.getObjectByName('Three'));
