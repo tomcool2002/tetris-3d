@@ -149,6 +149,9 @@ function setupKeyControls() {
   document.onkeydown = function (e) {
     if (pause == false) {
       switch (e.key) {
+        case "ArrowDown":
+          data.Deplacement('b');
+          break;
         case "ArrowRight":
           data.Deplacement('d');
           break;
