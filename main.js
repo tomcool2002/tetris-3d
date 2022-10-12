@@ -88,14 +88,6 @@ function init() {
   );
 
   score = new Score();
-
-  // loader.load('./models/numbers.glb',
-  //   function (gltf){
-  //     const zeroMesh = gltf.scene.children.find((child) => child.name == "Zero");
-  //     zeroMesh.scale.set(zeroMesh.scale.x * 5, zeroMesh.scale.y * 5, zeroMesh.scale.z * 5);
-  //     scene.add(zeroMesh);
-  //   }
-  // )
 }
 
 function horizontalLine() {
@@ -131,13 +123,6 @@ function CreatePlayGround() {
   base.position.y = -25;
   PlayGround.add(base);
 
-
-  //let geometry2 = new THREE.BoxGeometry(5,5,1);
-  //let texture2 = new THREE.MeshBasicMaterial({color: 0xfff000});
-  //let cubetest = new THREE.Mesh(geometry2,texture2);
-  //cubetest.position.y = 2.5;
-  //PlayGround.add(cubetest);
-
   return PlayGround;
 }
 
@@ -164,28 +149,10 @@ function setupKeyControls() {
   document.onkeydown = function (e) {
     if (pause == false) {
       switch (e.key) {
-        // case "q":
-        // //console.log(SelectedBlock.Piece.rotation);
-        // SelectedBlock.Piece.rotation.z += Math.PI/2;
-        // break;
-        // case "e":
-        //   //console.log(SelectedBlock.Piece.rotation);
-        //   SelectedBlock.Piece.rotation.z -= Math.PI/2;4
-        //   // data.pieceI.x +=1;
-        //   break;  
-        // case "ArrowDown":
-        //   if (-21 < pieceInit.Piece.position.y) {
-        //     SelectedBlock.Piece.position.y += -2.5;
-        //   }
-        //   break;
         case "ArrowRight":
-          // console.log(SelectedBlock.Piece.position.x);
-          // SelectedBlock.Piece.position.x += 2.5;
           data.Deplacement('d');
           break;
         case "ArrowLeft":
-          // console.log(SelectedBlock.Piece.position.x);
-          // SelectedBlock.Piece.position.x -= 2.5;
           data.Deplacement('g');
 
           break;
@@ -217,12 +184,13 @@ window.addEventListener('mouseup', clearClickPosition);
 let lastUpdate = new Date().getSeconds();
 let updated = false;
 let timeAtPaused;
+let points = 0;
 
 function gameLoop(timeAtPlay){
   if(pause == false){
     let now = new Date().getSeconds();
     if(score.IsReady == true){
-      score.ShowNumbers(scene, 9);
+      score.ShowNumbers(scene, points);
     }
     
 
@@ -230,10 +198,11 @@ function gameLoop(timeAtPlay){
 
       // changes block position
       if(updated == false){
-        //data.HighwayToHell();
+        data.HighwayToHell();
         lastUpdate = new Date().getSeconds();
         updated = true;
         data.AfficherTableau2D();
+        points++;
       }
     } else updated = false;
     cam.reposition();
