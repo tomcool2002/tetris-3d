@@ -195,7 +195,7 @@ function gameLoop(timeAtPlay){
   if(pause == false){
     let now = new Date().getSeconds();
     if(score.IsReady == true){
-      score.ShowNumbers(scene,1234567);
+      score.ShowNumbers(scene,points);
     }
     
 

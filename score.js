@@ -105,12 +105,11 @@ export class Score extends THREE.Group {
             let name = stringToName[number];
             let number3D = this.theNumbers[name].clone();
             let texture = this.texture;
-            number3D.material = new THREE.MeshStandardMaterial({ 
-                color: 0xff8080,
-                map:texture
-            });
-            debugger
-            
+            // number3D.material = new THREE.MeshStandardMaterial({ 
+            //     color: 0xff8080,
+            //     map:texture
+            // });
+            number3D.material = new THREE.MeshNormalMaterial({color:0xfa4040})
             number3D.position.y = 30;
 
             number3D.position.x = positionX[i];
