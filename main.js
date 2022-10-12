@@ -1,4 +1,3 @@
-
 import * as THREE from 'three';
 import { Data } from './Data';
 import { Camera } from "./camera";
@@ -6,8 +5,8 @@ import { Piece } from "./piece";
 import { MouseClicker } from "./mouseClicker";
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { Cube } from './cube';
-
-let scene, renderer, cam, base;
+import {Score} from './score';
+let scene, renderer, cam, base, score;
 let pieceInit;
 let data;
 
@@ -88,13 +87,15 @@ function init() {
     }
   );
 
-  loader.load('./models/numbers.glb',
-    function (gltf){
-      const zeroMesh = gltf.scene.children.find((child) => child.name == "Zero");
-      zeroMesh.scale.set(zeroMesh.scale.x * 5, zeroMesh.scale.y * 5, zeroMesh.scale.z * 5);
-      scene.add(zeroMesh);
-    }
-  )
+  score = new Score();
+
+  // loader.load('./models/numbers.glb',
+  //   function (gltf){
+  //     const zeroMesh = gltf.scene.children.find((child) => child.name == "Zero");
+  //     zeroMesh.scale.set(zeroMesh.scale.x * 5, zeroMesh.scale.y * 5, zeroMesh.scale.z * 5);
+  //     scene.add(zeroMesh);
+  //   }
+  // )
 }
 
 function horizontalLine() {
@@ -125,7 +126,7 @@ function CreatePlayGround() {
     PlayGround.add(Vline1)
   }
   let geometry = new THREE.BoxGeometry(22.5, 1, 5);
-  const texture = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+  const texture = new THREE.MeshBasicMaterial({ color: 0xFFF515 });
   base = new THREE.Mesh(geometry, texture);
   base.position.y = -25;
   PlayGround.add(base);
@@ -220,13 +221,16 @@ let timeAtPaused;
 function gameLoop(timeAtPlay){
   if(pause == false){
     let now = new Date().getSeconds();
+    if(score.IsReady == true){
+      score.ShowNumbers(scene, 9);
+    }
     
 
     if(now > lastUpdate + 0.5){
 
       // changes block position
       if(updated == false){
-        data.HighwayToHell();
+        //data.HighwayToHell();
         lastUpdate = new Date().getSeconds();
         updated = true;
         data.AfficherTableau2D();
