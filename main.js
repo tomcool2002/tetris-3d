@@ -20,9 +20,6 @@ const gameHeight = 20;
 
 
 function init() {
-
-  
-
   scene = new THREE.Scene();
 
   renderer = new THREE.WebGLRenderer({
@@ -30,7 +27,8 @@ function init() {
     antialias: false
   });
   renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setClearColor(0x6b6362, 1);
+  renderer.setClearColor(0x00867f, 1);
+  // 0x6b6362
 
   cam = new Camera(renderer);
   pause = false;
@@ -72,21 +70,31 @@ function init() {
 
   //pieceInit.enleveCube();
 
+
   scene.add(World);
 
+  renderer.outputEncoding = THREE.sRGBEncoding;
   // pause for now, add to ui later
   const loader = new GLTFLoader();
-  loader.load('./models/pauseModel.glb', function (gltfScene) {
-    gltfScene.scene.scale.set(5, 5, 5);
-    gltfScene.scene.position.x = 20;
-    gltfScene.scene.position.y = 20;
-    gltfScene.scene.position.z = -2.5;
-    // console.log(gltfScene.scene);
-    scene.add(gltfScene.scene);
-  });
+  loader.load('./models/pauseModel.glb', 
+    function (gltf) {
+      const pauseMesh = gltf.scene.children.find((child) => child.name == "Circle" );
+      pauseMesh.scale.set(pauseMesh.scale.x * 5, pauseMesh.scale.y * 5, pauseMesh.scale.z * 5);
+      pauseMesh.position.x = 20;
+      pauseMesh.position.y = 20;
+      pauseMesh.position.z = -2.5;
+      pauseMesh.material = new THREE.MeshBasicMaterial({color:0xfa4040})
+      scene.add(pauseMesh);
+    }
+  );
 
-  const light = new THREE.AmbientLight(0x404040);
-  scene.add(light);
+  loader.load('./models/numbers.glb',
+    function (gltf){
+      const zeroMesh = gltf.scene.children.find((child) => child.name == "Zero");
+      zeroMesh.scale.set(zeroMesh.scale.x * 5, zeroMesh.scale.y * 5, zeroMesh.scale.z * 5);
+      scene.add(zeroMesh);
+    }
+  )
 }
 
 function horizontalLine() {
