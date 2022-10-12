@@ -9,6 +9,9 @@ export class Data {
     this.HAUTEUR = 20;
     this.LONGEUR = 9;
     this.tableau = this.createBaseTableau();
+    this.positionPiece = [];
+    this.piecePrincipale;
+    this.memoireblock = [];
   }
 
   HighwayToHell() {
@@ -46,6 +49,7 @@ export class Data {
   }
 
   Deplacement(dir) {
+    this.Deconstruction();
     let mouv_2D = 0;
     let mouv_3D = 0;
     // let canMouve = false;
@@ -53,10 +57,12 @@ export class Data {
       case "g":
         mouv_2D = -1;
         mouv_3D = -2.5;
+
         for (let y = 0; y < this.tableau.length; y++) {
           for (let x = 0; x < this.tableau[y].length; x++) {
-            if (this.tableau[y][x][0] == "i") {
+            if (this.tableau[y][x][0] == "D") {
               if (x != 0 && dir == "g") {
+                this.piecePrincipale[1]--
                 this.mouveDirection(x, y, mouv_2D, mouv_3D);
               } else if (x != this.LONGEUR - 1 && dir == "d") {
                 this.mouveDirection(x, y, mouv_2D, mouv_3D);
@@ -68,12 +74,14 @@ export class Data {
       case "d":
         mouv_2D = 1;
         mouv_3D = 2.5;
+
         for (let y = this.HAUTEUR - 1; y >= 0; y--) {
           for (let x = this.LONGEUR - 1; x >= 0; x--) {
-            if (this.tableau[y][x][0] == "i") {
+            if (this.tableau[y][x][0] == "D") {
               if (x != 0 && dir == "g") {
                 this.mouveDirection(x, y, mouv_2D, mouv_3D);
               } else if (x != this.LONGEUR - 1 && dir == "d") {
+                this.piecePrincipale[1]++
                 this.mouveDirection(x, y, mouv_2D, mouv_3D);
               }
             }
@@ -81,7 +89,7 @@ export class Data {
         }
         break;
     }
-    //for (let y = this.HAUTEUR - 1; y >= 0; y--) {
+    // for (let y = this.HAUTEUR - 1; y >= 0; y--) {
     //  for (let x = this.LONGEUR - 1; x >= 0; x--) {
     //    if (this.tableau[y][x][0] == "i") {
     //      if (x != 0 && dir == "g") {
@@ -91,7 +99,7 @@ export class Data {
     //      }
     //    }
     //  }
-    //}
+    // }
 
     //for (let y = this.HAUTEUR - 1; y >= 0; y--) {
     //  for (let x = this.LONGEUR - 1; x >= 0; x--) {
@@ -100,21 +108,50 @@ export class Data {
     //    }
     //  }
     //}
+
+    this.Reconstruction(this.piecePrincipale[0],this.piecePrincipale[1]);
+  }
+
+  Reconstruction(y,x){
+    let compteur = 0;
+    this.positionPiece.forEach(block => {
+      this.tableau[y+block[0]][x+block[1]][0] = "i" 
+      this.tableau[y+block[0]][x+block[1]][1] = this.memoireblock[compteur]
+      compteur++;
+      this.tableau[y+block[0]][x+block[1]][1].position.x = this.TransformerPosition(x+block[1], y+block[0], true)[0]
+
+      //console.log(y+block[0], x+block[1])
+      //console.log(this.TransformerPosition(y+block[0], x+block[1], true)[0]);
+    });
+    this.memoireblock.length = 0;
+
+    
+  }
+
+  Deconstruction(){
+    for (let y = this.HAUTEUR - 1; y >= 0; y--) {
+      for (let x = this.LONGEUR - 1; x >= 0; x--) {
+        if (this.tableau[y][x][0] == "i"){
+            this.tableau[y][x][0] = "v"
+            this.memoireblock.push(this.tableau[y][x][1]);
+            this.tableau[y][x][1] = null;
+        }
+      }}
   }
 
   mouveDirection(x, y, mouv_2D, mouv_3D) {
     if (this.tableau[y][x + mouv_2D][0] == "v") {
-      let cube = this.tableau[y][x][1].position.x;
-      this.tableau[y][x][1].position.x =
-        this.TransformerPosition(x, y, true)[0] + mouv_3D;
-      cube = this.tableau[y][x][1].position.x;
-      this.tableau[y][x + mouv_2D][0] = "i";
+      //let cube = this.tableau[y][x][1].position.x;
+      this.tableau[y][x][1].position.x = this.TransformerPosition(x, y, true)[0] + mouv_3D;
+      //cube = this.tableau[y][x][1].position.x;
+      this.tableau[y][x + mouv_2D][0] = "D";
       this.tableau[y][x + mouv_2D][1] = this.tableau[y][x][1];
       this.tableau[y][x][0] = "v";
       this.tableau[y][x][1] = null;
     }
   }
   AjouterCubesTableau(listeCube) {
+    let compteur = 0;
     listeCube.forEach((cube) => {
       let pos = this.TransformerPosition(
         cube.position.x,
@@ -129,9 +166,24 @@ export class Data {
       // this;
 
       this.tableau[y][x][1] = cube;
+      if(compteur == 1){
+        this.piecePrincipale=[y,x]
+        this.tableau[y][x][0] = "D";
+      }
+      else{
+      this.positionPiece.push([y,x]);
       this.tableau[y][x][0] = "i";
+      }
+
       // console.log(this.tableau[y][x])
+      compteur++;
     });
+
+    this.positionPiece.forEach(piece => {
+      piece[0] -= this.piecePrincipale[0];
+      piece[1] -= this.piecePrincipale[1];
+    });
+
   }
 
   TransformerPosition(x, y, duTableau) {
@@ -150,7 +202,8 @@ export class Data {
 
   AfficherTableau2D() {
     console.clear();
-    // console.log();
+    console.log(this.positionPiece);
+    console.log(this.piecePrincipale);
     for (let y = 0; y < this.HAUTEUR; y++) {
       let stringLigne = "";
       for (let x = 0; x < this.LONGEUR; x++) {
