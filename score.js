@@ -23,6 +23,9 @@ export class Score extends THREE.Group {
         this.IsReady = false;
         const addingFunc = this.Loading.bind(this);
         loader.load('./models/numbers.glb', addingFunc);
+        this.texture = new THREE.TextureLoader().load('./models/checkers.jpg');
+        // this.texture = new THREE.TextureLoader().load('./models/honeycomb.jpg');
+
     }
     
     AddNumbers(local) {
@@ -68,40 +71,52 @@ export class Score extends THREE.Group {
     }
 
     ShowNumbers(scene, number = 0) {
-        if(number == 0){
-            this.theNumbers.Zero.material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-            this.theNumbers.Zero.position.y = 30;
-            scene.add(this.theNumbers.Zero);
-        } else{
-            // remove previous score
-            scene.remove(scene.getObjectByName('Zero'));
-            scene.remove(scene.getObjectByName('One'));
-            scene.remove(scene.getObjectByName('Two'));
-            scene.remove(scene.getObjectByName('Three'));
-            scene.remove(scene.getObjectByName('Four'));
-            scene.remove(scene.getObjectByName('Five'));
-            scene.remove(scene.getObjectByName('Six'));
-            scene.remove(scene.getObjectByName('Seven'));
-            scene.remove(scene.getObjectByName('Eight'));
-            scene.remove(scene.getObjectByName('Nine'));
+        // remove previous score
+        scene.remove(scene.getObjectByName('Zero'));
+        scene.remove(scene.getObjectByName('One'));
+        scene.remove(scene.getObjectByName('Two'));
+        scene.remove(scene.getObjectByName('Three'));
+        scene.remove(scene.getObjectByName('Four'));
+        scene.remove(scene.getObjectByName('Five'));
+        scene.remove(scene.getObjectByName('Six'));
+        scene.remove(scene.getObjectByName('Seven'));
+        scene.remove(scene.getObjectByName('Eight'));
+        scene.remove(scene.getObjectByName('Nine'));
+        
+
+        let listOfNumbers = `${number}`.split('');
+        listOfNumbers.length;
+        
+        for(let i = 0; i < listOfNumbers.length; i++){
+            listOfNumbers[i] = parseInt(listOfNumbers[i]);
+        }
+
+        const positionX = {
+            0 : -9,
+            1 : -6,
+            2 : -3,
+            3 : 0,
+            4 : 3,
+            5 : 6,
+            6 : 9
+        };
+        for(let i = 0; i < listOfNumbers.length; i++){
+            let number = listOfNumbers[i];
+            let name = stringToName[number];
+            let number3D = this.theNumbers[name].clone();
+            let texture = this.texture;
+            number3D.material = new THREE.MeshStandardMaterial({ 
+                color: 0xff8080,
+                map:texture
+            });
+            debugger
+            
+            number3D.position.y = 30;
+
+            number3D.position.x = positionX[i];
             
 
-            let listOfNumbers = `${number}`.split('');
-            listOfNumbers.length;
-            
-            for(let i = 0; i < listOfNumbers.length; i++){
-                listOfNumbers[i] = parseInt(listOfNumbers[i]);
-            }
-            if(listOfNumbers.length == 1){
-                let number = listOfNumbers[0];
-                let name = stringToName[number];
-                //stringToName[listOfNumbers[0]]
-                let number3D = this.theNumbers[name];
-                number3D.material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-                number3D.position.y = 30;
-                number3D.position.x = 0;
-                scene.add(number3D);
-            }
+            scene.add(number3D);
         }
     }
 }

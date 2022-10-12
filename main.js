@@ -27,7 +27,6 @@ function init() {
   });
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setClearColor(0x00867f, 1);
-  // 0x6b6362
 
   cam = new Camera(renderer);
   pause = false;
@@ -82,12 +81,15 @@ function init() {
       pauseMesh.position.x = 20;
       pauseMesh.position.y = 20;
       pauseMesh.position.z = -2.5;
-      pauseMesh.material = new THREE.MeshBasicMaterial({color:0xfa4040})
+      pauseMesh.material = new THREE.MeshNormalMaterial({color:0xfa4040})
       scene.add(pauseMesh);
     }
   );
 
   score = new Score();
+
+  const light = new THREE.AmbientLight( 0xffffff ); 
+  scene.add(light);
 }
 
 function horizontalLine() {
@@ -190,7 +192,7 @@ function gameLoop(timeAtPlay){
   if(pause == false){
     let now = new Date().getSeconds();
     if(score.IsReady == true){
-      score.ShowNumbers(scene, points);
+      score.ShowNumbers(scene,1234567);
     }
     
 
