@@ -53,30 +53,53 @@ export class Data {
       case "g":
         mouv_2D = -1;
         mouv_3D = -2.5;
+        for (let y = 0; y < this.tableau.length; y++) {
+          for (let x = 0; x < this.tableau[y].length; x++) {
+            if (this.tableau[y][x][0] == "i") {
+              if (x != 0 && dir == "g") {
+                this.mouveDirection(x, y, mouv_2D, mouv_3D);
+              } else if (x != this.LONGEUR - 1 && dir == "d") {
+                this.mouveDirection(x, y, mouv_2D, mouv_3D);
+              }
+            }
+          }
+        }
         break;
       case "d":
         mouv_2D = 1;
         mouv_3D = 2.5;
-        break;
-    }
-    for (let y = this.HAUTEUR - 1; y >= 0; y--) {
-      for (let x = this.LONGEUR - 1; x >= 0; x--) {
-        if (this.tableau[y][x][0] == "i") {
-          if (x != 0 && dir == "g") {
-            this.mouveDirection(x, y, mouv_2D, mouv_3D);
-          } else if (x != this.LONGEUR - 1 && dir == "d") {
-            this.mouveDirection(x, y, mouv_2D, mouv_3D);
+        for (let y = this.HAUTEUR - 1; y >= 0; y--) {
+          for (let x = this.LONGEUR - 1; x >= 0; x--) {
+            if (this.tableau[y][x][0] == "i") {
+              if (x != 0 && dir == "g") {
+                this.mouveDirection(x, y, mouv_2D, mouv_3D);
+              } else if (x != this.LONGEUR - 1 && dir == "d") {
+                this.mouveDirection(x, y, mouv_2D, mouv_3D);
+              }
+            }
           }
         }
-      }
+        break;
     }
-    for (let y = this.HAUTEUR - 1; y >= 0; y--) {
-      for (let x = this.LONGEUR - 1; x >= 0; x--) {
-        if (this.tableau[y][x][0] == "D") {
-          this.tableau[y][x][0] = "i";
-        }
-      }
-    }
+    //for (let y = this.HAUTEUR - 1; y >= 0; y--) {
+    //  for (let x = this.LONGEUR - 1; x >= 0; x--) {
+    //    if (this.tableau[y][x][0] == "i") {
+    //      if (x != 0 && dir == "g") {
+    //        this.mouveDirection(x, y, mouv_2D, mouv_3D);
+    //      } else if (x != this.LONGEUR - 1 && dir == "d") {
+    //        this.mouveDirection(x, y, mouv_2D, mouv_3D);
+    //      }
+    //    }
+    //  }
+    //}
+
+    //for (let y = this.HAUTEUR - 1; y >= 0; y--) {
+    //  for (let x = this.LONGEUR - 1; x >= 0; x--) {
+    //    if (this.tableau[y][x][0] == "D") {
+    //      this.tableau[y][x][0] = "i";
+    //    }
+    //  }
+    //}
   }
 
   mouveDirection(x, y, mouv_2D, mouv_3D) {
@@ -85,7 +108,7 @@ export class Data {
       this.tableau[y][x][1].position.x =
         this.TransformerPosition(x, y, true)[0] + mouv_3D;
       cube = this.tableau[y][x][1].position.x;
-      this.tableau[y][x + mouv_2D][0] = "D";
+      this.tableau[y][x + mouv_2D][0] = "i";
       this.tableau[y][x + mouv_2D][1] = this.tableau[y][x][1];
       this.tableau[y][x][0] = "v";
       this.tableau[y][x][1] = null;
