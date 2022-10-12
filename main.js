@@ -198,7 +198,7 @@ function gameLoop(timeAtPlay){
 
       // changes block position
       if(updated == false){
-        data.HighwayToHell();
+        // data.HighwayToHell();
         lastUpdate = new Date().getSeconds();
         updated = true;
         data.AfficherTableau2D();

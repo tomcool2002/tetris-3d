@@ -41,7 +41,7 @@ export class Piece  {
   createRandomPiece() {
     //random number 1-7
     //let rand = Math.floor(Math.random() * 7) + 1;
-    let rand = 1;
+    let rand = 2;
     let piece = new THREE.Group();
     let color = this.getRandomColour();
     //console.log(rand);
@@ -110,11 +110,6 @@ export class Piece  {
     this.listeCube.push(cube2.Cube);
     this.listeCube.push(cube3.Cube);
     this.listeCube.push(cube4.Cube);
-
-    // piece.add(cube1.Cube);
-    // piece.add(cube2.Cube);
-    // piece.add(cube3.Cube);
-    // piece.add(cube4.Cube);
     return piece;
   }
 }
