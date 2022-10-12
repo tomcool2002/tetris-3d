@@ -76,7 +76,7 @@ function init() {
 
   // pause for now, add to ui later
   const loader = new GLTFLoader();
-  loader.load('./pause/pauseModel.glb', function (gltfScene) {
+  loader.load('./models/pauseModel.glb', function (gltfScene) {
     gltfScene.scene.scale.set(5, 5, 5);
     gltfScene.scene.position.x = 20;
     gltfScene.scene.position.y = 20;
