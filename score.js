@@ -109,7 +109,7 @@ export class Score extends THREE.Group {
             //     color: 0xff8080,
             //     map:texture
             // });
-            number3D.material = new THREE.MeshNormalMaterial({color:0xfa4040})
+            number3D.material = new THREE.MeshNormalMaterial()
             number3D.position.y = 30;
 
             number3D.position.x = positionX[i];
