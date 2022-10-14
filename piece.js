@@ -41,7 +41,7 @@ export class Piece  {
   createRandomPiece() {
     //random number 1-7
     //let rand = Math.floor(Math.random() * 7) + 1;
-    let rand = 1;
+    let rand = 4;
     let piece = new THREE.Group();
     let color = this.getRandomColour();
     //console.log(rand);
