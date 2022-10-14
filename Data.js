@@ -96,8 +96,8 @@ export class Data {
             peutDeplacer = this.isValid(
               this.piecePrincipale[0]+ block[0],
               this.piecePrincipale[1] + 1 + block[1]
+
             );
-            
           });
 
           if(peutDeplacer){
@@ -107,7 +107,6 @@ export class Data {
             this.Reconstruction(this.piecePrincipale[0], this.piecePrincipale[1]);
           }
 
-          //this.mouveDirectionX(x, y, mouv_2D, mouv_3D);
         }
         break;
       case "b": // bas
