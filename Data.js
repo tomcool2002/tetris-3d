@@ -266,6 +266,12 @@ export class Data {
     return TableauligneComplete;
   }
 
+  IsValid(x,y){
+    if(x < 0 || x >= this.LONGEUR)return false;
+    if(y < 0 || y >= this.HAUTEUR) return false;
+    return true;
+  }
+
   createBaseTableau() {
     let Tableau = new Array(this.HAUTEUR);
 
