@@ -182,6 +182,20 @@ export class Data {
     return [x_transformer, y_transformer];
   }
 
+  isValid(y,x){
+
+// check for dimensions
+if(a >= arena.length || b >= arena[a].length) {
+  return false;
+}
+// check if the value is undefined/null/0/false/""
+if(!arena[a][b]) {
+  return false;
+}
+return true;
+
+  }
+
   AfficherTableau2D() {
     console.clear();
     //console.log(this.positionPiece);
