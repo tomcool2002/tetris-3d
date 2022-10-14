@@ -17,39 +17,39 @@ export class Data {
     this.memoireblock = [];
   }
 
-  HighwayToHell() {
-    for (let y = this.HAUTEUR - 1; y >= 0; y--) {
-      for (let x = this.LONGEUR - 1; x >= 0; x--) {
-        if (y != this.HAUTEUR - 1) {
-          if (this.tableau[y][x][0] == "i") {
-            if (this.tableau[y + 1][x][0] == "v") {
-              // camera, the position is changed, but the camera is not updated?
-              // let char = this.tableau[y][x][0];
-              // let cube = this.tableau[y][x][1];
-              // debugger;
-              this.tableau[y][x][1].position.y =
-                this.TransformerPosition(x, y, true)[1] - 2.5;
+  // HighwayToHell() {
+  //   for (let y = this.HAUTEUR - 1; y >= 0; y--) {
+  //     for (let x = this.LONGEUR - 1; x >= 0; x--) {
+  //       if (y != this.HAUTEUR - 1) {
+  //         if (this.tableau[y][x][0] == "i") {
+  //           if (this.tableau[y + 1][x][0] == "v") {
+  //             // camera, the position is changed, but the camera is not updated?
+  //             // let char = this.tableau[y][x][0];
+  //             // let cube = this.tableau[y][x][1];
+  //             // debugger;
+  //             this.tableau[y][x][1].position.y =
+  //               this.TransformerPosition(x, y, true)[1] - 2.5;
 
-              this.tableau[y + 1][x][0] = "i";
-              this.tableau[y + 1][x][1] = this.tableau[y][x][1];
-              // debugger;
+  //             this.tableau[y + 1][x][0] = "i";
+  //             this.tableau[y + 1][x][1] = this.tableau[y][x][1];
+  //             // debugger;
 
-              this.tableau[y][x][0] = "v";
-              this.tableau[y][x][1] = null;
-            }
-          }
-        } else if (this.tableau[y][x][0] == "i") {
-          for (let y = this.HAUTEUR - 1; y >= 0; y--) {
-            for (let x = this.LONGEUR - 1; x >= 0; x--) {
-              if (this.tableau[y][x][0] == "i") {
-                this.tableau[y][x][0] = "x";
-              }
-            }
-          }
-        }
-      }
-    }
-  }
+  //             this.tableau[y][x][0] = "v";
+  //             this.tableau[y][x][1] = null;
+  //           }
+  //         }
+  //       } else if (this.tableau[y][x][0] == "i") {
+  //         for (let y = this.HAUTEUR - 1; y >= 0; y--) {
+  //           for (let x = this.LONGEUR - 1; x >= 0; x--) {
+  //             if (this.tableau[y][x][0] == "i") {
+  //               this.tableau[y][x][0] = "x";
+  //             }
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
 
   Deplacement(dir) {
     let mouv_2D = 0;
@@ -68,10 +68,8 @@ export class Data {
             }
 
             peutDeplacer = this.isValid(
-              20,20
-
-              //this.piecePrincipale[0] + 1 + block[0],
-              //this.piecePrincipale[1] + block[1]
+              this.piecePrincipale[0] + 1 + block[0],
+              this.piecePrincipale[1] + block[1]
             );
             
           });
@@ -124,10 +122,8 @@ export class Data {
             }
 
             peutDeplacer = this.isValid(
-              20,20
-
-              //this.piecePrincipale[0] + 1 + block[0],
-              //this.piecePrincipale[1] + block[1]
+              this.piecePrincipale[0] + 1 + block[0],
+              this.piecePrincipale[1] + block[1]
             );
             
           });
