@@ -9,8 +9,10 @@ export class Data {
     this.HAUTEUR = 20;
     this.LONGEUR = 9;
     this.tableau = this.createBaseTableau();
+
     this.positionPiece = [];
     this.piecePrincipale;
+
     this.memoirePiece;
     this.memoireblock = [];
   }
@@ -52,42 +54,96 @@ export class Data {
   Deplacement(dir) {
     let mouv_2D = 0;
     let mouv_3D = 0;
+    let peutDeplacer = true;
 
     switch (dir) {
       case "g": // gauche
         mouv_2D = -1;
         mouv_3D = -2.5;
-              if (this.piecePrincipale[1] != 0) {
-                // regarde si n'est pas au max
-                this.Deconstruction();
-                this.piecePrincipale[1]--;
-                this.MoveBlock();
-                //this.mouveDirectionX(x, y, mouv_2D, mouv_3D);
-              }
+        if (this.piecePrincipale[1] != 0) {
+          // regarde si n'est pas au max
+          this.positionPiece.every((block) => {
+            if (peutDeplacer) {
+              return false;
+            }
+
+            peutDeplacer = this.isValid(
+              20,20
+
+              //this.piecePrincipale[0] + 1 + block[0],
+              //this.piecePrincipale[1] + block[1]
+            );
+            
+          });
+
+
+          if(peutDeplacer){
+            this.Deconstruction();
+            this.piecePrincipale[1]--; // modifie position piece "D" dans le tableau 2d
+            this.MoveBlock();
+            this.Reconstruction(this.piecePrincipale[0], this.piecePrincipale[1]);
+          }
+        }
         break;
       case "d": // droite
         mouv_2D = 1;
         mouv_3D = 2.5;
-          if (this.piecePrincipale[1] != this.LONGEUR - 1) {
-            // regarde si n'est pas au max
+        if (this.piecePrincipale[1] != this.LONGEUR - 1) {
+          // regarde si n'est pas au max
+          this.positionPiece.every((block) => {
+            if (peutDeplacer) {
+              return false;
+            }
+
+            peutDeplacer = this.isValid(
+              this.piecePrincipale[0]+ block[0],
+              this.piecePrincipale[1] + 1 + block[1]
+            );
+            
+          });
+
+          if(peutDeplacer){
             this.Deconstruction();
-            this.piecePrincipale[1]++;
+            this.piecePrincipale[1]++; // modifie position piece "D" dans le tableau 2d
             this.MoveBlock();
-            //this.mouveDirectionX(x, y, mouv_2D, mouv_3D);
+            this.Reconstruction(this.piecePrincipale[0], this.piecePrincipale[1]);
           }
+
+          //this.mouveDirectionX(x, y, mouv_2D, mouv_3D);
+        }
         break;
       case "b": // bas
         mouv_2D = 1;
         mouv_3D = 2.5;
-        if (this.piecePrincipale[0] != this.HAUTEUR - 1) { // regarde si n'est pas au max
-          this.Deconstruction();
-          this.piecePrincipale[0]++;
-          this.MoveBlock();
+        if (this.piecePrincipale[0] != this.HAUTEUR - 1) {
+          // regarde si n'est pas au max
+
+          this.positionPiece.every((block) => {
+            if (peutDeplacer) {
+              return false;
+            }
+
+            peutDeplacer = this.isValid(
+              20,20
+
+              //this.piecePrincipale[0] + 1 + block[0],
+              //this.piecePrincipale[1] + block[1]
+            );
+            
+          });
+
+
+          if(peutDeplacer){
+            this.Deconstruction();
+            this.piecePrincipale[0]++; // modifie position piece "D" dans le tableau 2d
+            this.MoveBlock();
+            this.Reconstruction(this.piecePrincipale[0], this.piecePrincipale[1]);
+          }
         }
         break;
     }
 
-    this.Reconstruction(this.piecePrincipale[0], this.piecePrincipale[1]);
+
   }
 
   MoveBlock() {
@@ -111,12 +167,12 @@ export class Data {
     this.positionPiece.forEach((block) => {
       this.tableau[y + block[0]][x + block[1]][0] = "i";
 
-      //this.tableau[y+block[0]][x+block[1]][1] = this.memoireblock[compteur]
       this.memoireblock[compteur].position.x = this.TransformerPosition(
         x + block[1],
         y + block[0],
         true
       )[0];
+
       this.memoireblock[compteur].position.y = this.TransformerPosition(
         x + block[1],
         y + block[0],
@@ -124,7 +180,6 @@ export class Data {
       )[1];
       compteur++;
     });
-    //this.memoireblock.length = 0;
   }
 
   Deconstruction() {
@@ -182,19 +237,6 @@ export class Data {
     return [x_transformer, y_transformer];
   }
 
-  isValid(y,x){
-
-// check for dimensions
-if(a >= arena.length || b >= arena[a].length) {
-  return false;
-}
-// check if the value is undefined/null/0/false/""
-if(!arena[a][b]) {
-  return false;
-}
-return true;
-
-  }
 
   AfficherTableau2D() {
     console.clear();
