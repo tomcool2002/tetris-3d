@@ -1,6 +1,8 @@
 import * as THREE from "three";
 import { Scene } from "three";
 import { Cube } from "./cube";
+import { Piece } from "./piece";
+
 
 export class Data {
   constructor() {
@@ -18,6 +20,15 @@ export class Data {
   }
   HighwayToHell(){
     this.Deplacement('b');
+  }
+
+  startGame(scene){
+    let pieceInit = new Piece();
+    pieceInit.listeCube[3].name = 'hello';
+    this.AjouterCubesTableau(pieceInit.listeCube)
+    for(let i = 0; i < pieceInit.listeCube.length; i++){
+      scene.add(pieceInit.listeCube[i]);
+    }
   }
 
   // HighwayToHell() {
