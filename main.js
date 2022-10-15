@@ -1,13 +1,12 @@
 import * as THREE from 'three';
 import { Data } from './Data';
 import { Camera } from "./camera";
-import { Piece } from "./piece";
 import { MouseClicker } from "./mouseClicker";
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { Cube } from './cube';
 import {Score} from './score';
 let scene, renderer, cam, base, score;
-let pieceInit;
+// let pieceInit;
 let data;
 
 let pause;
@@ -42,18 +41,19 @@ function init() {
   World.position.y = 1;
   let D2array = [20][19]
 
-  pieceInit = new Piece();
+  // pieceInit = new Piece();
   data = new Data();
-  pieceInit.listeCube[3].name = 'hello';
+  // pieceInit.listeCube[3].name = 'hello';
   
-  data.AjouterCubesTableau(pieceInit.listeCube)
+  // data.AjouterCubesTableau(pieceInit.listeCube)
+  data.startGame(scene)
   data.AfficherTableau2D();
   // pieceInit.listeCube.pop()
 
 
-  for(let i = 0; i < pieceInit.listeCube.length; i++){
-    scene.add(pieceInit.listeCube[i]);
-  }
+  // for(let i = 0; i < pieceInit.listeCube.length; i++){
+  //   scene.add(pieceInit.listeCube[i]);
+  // }
 
   // remove cube
   // scene.remove(scene.getObjectByName('hello'));
