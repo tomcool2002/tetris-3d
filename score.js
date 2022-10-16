@@ -14,6 +14,8 @@ const stringToName = {
     8:"Eight",
     9:"Nine",
 }
+
+
 export class Score extends THREE.Group {
     
     constructor() {
@@ -23,7 +25,7 @@ export class Score extends THREE.Group {
         this.IsReady = false;
         const addingFunc = this.Loading.bind(this);
         loader.load('./models/numbers.glb', addingFunc);
-        this.texture = new THREE.TextureLoader().load('./models/checkers.jpg');
+        // this.texture = new THREE.TextureLoader().load('./models/checkers.jpg');
         // this.texture = new THREE.TextureLoader().load('./models/honeycomb.jpg');
 
     }
@@ -104,12 +106,12 @@ export class Score extends THREE.Group {
             let number = listOfNumbers[i];
             let name = stringToName[number];
             let number3D = this.theNumbers[name].clone();
-            let texture = this.texture;
+            // let texture = this.texture;
             // number3D.material = new THREE.MeshStandardMaterial({ 
             //     color: 0xff8080,
             //     map:texture
             // });
-            number3D.material = new THREE.MeshNormalMaterial()
+            number3D.material = new THREE.MeshNormalMaterial();
             number3D.position.y = 30;
 
             number3D.position.x = positionX[i];

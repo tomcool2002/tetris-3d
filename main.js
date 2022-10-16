@@ -6,6 +6,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { Cube } from './cube';
 import {Score} from './score';
 let scene, renderer, cam, base, score;
+import { Holder } from './hold';
 // let pieceInit;
 let data;
 
@@ -90,6 +91,12 @@ function init() {
 
   const light = new THREE.AmbientLight( 0xffffff ); 
   scene.add(light);
+
+
+
+  // holder
+  let holder = new Holder(scene);
+  // hol
 }
 
 function horizontalLine() {

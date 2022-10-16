@@ -24,7 +24,7 @@ export class Data {
 
   startGame(scene){
     let pieceInit = new Piece();
-    pieceInit.listeCube[3].name = 'hello';
+    // pieceInit.listeCube[3].name = 'hello';
     this.AjouterCubesTableau(pieceInit.listeCube)
     for(let i = 0; i < pieceInit.listeCube.length; i++){
       scene.add(pieceInit.listeCube[i]);
