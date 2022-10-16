@@ -113,6 +113,7 @@ export class Score extends THREE.Group {
             // });
             number3D.material = new THREE.MeshNormalMaterial();
             number3D.position.y = 30;
+            number3D.position.z = -2.5;
 
             number3D.position.x = positionX[i];
             

@@ -3,7 +3,6 @@ import { Data } from './Data';
 import { Camera } from "./camera";
 import { MouseClicker } from "./mouseClicker";
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { Cube } from './cube';
 import {Score} from './score';
 let scene, renderer, cam, base, score;
 import { Holder } from './hold';
@@ -96,7 +95,7 @@ function init() {
 
   // holder
   let holder = new Holder(scene);
-  // hol
+  holder.AddPieceToHolder(scene, "I");
 }
 
 function horizontalLine() {

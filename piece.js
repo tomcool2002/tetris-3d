@@ -112,4 +112,72 @@ export class Piece  {
     this.listeCube.push(cube4.Cube);
     return piece;
   }
+
+  createPiece(pieceNum) {
+    //random number 1-7
+    let piece = new THREE.Group();
+    let color = this.getRandomColour();
+    //console.log(rand);
+    let cube1;
+    let cube2;
+    let cube3;
+    let cube4;
+
+    switch (pieceNum) {
+      case 1: // I Shape
+        // let cube1 = new Cube(2.5,color,0,,-2.5);
+        cube1 = new Cube(2.5, color, 0, 5, -2.5);
+        cube2 = new Cube(2.5, color, 0, 2.5, -2.5);
+        cube3 = new Cube(2.5, color, 0, 0, -2.5);
+        cube4 = new Cube(2.5, color, 0, -2.5, -2.5);
+
+        break;
+      case 2: // j Shape
+        cube1 = new Cube(2.5, color, 0, 0, -2.5);
+        cube2 = new Cube(2.5, color, 2.5, 0, -2.5);
+        cube3 = new Cube(2.5, color, 2.5, 2.5, -2.5);
+        cube4 = new Cube(2.5, color, 2.5, 5, -2.5);
+        break;
+      case 3: // L Shape
+        cube1 = new Cube(2.5, color, 0, 0, -2.5);
+        cube2 = new Cube(2.5, color, -2.5, 0, -2.5);
+        cube3 = new Cube(2.5, color, -2.5, 2.5, -2.5);
+        cube4 = new Cube(2.5, color, -2.5, 5, -2.5);
+        break;
+      case 4: // O Shape
+        cube1 = new Cube(2.5, color, 0, 0, -2.5);
+        cube2 = new Cube(2.5, color, 2.5, 0, -2.5);
+        cube3 = new Cube(2.5, color, 2.5, 2.5, -2.5);
+        cube4 = new Cube(2.5, color, 0, 2.5, -2.5);
+        break;
+      case 5: // Z Shape
+        cube1 = new Cube(2.5, color, 0, 0, -2.5);
+        cube2 = new Cube(2.5, color, 2.5, 0, -2.5);
+        cube3 = new Cube(2.5, color, 0, 2.5, -2.5);
+        cube4 = new Cube(2.5, color, -2.5, 2.5, -2.5);
+        break;
+      case 6: // T Shape
+        cube1 = new Cube(2.5, color, 0, 0, -2.5);
+        cube2 = new Cube(2.5, color, -2.5, 0, -2.5);
+        cube3 = new Cube(2.5, color, 2.5, 0, -2.5);
+        cube4 = new Cube(2.5, color, 0, 2.5, -2.5);
+        break;
+      case 7: // S Shape
+      cube1 = new Cube(2.5, color, 0, 0, -2.5);
+      cube2 = new Cube(2.5, color, -2.5, 0, -2.5);
+      cube3 = new Cube(2.5, color, 0, 2.5, -2.5);
+      cube4 = new Cube(2.5, color, 2.5, 2.5, -2.5);
+        break;
+    }
+
+    cube1.Cube.position.y += 20;
+    cube2.Cube.position.y += 20;
+    cube3.Cube.position.y += 20;
+    cube4.Cube.position.y += 20;
+    this.listeCube.push(cube1.Cube);
+    this.listeCube.push(cube2.Cube);
+    this.listeCube.push(cube3.Cube);
+    this.listeCube.push(cube4.Cube);
+    return piece;
+  }
 }
