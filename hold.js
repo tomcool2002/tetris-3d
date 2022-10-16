@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'https://unpkg.com/three@0.127.0/examples/jsm/loaders/GLTFLoader.js';
-import { Scene } from 'three';
+// import { Scene } from 'three';
 import { Piece } from './piece';
 
 
@@ -11,13 +11,14 @@ export class Holder extends THREE.Group {
         
         loader.load('./models/holdSquare.glb', function(gltf){
             const holdMesh = gltf.scene.children.find((child) => child.name == "holdSquare");
-            holdMesh.material = new THREE.MeshNormalMaterial();
-            holdMesh.scale.set(holdMesh.scale.x , holdMesh.scale.y * 6, holdMesh.scale.z * 5);
+            holdMesh.material = new THREE.MeshBasicMaterial({color:0xfb4003});
+            holdMesh.scale.set(holdMesh.scale.x * 0.5 , holdMesh.scale.y * 8, holdMesh.scale.z * 7);
             holdMesh.rotation.y = 1.56;
 
             holdMesh.position.y = 20;
-            holdMesh.position.x = -20;
+            holdMesh.position.x = -25;
             holdMesh.position.z = -2.5;
+            holdMesh.name = "holdSquare";
             scene.add(holdMesh)
         });
         
@@ -31,16 +32,18 @@ export class Holder extends THREE.Group {
             S : pieces.createPiece(7),
             T : pieces.createPiece(6),
         };
+        // let piece = pieces.createPiece(7);
+        // debugger
+        // scene.add(piece);
     }
 
-    AddPieceToHolder(pieceShape){
+    AddPieceToHolder(pieceShape,scene){
         for(const shape in this.Pieces){
             let piece = this.Pieces[shape];
-            this.remove(this.getObjectById(piece.id));
+            scene.remove(scene.getObjectById(piece.id));
         }
         let piece = this.Pieces[pieceShape];
-        // scene.add(piece);
-        this.add(piece)
-        debugger
+        scene.add(piece);
+        // debugger
     }
 }

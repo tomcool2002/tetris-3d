@@ -95,7 +95,7 @@ function init() {
 
   // holder
   let holder = new Holder(scene);
-  holder.AddPieceToHolder(scene, "I");
+  holder.AddPieceToHolder("S", scene);
 }
 
 function horizontalLine() {
@@ -195,7 +195,7 @@ window.addEventListener('mouseup', clearClickPosition);
 let lastUpdate = new Date().getSeconds();
 let updated = false;
 let timeAtPaused;
-let points = 0;
+let points = 31;
 
 function gameLoop(timeAtPlay){
   if(pause == false){
@@ -203,8 +203,6 @@ function gameLoop(timeAtPlay){
     if(score.IsReady == true){
       score.ShowNumbers(scene,points);
     }
-    
-
     if(now > lastUpdate + 0.5){
 
       // changes block position
