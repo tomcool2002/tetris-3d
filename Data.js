@@ -148,25 +148,35 @@ export class Data {
 
   PlaceBlock() {
 
-    
-
-    this.syncPositionMemoire
 
     let compteur = 0;
     for (let y = this.HAUTEUR - 1; y >= 0; y--) {
       for (let x = this.LONGEUR - 1; x >= 0; x--) {
         if (this.tableau[y][x][0] == "i" ) {
-          this.tableau[y][x] = ["x",this.memoireblock[compteur]];
-          console.log(this.tableau[y][x]);
-          console.log(y,x);
+          this.tableau[y][x][0] = "x";
+          //console.log(this.tableau[y][x]);
+          //console.log(y,x);
           compteur++;
         }
       }
     }
 
+    this.memoireblock.forEach(block => {
+      let coorTableau = this.TransformerPosition(block.position.x,block.position.y,false)
 
+      this.tableau[coorTableau[1]][coorTableau[0]][1] = block;
+    });
 
     this.tableau[this.piecePrincipale[0]][this.piecePrincipale[1]] = ["x",this.memoirePiece];
+
+
+    for (let x = this.LONGEUR - 1; x >= 0; x--) {
+    
+    this.scene.remove(this.tableau[19][x][1]);
+
+    }
+
+
     this.positionPiece.length = 0;
     this.memoireblock.length = 0;
 
