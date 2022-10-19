@@ -96,77 +96,88 @@ export class Data {
       case "g": // gauche
         mouv_2D = -1;
         mouv_3D = -2.5;
-          for (let i = 0; i < this.positionPiece.length; i++) {
-            peutDeplacer = this.isValid(
-              this.piecePrincipale[0] + this.positionPiece[i][0],
-              this.piecePrincipale[1] - 1 + this.positionPiece[i][1]
-            );
 
-            if (!peutDeplacer) {
-              break;
-            }
+        for (let i = 0; i < this.positionPiece.length; i++) {
+          peutDeplacer = this.isValid(
+            this.piecePrincipale[0] + this.positionPiece[i][0],
+            this.piecePrincipale[1] - 1 + this.positionPiece[i][1]
+          );
+
+          if (!peutDeplacer) {
+            break;
           }
+        }
+        if (peutDeplacer) {
+        peutDeplacer = this.isValid(
+          this.piecePrincipale[0],
+          this.piecePrincipale[1] - 1
+        );
+        }
 
-          if (peutDeplacer) {
-            this.Deconstruction();
-            this.piecePrincipale[1]--; // modifie position piece "D" dans le tableau 2d
-            this.MoveBlock();
-            this.Reconstruction(
-              this.piecePrincipale[0],
-              this.piecePrincipale[1]
-            );
-          }  
+        if (peutDeplacer) {
+          this.Deconstruction();
+          this.piecePrincipale[1]--; // modifie position piece "D" dans le tableau 2d
+          this.MoveBlock();
+          this.Reconstruction(this.piecePrincipale[0], this.piecePrincipale[1]);
+        }
         break;
       case "d": // droite
         mouv_2D = 1;
         mouv_3D = 2.5;
-          for (let i = 0; i < this.positionPiece.length; i++) {
-            peutDeplacer = this.isValid(
-              this.piecePrincipale[0] + this.positionPiece[i][0],
-              this.piecePrincipale[1] + 1 + this.positionPiece[i][1]
-            );
+        for (let i = 0; i < this.positionPiece.length; i++) {
+          peutDeplacer = this.isValid(
+            this.piecePrincipale[0] + this.positionPiece[i][0],
+            this.piecePrincipale[1] + 1 + this.positionPiece[i][1]
+          );
 
-            if (!peutDeplacer) {
-              break;
-            }
+          if (!peutDeplacer) {
+            break;
           }
+        }
+        if (peutDeplacer) {
+        peutDeplacer = this.isValid(
+          this.piecePrincipale[0],
+          this.piecePrincipale[1] + 1
+        );
+        }
 
-          if (peutDeplacer) {
-            this.Deconstruction();
-            this.piecePrincipale[1]++; // modifie position piece "D" dans le tableau 2d
-            this.MoveBlock();
-            this.Reconstruction(
-              this.piecePrincipale[0],
-              this.piecePrincipale[1]
-            );
-          }
+        if (peutDeplacer) {
+          this.Deconstruction();
+          this.piecePrincipale[1]++; // modifie position piece "D" dans le tableau 2d
+          this.MoveBlock();
+          this.Reconstruction(this.piecePrincipale[0], this.piecePrincipale[1]);
+        }
         break;
       case "b": // bas
         mouv_2D = 1;
         mouv_3D = 2.5;
-          for (let i = 0; i < this.positionPiece.length; i++) {
-            peutDeplacer = this.isValid(
-              this.piecePrincipale[0] + 1 + this.positionPiece[i][0],
-              this.piecePrincipale[1] + this.positionPiece[i][1]
-            );
+        for (let i = 0; i < this.positionPiece.length; i++) {
+          peutDeplacer = this.isValid(
+            this.piecePrincipale[0] + 1 + this.positionPiece[i][0],
+            this.piecePrincipale[1] + this.positionPiece[i][1]
+          );
 
-            if (!peutDeplacer) {
-              break;
-            }
+          if (!peutDeplacer) {
+            break;
           }
+        }
 
-          if (peutDeplacer) {
-            this.Deconstruction();
-            this.piecePrincipale[0]++; // modifie position piece "D" dans le tableau 2d
-            this.MoveBlock();
-            this.Reconstruction(
-              this.piecePrincipale[0],
-              this.piecePrincipale[1]
-            );
-          } else {
-            this.PlaceBlock();
-          }
-        
+        if (peutDeplacer) {
+          peutDeplacer = this.isValid(
+            this.piecePrincipale[0] + 1,
+            this.piecePrincipale[1]
+          );
+        }
+
+        if (peutDeplacer) {
+          this.Deconstruction();
+          this.piecePrincipale[0]++; // modifie position piece "D" dans le tableau 2d
+          this.MoveBlock();
+          this.Reconstruction(this.piecePrincipale[0], this.piecePrincipale[1]);
+        } else {
+          this.PlaceBlock();
+        }
+
         break;
     }
   }
