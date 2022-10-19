@@ -2,6 +2,7 @@ import * as THREE from "three";
 import { Scene } from "three";
 import { Cube } from "./cube";
 import { Piece } from "./piece";
+import { Score } from './score';
 
 export class Data {
   constructor() {
@@ -11,6 +12,7 @@ export class Data {
 
     this.positionPiece = [];
     this.piecePrincipale;
+    this.score = new Score();
 
     this.memoirePiece;
     this.memoireblock = [];
@@ -23,12 +25,21 @@ export class Data {
 
   startGame(scene) {
     this.scene = scene;
+    // if(this.tableau[0][4][0] == 'v'){
+    //   let pieceInit = new Piece();
+    //   // pieceInit.listeCube[3].name = 'hello';
+    //   this.AjouterCubesTableau(pieceInit.listeCube);
+    //   for (let i = 0; i < pieceInit.listeCube.length; i++) {
+    //     scene.add(pieceInit.listeCube[i]);
+    //   }
+    // }
     let pieceInit = new Piece();
     // pieceInit.listeCube[3].name = 'hello';
     this.AjouterCubesTableau(pieceInit.listeCube);
     for (let i = 0; i < pieceInit.listeCube.length; i++) {
       scene.add(pieceInit.listeCube[i]);
     }
+    
   }
 
   Deplacement(dir) {
@@ -273,6 +284,7 @@ export class Data {
   isValid(y, x) {
     if (x < 0 || x >= this.LONGEUR) return false;
     if (y < 0 || y >= this.HAUTEUR) return false;
+    if(this.tableau[y][x][0] == 'x') return false;
     return true;
   }
 
