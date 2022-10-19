@@ -125,19 +125,24 @@ export class Data {
   }
 
   PlaceBlock() {
+    let compteur = 0;
     for (let y = this.HAUTEUR - 1; y >= 0; y--) {
       for (let x = this.LONGEUR - 1; x >= 0; x--) {
         if (this.tableau[y][x][0] == "i" || this.tableau[y][x][0] == "D") {
           this.tableau[y][x][0] = "x";
+          this.tableau[y][x][1] = this.memoireblock[compteur]
+          compteur++;
         }
       }
     }
-    
+
+    console.log()
+
     this.positionPiece.length = 0;
     this.memoireblock.length = 0;
-    this.startGame(this.scene);
+    //this.startGame(this.scene);
 
-    //this.scene.remove(this.memoireblock[0]);
+
 
 
   }
