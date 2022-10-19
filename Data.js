@@ -3,11 +3,8 @@ import { Scene } from "three";
 import { Cube } from "./cube";
 import { Piece } from "./piece";
 
-
 export class Data {
   constructor() {
-    // const Longueur = 9;
-    // const Hauteur = ;
     this.HAUTEUR = 20;
     this.LONGEUR = 9;
     this.tableau = this.createBaseTableau();
@@ -17,127 +14,128 @@ export class Data {
 
     this.memoirePiece;
     this.memoireblock = [];
+
+    this.scene;
   }
-  HighwayToHell(){
-    this.Deplacement('b');
+  HighwayToHell() {
+    this.Deplacement("b");
   }
 
-  startGame(scene){
+  startGame(scene) {
+    this.scene = scene;
     let pieceInit = new Piece();
     // pieceInit.listeCube[3].name = 'hello';
-    this.AjouterCubesTableau(pieceInit.listeCube)
-    for(let i = 0; i < pieceInit.listeCube.length; i++){
+    this.AjouterCubesTableau(pieceInit.listeCube);
+    for (let i = 0; i < pieceInit.listeCube.length; i++) {
       scene.add(pieceInit.listeCube[i]);
     }
   }
-
-
 
   Deplacement(dir) {
     let mouv_2D = 0;
     let mouv_3D = 0;
     let peutDeplacer = true;
-    let estJouable = this.tableau[this.piecePrincipale[0]][this.piecePrincipale[1]][0] == 'D';
-    // debugger;
-    if(estJouable){
-      switch (dir) {
-        case "g": // gauche
-          mouv_2D = -1;
-          mouv_3D = -2.5;
-          if (this.piecePrincipale[1] != 0) {
-            // regarde si n'est pas au max
-            for(let i = 0; i < this.positionPiece.length; i++){
-              peutDeplacer = this.isValid(
-                this.piecePrincipale[0] + this.positionPiece[i][0],
-                this.piecePrincipale[1] - 1 + this.positionPiece[i][1]
-              );
-  
-              if (!peutDeplacer) {
-                return false;
-              }
-            };
-  
-            if (peutDeplacer) {
-              this.Deconstruction();
-              this.piecePrincipale[1]--; // modifie position piece "D" dans le tableau 2d
-              this.MoveBlock();
-              this.Reconstruction(
-                this.piecePrincipale[0],
-                this.piecePrincipale[1]
-              );
+
+    switch (dir) {
+      case "g": // gauche
+        mouv_2D = -1;
+        mouv_3D = -2.5;
+        if (this.piecePrincipale[1] != 0) {
+          // regarde si n'est pas au max
+          for (let i = 0; i < this.positionPiece.length; i++) {
+            peutDeplacer = this.isValid(
+              this.piecePrincipale[0] + this.positionPiece[i][0],
+              this.piecePrincipale[1] - 1 + this.positionPiece[i][1]
+            );
+
+            if (!peutDeplacer) {
+              break;
             }
           }
-          break;
-        case "d": // droite
-          mouv_2D = 1;
-          mouv_3D = 2.5;
-          if (this.piecePrincipale[1] != this.LONGEUR - 1) {
-            // regarde si n'est pas au max
-            for(let i = 0; i < this.positionPiece.length; i++){
-  
-              peutDeplacer = this.isValid(
-                this.piecePrincipale[0] + this.positionPiece[i][0],
-                this.piecePrincipale[1] + 1 + this.positionPiece[i][1]
-              );
-  
-              if (!peutDeplacer) {
-                break;
-              }
-            }
-  
-            if (peutDeplacer) {
-              this.Deconstruction();
-              this.piecePrincipale[1]++; // modifie position piece "D" dans le tableau 2d
-              this.MoveBlock();
-              this.Reconstruction(
-                this.piecePrincipale[0],
-                this.piecePrincipale[1]
-              );
-            }
-          } 
-          break;
-        case "b": // bas
-          mouv_2D = 1;
-          mouv_3D = 2.5;
-          if (this.piecePrincipale[0] != this.HAUTEUR - 1) {
-            // regarde si n'est pas au max
-  
-            for(let i = 0; i < this.positionPiece.length; i++){
-  
-              peutDeplacer = this.isValid(
-                this.piecePrincipale[0] + 1 + this.positionPiece[i][0],
-                this.piecePrincipale[1] + this.positionPiece[i][1]
-              );
-  
-              if (!peutDeplacer) {
-                return false;
-              }
-  
-            };
-  
-            if (peutDeplacer) {
-              this.Deconstruction();
-              this.piecePrincipale[0]++; // modifie position piece "D" dans le tableau 2d
-              this.MoveBlock();
-              this.Reconstruction(
-                this.piecePrincipale[0],
-                this.piecePrincipale[1]
-              );
+
+          if (peutDeplacer) {
+            this.Deconstruction();
+            this.piecePrincipale[1]--; // modifie position piece "D" dans le tableau 2d
+            this.MoveBlock();
+            this.Reconstruction(
+              this.piecePrincipale[0],
+              this.piecePrincipale[1]
+            );
+          }
+        }
+        break;
+      case "d": // droite
+        mouv_2D = 1;
+        mouv_3D = 2.5;
+        if (this.piecePrincipale[1] != this.LONGEUR - 1) {
+          // regarde si n'est pas au max
+          for (let i = 0; i < this.positionPiece.length; i++) {
+            peutDeplacer = this.isValid(
+              this.piecePrincipale[0] + this.positionPiece[i][0],
+              this.piecePrincipale[1] + 1 + this.positionPiece[i][1]
+            );
+
+            if (!peutDeplacer) {
+              break;
             }
           }
-          else {
-            // debugger
-            for(let y = this.HAUTEUR - 1; y >= 0; y--){
-              for(let x = this.LONGEUR -1; x >= 0; x--){
-                if(this.tableau[y][x][0] == 'i' || this.tableau[y][x][0] == 'D')
-                  this.tableau[y][x][0] = 'x';
-              }
+
+          if (peutDeplacer) {
+            this.Deconstruction();
+            this.piecePrincipale[1]++; // modifie position piece "D" dans le tableau 2d
+            this.MoveBlock();
+            this.Reconstruction(
+              this.piecePrincipale[0],
+              this.piecePrincipale[1]
+            );
+          }
+        }
+        break;
+      case "b": // bas
+        mouv_2D = 1;
+        mouv_3D = 2.5;
+        if (this.piecePrincipale[0] != this.HAUTEUR - 1) {
+          // regarde si n'est pas au max
+
+          for (let i = 0; i < this.positionPiece.length; i++) {
+            peutDeplacer = this.isValid(
+              this.piecePrincipale[0] + 1 + this.positionPiece[i][0],
+              this.piecePrincipale[1] + this.positionPiece[i][1]
+            );
+
+            if (!peutDeplacer) {
+              break;
             }
           }
-          break;
+
+          if (peutDeplacer) {
+            this.Deconstruction();
+            this.piecePrincipale[0]++; // modifie position piece "D" dans le tableau 2d
+            this.MoveBlock();
+            this.Reconstruction(
+              this.piecePrincipale[0],
+              this.piecePrincipale[1]
+            );
+          } else {
+            this.PlaceBlock();
+          }
+        }
+        break;
+    }
+  }
+
+  PlaceBlock() {
+    for (let y = this.HAUTEUR - 1; y >= 0; y--) {
+      for (let x = this.LONGEUR - 1; x >= 0; x--) {
+        if (this.tableau[y][x][0] == "i" || this.tableau[y][x][0] == "D") {
+          this.tableau[y][x][0] = "x";
+        }
       }
     }
-    
+
+    this.scene.remove(this.memoireblock[0]);
+
+
   }
 
   MoveBlock() {
@@ -179,7 +177,7 @@ export class Data {
   Deconstruction() {
     for (let y = this.HAUTEUR - 1; y >= 0; y--) {
       for (let x = this.LONGEUR - 1; x >= 0; x--) {
-        if (this.tableau[y][x][0] == "i" || "D") {
+        if (this.tableau[y][x][0] == "i" || this.tableau[y][x][0] == "D") {
           this.tableau[y][x][0] = "v";
           this.tableau[y][x][1] = null;
         }
