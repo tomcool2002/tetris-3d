@@ -234,8 +234,8 @@ export class Data {
   }
 
   AfficherTableau2D() {
-    //console.clear();
-    console.log(this.positionPiece);
+    console.clear();
+    // console.log(this.positionPiece);
     //console.log(this.piecePrincipale);
     for (let y = 0; y < this.HAUTEUR; y++) {
       let stringLigne = "";
