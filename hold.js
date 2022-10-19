@@ -15,7 +15,7 @@ export class Holder extends THREE.Group {
             holdMesh.scale.set(holdMesh.scale.x * 0.5 , holdMesh.scale.y * 8, holdMesh.scale.z * 7);
             holdMesh.rotation.y = 1.56;
 
-            holdMesh.position.y = 20;
+            holdMesh.position.y = 18;
             holdMesh.position.x = -25;
             holdMesh.position.z = -2.5;
             holdMesh.name = "holdSquare";

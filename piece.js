@@ -182,10 +182,10 @@ export class Piece  {
         break;
     }
 
-    cube1.Cube.position.y += 19;
-    cube2.Cube.position.y += 19;
-    cube3.Cube.position.y += 19;
-    cube4.Cube.position.y += 19;
+    cube1.Cube.position.y += 17;
+    cube2.Cube.position.y += 17;
+    cube3.Cube.position.y += 17;
+    cube4.Cube.position.y += 17;
 
     cube1.Cube.position.x -= 25;
     cube2.Cube.position.x -= 25;
