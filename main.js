@@ -189,26 +189,21 @@ window.addEventListener('mouseup', clearClickPosition);
 
 
 
-let lastUpdate = new Date().getSeconds();
-let updated = false;
+let lastUpdate = Date.now();
 let timeAtPaused;
 let points = 0;
 
 function gameLoop(timeAtPlay){
   if(pause == false){
-    let now = new Date().getSeconds();
+    let now = Date.now();
     
-    if(now > lastUpdate + 0.5){
-
-      // changes block position
-      if(!updated){
-        data.HighwayToHell();
-        lastUpdate = new Date().getSeconds();
-        updated = true;
-        data.AfficherTableau2D();
-        points++;
-      }
-    } else updated = false;
+    
+    if(now > lastUpdate + 1000){
+      data.HighwayToHell();
+      data.AfficherTableau2D();
+      lastUpdate = Date.now();
+      points++
+    }
     cam.reposition();
 
     //pause game
