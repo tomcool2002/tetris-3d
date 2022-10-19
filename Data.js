@@ -12,6 +12,8 @@ export class Data {
 
     this.positionPiece = [];
     this.piecePrincipale;
+
+    this.points = 0;
     this.score = new Score();
 
     this.memoirePiece;
@@ -25,29 +27,45 @@ export class Data {
 
   startGame(scene) {
     this.scene = scene;
-    // if(this.tableau[0][4][0] == 'v'){
-    //   let pieceInit = new Piece();
-    //   // pieceInit.listeCube[3].name = 'hello';
-    //   this.AjouterCubesTableau(pieceInit.listeCube);
-    //   for (let i = 0; i < pieceInit.listeCube.length; i++) {
-    //     scene.add(pieceInit.listeCube[i]);
-    //   }
-    // }
+    let lignePleine = this.CheckLine()
+
+    switch(lignePleine.length){
+
+      case 1:{
+        this.points += 40;
+        break;
+      }
+      case 2:{
+        this.points += 100;
+        break;
+      }
+      case 3:{
+        this.points += 300;
+        break;
+      }
+      case 4:{
+        this.points += 1200;
+        break;
+      }
+    }
+
+    if(this.score.IsReady){
+      this.score.ShowNumbers(this.scene,this.points)
+    }
+
+    lignePleine.forEach(ligne => {
+    for (let x = this.LONGEUR - 1; x >= 0; x--) {
+      this.scene.remove(this.tableau[ligne][x][1]);
+      this.tableau[ligne][x] = ["v",null];
+    }
+    });
+
+
     let pieceInit = new Piece();
-    // pieceInit.listeCube[3].name = 'hello';
     this.AjouterCubesTableau(pieceInit.listeCube);
     for (let i = 0; i < pieceInit.listeCube.length; i++) {
       scene.add(pieceInit.listeCube[i]);
     }
-    // for (let y = this.HAUTEUR - 1; y >= 0; y--) {
-    //   for (let x = this.LONGEUR - 1; x >= 0; x--) {
-    //     if(this.tableau[y][x][1] != null){
-    //       //console.log(this.tableau[y][x]);
-    //       //console.log(y,x)
-    //       this.scene.remove(this.tableau[y][x][1]);
-    //     }
-    //   }
-    // }
     
   }
 
