@@ -10,6 +10,8 @@ export class Data {
     this.LONGEUR = 9;
     this.tableau = this.createBaseTableau();
 
+    this.syncPositionMemoire = [];
+
     this.positionPiece = [];
     this.piecePrincipale;
     this.score = new Score();
@@ -145,6 +147,11 @@ export class Data {
   }
 
   PlaceBlock() {
+
+    
+
+    this.syncPositionMemoire
+
     let compteur = 0;
     for (let y = this.HAUTEUR - 1; y >= 0; y--) {
       for (let x = this.LONGEUR - 1; x >= 0; x--) {
