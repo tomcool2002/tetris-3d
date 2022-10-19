@@ -13,6 +13,8 @@ export class Data {
 
     this.positionPiece = [];
     this.piecePrincipale;
+
+    this.points = 0;
     this.score = new Score();
 
     this.memoirePiece;
@@ -26,11 +28,46 @@ export class Data {
 
   startGame(scene) {
     this.scene = scene;
+    let lignePleine = this.CheckLine()
+
+    switch(lignePleine.length){
+
+      case 1:{
+        this.points += 40;
+        break;
+      }
+      case 2:{
+        this.points += 100;
+        break;
+      }
+      case 3:{
+        this.points += 300;
+        break;
+      }
+      case 4:{
+        this.points += 1200;
+        break;
+      }
+    }
+
+    if(this.score.IsReady){
+      this.score.ShowNumbers(this.scene,this.points)
+    }
+
+    lignePleine.forEach(ligne => {
+    for (let x = this.LONGEUR - 1; x >= 0; x--) {
+      this.scene.remove(this.tableau[ligne][x][1]);
+      this.tableau[ligne][x] = ["v",null];
+    }
+    });
+
+
     let pieceInit = new Piece();
     this.AjouterCubesTableau(pieceInit.listeCube);
     for (let i = 0; i < pieceInit.listeCube.length; i++) {
       scene.add(pieceInit.listeCube[i]);
     }
+    
   }
 
   Deplacement(dir) {
