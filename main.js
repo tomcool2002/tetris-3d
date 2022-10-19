@@ -3,8 +3,7 @@ import { Data } from './Data';
 import { Camera } from "./camera";
 import { MouseClicker } from "./mouseClicker";
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import {Score} from './score';
-let scene, renderer, cam, base, score;
+let scene, renderer, cam, base;
 import { Holder } from './hold';
 // let pieceInit;
 let data;
@@ -85,8 +84,6 @@ function init() {
       scene.add(pauseMesh);
     }
   );
-
-  score = new Score();
 
   const light = new THREE.AmbientLight( 0xffffff ); 
   scene.add(light);
@@ -200,13 +197,11 @@ let points = 0;
 function gameLoop(timeAtPlay){
   if(pause == false){
     let now = new Date().getSeconds();
-    if(score.IsReady == true){
-      score.ShowNumbers(scene,points);
-    }
+    
     if(now > lastUpdate + 0.5){
 
       // changes block position
-      if(updated == false){
+      if(!updated){
         data.HighwayToHell();
         lastUpdate = new Date().getSeconds();
         updated = true;
