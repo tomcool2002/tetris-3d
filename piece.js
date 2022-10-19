@@ -138,11 +138,6 @@ export class Piece  {
         cube3 = new Cube(2.5, color, 0, 0, -2.5);
         cube4 = new Cube(2.5, color, 0, -2.5, -2.5);
 
-        // this.ajouterCubeTableau(cube1.Cube);
-        // this.ajouterCubeTableau(cube2.Cube);
-        // this.ajouterCubeTableau(cube3.Cube);
-        // this.ajouterCubeTableau(cube4.Cube);
-
         break;
       case 2: // j Shape
         cube1 = new Cube(2.5, color, 0, 0, -2.5);
@@ -191,11 +186,6 @@ export class Piece  {
     cube2.Cube.position.x -= 25;
     cube3.Cube.position.x -= 25;
     cube4.Cube.position.x -= 25;
-
-    // cube1.Cube.position.z -= 1;
-    // cube2.Cube.position.z -= 1;
-    // cube3.Cube.position.z -= 1;
-    // cube4.Cube.position.z -= 1;
 
 
     piece.add(cube1.Cube);
