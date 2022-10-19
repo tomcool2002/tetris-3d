@@ -2,7 +2,7 @@ import * as THREE from "three";
 import { Scene } from "three";
 import { Cube } from "./cube";
 import { Piece } from "./piece";
-import { Score } from './score';
+import { Score } from "./score";
 
 export class Data {
   constructor(camera) {
@@ -28,46 +28,63 @@ export class Data {
 
   startGame(scene) {
     this.scene = scene;
-    let lignePleine = this.CheckLine()
+    let lignePleine = this.CheckLine();
 
-    switch(lignePleine.length){
-
-      case 1:{
+    switch (
+      lignePleine.length // donne les points
+    ) {
+      case 1: {
         this.points += 40;
         break;
       }
-      case 2:{
+      case 2: {
         this.points += 100;
         break;
       }
-      case 3:{
+      case 3: {
         this.points += 300;
         break;
       }
-      case 4:{
+      case 4: {
         this.points += 1200;
         break;
       }
     }
 
-    if(this.score.IsReady){
-      this.score.ShowNumbers(this.scene,this.points)
+    if (this.score.IsReady) {
+      this.score.ShowNumbers(this.scene, this.points);
     }
 
-    lignePleine.forEach(ligne => {
-    for (let x = this.LONGEUR - 1; x >= 0; x--) {
-      this.scene.remove(this.tableau[ligne][x][1]);
-      this.tableau[ligne][x] = ["v",null];
-    }
+    lignePleine.forEach((ligne) => {
+      // enleve les ligne pleines
+      for (let x = this.LONGEUR - 1; x >= 0; x--) {
+        this.scene.remove(this.tableau[ligne][x][1]);
+        this.tableau[ligne][x] = ["v", null];
+      }
     });
 
+    if (lignePleine.length > 0) {
+      for (let y = this.HAUTEUR - 1; y >= 0; y--) {
+        for (let x = 0; x <= this.LONGEUR - 1; x++) {
+          if (this.tableau[y][x][1] != null) {
+            this.tableau[y][x][1].position.y = this.TransformerPosition(
+              x,
+              y + lignePleine.length,
+              true
+            )[1];
+
+            this.tableau[y + lignePleine.length][x] = this.tableau[y][x];
+            this.tableau[y][x] = ["v", null];
+          }
+        }
+      }
+    }
 
     let pieceInit = new Piece();
     this.AjouterCubesTableau(pieceInit.listeCube);
     for (let i = 0; i < pieceInit.listeCube.length; i++) {
       scene.add(pieceInit.listeCube[i]);
     }
-    
   }
 
   Deplacement(dir) {
@@ -164,22 +181,28 @@ export class Data {
   }
 
   PlaceBlock() {
-
     for (let y = this.HAUTEUR - 1; y >= 0; y--) {
       for (let x = this.LONGEUR - 1; x >= 0; x--) {
-        if (this.tableau[y][x][0] == "i" ) {
+        if (this.tableau[y][x][0] == "i") {
           this.tableau[y][x][0] = "x"; // change tout les I en X
         }
       }
     }
     this.camera.newRotation();
-    this.memoireblock.forEach(block => {
-      let coorTableau = this.TransformerPosition(block.position.x,block.position.y,false) //trouve la position du block
+    this.memoireblock.forEach((block) => {
+      let coorTableau = this.TransformerPosition(
+        block.position.x,
+        block.position.y,
+        false
+      ); //trouve la position du block
 
       this.tableau[coorTableau[1]][coorTableau[0]][1] = block; // insere le block dans le tableau (non principale)
     });
 
-    this.tableau[this.piecePrincipale[0]][this.piecePrincipale[1]] = ["x",this.memoirePiece]; // met le block principale dans le tableau
+    this.tableau[this.piecePrincipale[0]][this.piecePrincipale[1]] = [
+      "x",
+      this.memoirePiece,
+    ]; // met le block principale dans le tableau
     this.positionPiece.length = 0; // delete le tableau position piece
     this.memoireblock.length = 0; // delete le tableau memoireblock
 
@@ -312,7 +335,7 @@ export class Data {
   isValid(y, x) {
     if (x < 0 || x >= this.LONGEUR) return false;
     if (y < 0 || y >= this.HAUTEUR) return false;
-    if(this.tableau[y][x][0] == 'x') return false;
+    if (this.tableau[y][x][0] == "x") return false;
     return true;
   }
 
