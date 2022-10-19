@@ -126,7 +126,7 @@ function CreatePlayGround() {
     PlayGround.add(Vline1)
   }
   let geometry = new THREE.BoxGeometry(22.5, 1, 5);
-  const texture = new THREE.MeshBasicMaterial({ color: 0xFFF515 });
+  const texture = new THREE.MeshBasicMaterial({ color: 0x431616 });
   base = new THREE.Mesh(geometry, texture);
   base.position.y = -25;
   PlayGround.add(base);
@@ -195,7 +195,7 @@ window.addEventListener('mouseup', clearClickPosition);
 let lastUpdate = new Date().getSeconds();
 let updated = false;
 let timeAtPaused;
-let points = 31;
+let points = 0;
 
 function gameLoop(timeAtPlay){
   if(pause == false){
