@@ -10,8 +10,6 @@ export class Data {
     this.LONGEUR = 9;
     this.tableau = this.createBaseTableau();
 
-    this.syncPositionMemoire = [];
-
     this.positionPiece = [];
     this.piecePrincipale;
     this.score = new Score();
