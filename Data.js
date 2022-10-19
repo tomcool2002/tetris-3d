@@ -37,94 +37,107 @@ export class Data {
     let mouv_2D = 0;
     let mouv_3D = 0;
     let peutDeplacer = true;
-
-    switch (dir) {
-      case "g": // gauche
-        mouv_2D = -1;
-        mouv_3D = -2.5;
-        if (this.piecePrincipale[1] != 0) {
-          // regarde si n'est pas au max
-          for(let i = 0; i < this.positionPiece.length; i++){
-            peutDeplacer = this.isValid(
-              this.piecePrincipale[0] + this.positionPiece[i][0],
-              this.piecePrincipale[1] - 1 + this.positionPiece[i][1]
-            );
-
-            if (!peutDeplacer) {
-              return false;
-            }
-          };
-
-          if (peutDeplacer) {
-            this.Deconstruction();
-            this.piecePrincipale[1]--; // modifie position piece "D" dans le tableau 2d
-            this.MoveBlock();
-            this.Reconstruction(
-              this.piecePrincipale[0],
-              this.piecePrincipale[1]
-            );
-          }
-        }
-        break;
-      case "d": // droite
-        mouv_2D = 1;
-        mouv_3D = 2.5;
-        if (this.piecePrincipale[1] != this.LONGEUR - 1) {
-          // regarde si n'est pas au max
-          for(let i = 0; i < this.positionPiece.length; i++){
-
-            peutDeplacer = this.isValid(
-              this.piecePrincipale[0] + this.positionPiece[i][0],
-              this.piecePrincipale[1] + 1 + this.positionPiece[i][1]
-            );
-
-            if (!peutDeplacer) {
-              break;
+    let estJouable = this.tableau[this.piecePrincipale[0]][this.piecePrincipale[1]][0] == 'D';
+    // debugger;
+    if(estJouable){
+      switch (dir) {
+        case "g": // gauche
+          mouv_2D = -1;
+          mouv_3D = -2.5;
+          if (this.piecePrincipale[1] != 0) {
+            // regarde si n'est pas au max
+            for(let i = 0; i < this.positionPiece.length; i++){
+              peutDeplacer = this.isValid(
+                this.piecePrincipale[0] + this.positionPiece[i][0],
+                this.piecePrincipale[1] - 1 + this.positionPiece[i][1]
+              );
+  
+              if (!peutDeplacer) {
+                return false;
+              }
+            };
+  
+            if (peutDeplacer) {
+              this.Deconstruction();
+              this.piecePrincipale[1]--; // modifie position piece "D" dans le tableau 2d
+              this.MoveBlock();
+              this.Reconstruction(
+                this.piecePrincipale[0],
+                this.piecePrincipale[1]
+              );
             }
           }
-
-          if (peutDeplacer) {
-            this.Deconstruction();
-            this.piecePrincipale[1]++; // modifie position piece "D" dans le tableau 2d
-            this.MoveBlock();
-            this.Reconstruction(
-              this.piecePrincipale[0],
-              this.piecePrincipale[1]
-            );
-          }
-        }
-        break;
-      case "b": // bas
-        mouv_2D = 1;
-        mouv_3D = 2.5;
-        if (this.piecePrincipale[0] != this.HAUTEUR - 1) {
-          // regarde si n'est pas au max
-
-          for(let i = 0; i < this.positionPiece.length; i++){
-
-            peutDeplacer = this.isValid(
-              this.piecePrincipale[0] + 1 + this.positionPiece[i][0],
-              this.piecePrincipale[1] + this.positionPiece[i][1]
-            );
-
-            if (!peutDeplacer) {
-              return false;
+          break;
+        case "d": // droite
+          mouv_2D = 1;
+          mouv_3D = 2.5;
+          if (this.piecePrincipale[1] != this.LONGEUR - 1) {
+            // regarde si n'est pas au max
+            for(let i = 0; i < this.positionPiece.length; i++){
+  
+              peutDeplacer = this.isValid(
+                this.piecePrincipale[0] + this.positionPiece[i][0],
+                this.piecePrincipale[1] + 1 + this.positionPiece[i][1]
+              );
+  
+              if (!peutDeplacer) {
+                break;
+              }
             }
-
-          };
-
-          if (peutDeplacer) {
-            this.Deconstruction();
-            this.piecePrincipale[0]++; // modifie position piece "D" dans le tableau 2d
-            this.MoveBlock();
-            this.Reconstruction(
-              this.piecePrincipale[0],
-              this.piecePrincipale[1]
-            );
+  
+            if (peutDeplacer) {
+              this.Deconstruction();
+              this.piecePrincipale[1]++; // modifie position piece "D" dans le tableau 2d
+              this.MoveBlock();
+              this.Reconstruction(
+                this.piecePrincipale[0],
+                this.piecePrincipale[1]
+              );
+            }
+          } 
+          break;
+        case "b": // bas
+          mouv_2D = 1;
+          mouv_3D = 2.5;
+          if (this.piecePrincipale[0] != this.HAUTEUR - 1) {
+            // regarde si n'est pas au max
+  
+            for(let i = 0; i < this.positionPiece.length; i++){
+  
+              peutDeplacer = this.isValid(
+                this.piecePrincipale[0] + 1 + this.positionPiece[i][0],
+                this.piecePrincipale[1] + this.positionPiece[i][1]
+              );
+  
+              if (!peutDeplacer) {
+                return false;
+              }
+  
+            };
+  
+            if (peutDeplacer) {
+              this.Deconstruction();
+              this.piecePrincipale[0]++; // modifie position piece "D" dans le tableau 2d
+              this.MoveBlock();
+              this.Reconstruction(
+                this.piecePrincipale[0],
+                this.piecePrincipale[1]
+              );
+            }
           }
-        }
-        break;
+          else {
+            // debugger
+            for(let y = this.HAUTEUR - 1; y >= 0; y--){
+              for(let x = this.LONGEUR -1; x >= 0; x--){
+                if(this.tableau[y][x][0] == 'i' || this.tableau[y][x][0] == 'D')
+                  this.tableau[y][x][0] = 'x';
+              }
+            }
+          }
+          break;
+      }
     }
+    
   }
 
   MoveBlock() {
@@ -219,8 +232,8 @@ export class Data {
   }
 
   AfficherTableau2D() {
-    //console.clear();
-    console.log(this.positionPiece);
+    console.clear();
+    // console.log(this.positionPiece);
     //console.log(this.piecePrincipale);
     for (let y = 0; y < this.HAUTEUR; y++) {
       let stringLigne = "";

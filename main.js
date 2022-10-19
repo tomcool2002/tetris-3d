@@ -95,7 +95,7 @@ function init() {
 
   // holder
   let holder = new Holder(scene);
-  holder.AddPieceToHolder("S", scene);
+  holder.AddPieceToHolder("I", scene);
 }
 
 function horizontalLine() {
