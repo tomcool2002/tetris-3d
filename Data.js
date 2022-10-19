@@ -39,6 +39,15 @@ export class Data {
     for (let i = 0; i < pieceInit.listeCube.length; i++) {
       scene.add(pieceInit.listeCube[i]);
     }
+    // for (let y = this.HAUTEUR - 1; y >= 0; y--) {
+    //   for (let x = this.LONGEUR - 1; x >= 0; x--) {
+    //     if(this.tableau[y][x][1] != null){
+    //       //console.log(this.tableau[y][x]);
+    //       //console.log(y,x)
+    //       this.scene.remove(this.tableau[y][x][1]);
+    //     }
+    //   }
+    // }
     
   }
 
@@ -139,19 +148,22 @@ export class Data {
     let compteur = 0;
     for (let y = this.HAUTEUR - 1; y >= 0; y--) {
       for (let x = this.LONGEUR - 1; x >= 0; x--) {
-        if (this.tableau[y][x][0] == "i" || this.tableau[y][x][0] == "D") {
-          this.tableau[y][x][0] = "x";
-          this.tableau[y][x][1] = this.memoireblock[compteur]
+        if (this.tableau[y][x][0] == "i" ) {
+          this.tableau[y][x] = ["x",this.memoireblock[compteur]];
+          console.log(this.tableau[y][x]);
+          console.log(y,x);
           compteur++;
         }
       }
     }
 
-    console.log()
 
+
+    this.tableau[this.piecePrincipale[0]][this.piecePrincipale[1]] = ["x",this.memoirePiece];
     this.positionPiece.length = 0;
     this.memoireblock.length = 0;
-    //this.startGame(this.scene);
+
+    this.startGame(this.scene);
 
 
 
@@ -250,7 +262,7 @@ export class Data {
   }
 
   AfficherTableau2D() {
-    console.clear();
+    //console.clear();
     // console.log(this.positionPiece);
     //console.log(this.piecePrincipale);
     for (let y = 0; y < this.HAUTEUR; y++) {
