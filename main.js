@@ -38,10 +38,10 @@ function init() {
   World.add(PlayGround2);
 
   World.position.y = 1;
-  let D2array = [20][19]
+  // let D2array = [20][19]
 
   // pieceInit = new Piece();
-  data = new Data();
+  data = new Data(cam);
   // pieceInit.listeCube[3].name = 'hello';
   
   // data.AjouterCubesTableau(pieceInit.listeCube)
@@ -202,7 +202,6 @@ function gameLoop(timeAtPlay){
       data.HighwayToHell();
       data.AfficherTableau2D();
       lastUpdate = Date.now();
-      points++
     }
     cam.reposition();
 
@@ -211,13 +210,13 @@ function gameLoop(timeAtPlay){
       if(mouseClicker.click(clickPosition, scene, cam) && Date.now() - timeAtPlay >= 100){
         pause = true;
         timeAtPaused = Date.now();
-        cam.pause()
+        // cam.pause();
       }
     } else {
       if(mouseClicker.click(clickPosition, scene, cam) && pause == false){
         pause = true;
         timeAtPaused = Date.now();
-        cam.pause()
+        // cam.pause();
       }
     } 
   } 
@@ -226,13 +225,13 @@ function gameLoop(timeAtPlay){
     let truechose = (Date.now() - timeAtPaused >= 100);
     if(mouseClicker.click(clickPosition, scene, cam) == true && truechose == true ){
       pause = false;
-      cam.play();
+      // cam.play();
       timeAtPlay = Date.now();
     }
   }else{
     if(mouseClicker.click(clickPosition, scene, cam) == true && pause == true){
       pause = false;
-      cam.play();
+      // cam.play();
       timeAtPlay = Date.now();
     }
   }

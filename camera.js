@@ -13,31 +13,42 @@ export class Camera extends THREE.PerspectiveCamera{
         
         this.lookAt(0, 0, 0);
         this.position.set(0, 0, 100);
+        // this.position.set(50, 0, 100);
+        
 
-        // this.controls.enabled = true;
         this.controls.autoRotate  = true;
         this.controls.autoRotateSpeed = 1;
         this.controls.enablePan = false;
         this.controls.enableRotate = false;
     }
 
-    pause(){
-        this.controls.autoRotate  = false;
-        this.controls.autoRotateSpeed = 0;
-        this.controls.enablePan = true;
-        this.controls.enableRotate = true;
-        // console.log("paused");
-    }
-
-    play(){
+    newRotation(){
         this.controls.autoRotate  = true;
-        this.controls.autoRotateSpeed = 1;
+        this.controls.autoRotateSpeed = -(this.controls.autoRotateSpeed);
         this.controls.enablePan = false;
         this.controls.enableRotate = false;
     }
+
+
+
+    // pause(){
+    //     this.controls.autoRotate  = false;
+    //     this.controls.autoRotateSpeed = 0;
+    //     this.controls.enablePan = true;
+    //     this.controls.enableRotate = true;
+    //     console.log("paused");
+    // }
+
+    // play(){
+    //     this.controls.autoRotate  = true;
+    //     this.controls.autoRotateSpeed = 1;
+    //     this.controls.enablePan = false;
+    //     this.controls.enableRotate = false;
+    // }
 
     reposition(){
         this.controls.update();
+        // console.log(this.position);
     }
 
     

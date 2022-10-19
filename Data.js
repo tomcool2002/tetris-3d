@@ -5,10 +5,11 @@ import { Piece } from "./piece";
 import { Score } from './score';
 
 export class Data {
-  constructor() {
+  constructor(camera) {
     this.HAUTEUR = 20;
     this.LONGEUR = 9;
     this.tableau = this.createBaseTableau();
+    this.camera = camera;
 
     this.positionPiece = [];
     this.piecePrincipale;
@@ -167,13 +168,11 @@ export class Data {
     for (let y = this.HAUTEUR - 1; y >= 0; y--) {
       for (let x = this.LONGEUR - 1; x >= 0; x--) {
         if (this.tableau[y][x][0] == "i" ) {
-          this.tableau[y][x][0] = "x"; // modifie tout les I en X
-          //console.log(this.tableau[y][x]);
-          //console.log(y,x);
+          this.tableau[y][x][0] = "x"; // change tout les I en X
         }
       }
     }
-
+    this.camera.newRotation();
     this.memoireblock.forEach(block => {
       let coorTableau = this.TransformerPosition(block.position.x,block.position.y,false) //trouve la position du block
 
@@ -181,23 +180,10 @@ export class Data {
     });
 
     this.tableau[this.piecePrincipale[0]][this.piecePrincipale[1]] = ["x",this.memoirePiece]; // met le block principale dans le tableau
-
-
-    // for (let x = this.LONGEUR - 1; x >= 0; x--) { // for testing
-    
-    // this.scene.remove(this.tableau[19][x][1]);
-
-    // }
-
-
     this.positionPiece.length = 0; // delete le tableau position piece
     this.memoireblock.length = 0; // delete le tableau memoireblock
 
     this.startGame(this.scene);
-
-
-
-
   }
 
   MoveBlock() {
