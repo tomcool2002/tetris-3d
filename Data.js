@@ -64,7 +64,7 @@ export class Data {
     });
 
     if (lignePleine.length > 0) {
-      for (let y = this.HAUTEUR - 1; y >= 0; y--) {
+      for (let y = lignePleine[lignePleine.length - 1]; y >= 0; y--) {
         for (let x = 0; x <= this.LONGEUR - 1; x++) {
           if (this.tableau[y][x][1] != null) {
             this.tableau[y][x][1].position.y = this.TransformerPosition(
@@ -96,8 +96,6 @@ export class Data {
       case "g": // gauche
         mouv_2D = -1;
         mouv_3D = -2.5;
-        if (this.piecePrincipale[1] != 0) {
-          // regarde si n'est pas au max
           for (let i = 0; i < this.positionPiece.length; i++) {
             peutDeplacer = this.isValid(
               this.piecePrincipale[0] + this.positionPiece[i][0],
@@ -117,14 +115,11 @@ export class Data {
               this.piecePrincipale[0],
               this.piecePrincipale[1]
             );
-          }
-        }
+          }  
         break;
       case "d": // droite
         mouv_2D = 1;
         mouv_3D = 2.5;
-        if (this.piecePrincipale[1] != this.LONGEUR - 1) {
-          // regarde si n'est pas au max
           for (let i = 0; i < this.positionPiece.length; i++) {
             peutDeplacer = this.isValid(
               this.piecePrincipale[0] + this.positionPiece[i][0],
@@ -145,14 +140,10 @@ export class Data {
               this.piecePrincipale[1]
             );
           }
-        }
         break;
       case "b": // bas
         mouv_2D = 1;
         mouv_3D = 2.5;
-        if (this.piecePrincipale[0] != this.HAUTEUR - 1) {
-          // regarde si n'est pas au max
-
           for (let i = 0; i < this.positionPiece.length; i++) {
             peutDeplacer = this.isValid(
               this.piecePrincipale[0] + 1 + this.positionPiece[i][0],
@@ -175,7 +166,7 @@ export class Data {
           } else {
             this.PlaceBlock();
           }
-        }
+        
         break;
     }
   }
