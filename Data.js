@@ -132,8 +132,12 @@ export class Data {
         }
       }
     }
+    
+    this.positionPiece.length = 0;
+    this.memoireblock.length = 0;
+    this.startGame(this.scene);
 
-    this.scene.remove(this.memoireblock[0]);
+    //this.scene.remove(this.memoireblock[0]);
 
 
   }
