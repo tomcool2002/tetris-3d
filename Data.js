@@ -146,37 +146,34 @@ export class Data {
 
   PlaceBlock() {
 
-
-    let compteur = 0;
     for (let y = this.HAUTEUR - 1; y >= 0; y--) {
       for (let x = this.LONGEUR - 1; x >= 0; x--) {
         if (this.tableau[y][x][0] == "i" ) {
-          this.tableau[y][x][0] = "x";
+          this.tableau[y][x][0] = "x"; // modifie tout les I en X
           //console.log(this.tableau[y][x]);
           //console.log(y,x);
-          compteur++;
         }
       }
     }
 
     this.memoireblock.forEach(block => {
-      let coorTableau = this.TransformerPosition(block.position.x,block.position.y,false)
+      let coorTableau = this.TransformerPosition(block.position.x,block.position.y,false) //trouve la position du block
 
-      this.tableau[coorTableau[1]][coorTableau[0]][1] = block;
+      this.tableau[coorTableau[1]][coorTableau[0]][1] = block; // insere le block dans le tableau (non principale)
     });
 
-    this.tableau[this.piecePrincipale[0]][this.piecePrincipale[1]] = ["x",this.memoirePiece];
+    this.tableau[this.piecePrincipale[0]][this.piecePrincipale[1]] = ["x",this.memoirePiece]; // met le block principale dans le tableau
 
 
-    for (let x = this.LONGEUR - 1; x >= 0; x--) {
+    // for (let x = this.LONGEUR - 1; x >= 0; x--) { // for testing
     
-    this.scene.remove(this.tableau[19][x][1]);
+    // this.scene.remove(this.tableau[19][x][1]);
 
-    }
+    // }
 
 
-    this.positionPiece.length = 0;
-    this.memoireblock.length = 0;
+    this.positionPiece.length = 0; // delete le tableau position piece
+    this.memoireblock.length = 0; // delete le tableau memoireblock
 
     this.startGame(this.scene);
 
