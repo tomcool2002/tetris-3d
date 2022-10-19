@@ -210,13 +210,13 @@ function gameLoop(timeAtPlay){
       if(mouseClicker.click(clickPosition, scene, cam) && Date.now() - timeAtPlay >= 100){
         pause = true;
         timeAtPaused = Date.now();
-        // cam.pause();
+        cam.pause();
       }
     } else {
       if(mouseClicker.click(clickPosition, scene, cam) && pause == false){
         pause = true;
         timeAtPaused = Date.now();
-        // cam.pause();
+        cam.pause();
       }
     } 
   } 
@@ -225,13 +225,13 @@ function gameLoop(timeAtPlay){
     let truechose = (Date.now() - timeAtPaused >= 100);
     if(mouseClicker.click(clickPosition, scene, cam) == true && truechose == true ){
       pause = false;
-      // cam.play();
+      cam.play();
       timeAtPlay = Date.now();
     }
   }else{
     if(mouseClicker.click(clickPosition, scene, cam) == true && pause == true){
       pause = false;
-      // cam.play();
+      cam.play();
       timeAtPlay = Date.now();
     }
   }
@@ -242,14 +242,11 @@ function gameLoop(timeAtPlay){
 
 
 let timeAtPlay;
-// let timeAtPaused;
 function animate() {
 
   timeAtPlay =  gameLoop(timeAtPlay);
-  // data.HighwayToHell();
   requestAnimationFrame(animate);
   renderer.render(scene, cam);
-  // data.AfficherTableau2D();
 }
 
 

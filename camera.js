@@ -11,6 +11,7 @@ export class Camera extends THREE.PerspectiveCamera{
 
         this.controls = new OrbitControls(this,renderer.domElement);
         
+        this.rotationSpeed = 1;
         this.lookAt(0, 0, 0);
         this.position.set(0, 0, 100);
         // this.position.set(50, 0, 100);
@@ -23,28 +24,30 @@ export class Camera extends THREE.PerspectiveCamera{
     }
 
     newRotation(){
+        this.rotationSpeed = -(this.rotationSpeed);
         this.controls.autoRotate  = true;
-        this.controls.autoRotateSpeed = -(this.controls.autoRotateSpeed);
+        this.controls.autoRotateSpeed = this.rotationSpeed;
         this.controls.enablePan = false;
         this.controls.enableRotate = false;
     }
 
 
 
-    // pause(){
-    //     this.controls.autoRotate  = false;
-    //     this.controls.autoRotateSpeed = 0;
-    //     this.controls.enablePan = true;
-    //     this.controls.enableRotate = true;
-    //     console.log("paused");
-    // }
+    pause(){
+        this.controls.autoRotate  = false;
+        this.controls.autoRotateSpeed = 0;
+        this.controls.enablePan = true;
+        this.controls.enableRotate = true;
+        console.log("paused");
+    }
 
-    // play(){
-    //     this.controls.autoRotate  = true;
-    //     this.controls.autoRotateSpeed = 1;
-    //     this.controls.enablePan = false;
-    //     this.controls.enableRotate = false;
-    // }
+    play(){
+        this.controls.autoRotate  = true;
+        this.controls.autoRotateSpeed = this.rotationSpeed;
+        this.controls.enablePan = false;
+        this.controls.enableRotate = false;
+        // debugger
+    }
 
     reposition(){
         this.controls.update();
