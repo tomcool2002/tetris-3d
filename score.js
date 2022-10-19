@@ -94,13 +94,13 @@ export class Score extends THREE.Group {
         }
 
         const positionX = {
-            0 : -9,
-            1 : -6,
-            2 : -3,
+            0 : -15,
+            1 : -10,
+            2 : -5,
             3 : 0,
-            4 : 3,
-            5 : 6,
-            6 : 9
+            4 : 5,
+            5 : 10,
+            6 : 15
         };
         for(let i = 0; i < listOfNumbers.length; i++){
             let number = listOfNumbers[i];
