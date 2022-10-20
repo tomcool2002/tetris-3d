@@ -92,7 +92,7 @@ function init() {
 
   // holder
   let holder = new Holder(scene);
-  holder.AddPieceToHolder("I", scene);
+  holder.AddPieceToHolder("O", scene);
 }
 
 function horizontalLine() {

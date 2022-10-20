@@ -11,14 +11,14 @@ export class Camera extends THREE.PerspectiveCamera{
 
         this.controls = new OrbitControls(this,renderer.domElement);
         
-        this.rotationSpeed = 1;
+        this.rotationSpeed = 2;
         this.lookAt(0, 0, 0);
         this.position.set(0, 0, 100);
         // this.position.set(50, 0, 100);
         
 
         this.controls.autoRotate  = true;
-        this.controls.autoRotateSpeed = 1;
+        this.controls.autoRotateSpeed = this.rotationSpeed;
         this.controls.enablePan = false;
         this.controls.enableRotate = false;
     }
