@@ -38,34 +38,11 @@ function init() {
   World.add(PlayGround2);
 
   World.position.y = 1;
-  // let D2array = [20][19]
-
-  // pieceInit = new Piece();
   data = new Data(cam);
-  // pieceInit.listeCube[3].name = 'hello';
-  
-  // data.AjouterCubesTableau(pieceInit.listeCube)
   data.startGame(scene)
   data.AfficherTableau2D();
-  // pieceInit.listeCube.pop()
-
-
-  // for(let i = 0; i < pieceInit.listeCube.length; i++){
-  //   scene.add(pieceInit.listeCube[i]);
-  // }
-
-  // remove cube
-  // scene.remove(scene.getObjectByName('hello'));
-
   
-  // scene.remove(pieceInit.listeCube[3]);
-  // scene.add(pieceInit.Piece);
-  //console.log(pieceInit.Piece)
-  setupKeyControls();
-  // pieceInit.Piece.name = "a piece of game baby";
-  //console.log(pieceInit.Piece.name);
-
-  //pieceInit.enleveCube();
+  setupKeyControls();;
 
 
   scene.add(World);
@@ -92,7 +69,7 @@ function init() {
 
   // holder
   let holder = new Holder(scene);
-  holder.AddPieceToHolder("O", scene);
+  holder.AddPieceToHolder("Z", scene);
 }
 
 function horizontalLine() {
