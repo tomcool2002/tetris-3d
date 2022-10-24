@@ -14,6 +14,8 @@ export class Data {
     this.positionPiece = [];
     this.piecePrincipale;
 
+    
+
     this.points = 0;
     this.score = new Score();
 

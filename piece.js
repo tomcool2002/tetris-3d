@@ -33,7 +33,7 @@ export class Piece  {
   createRandomPiece() {
     //random number 1-7
     // let rand = Math.floor(Math.random() * 7) + 1;
-    let rand = 1;
+    let rand = 6;
     let piece = new THREE.Group();
     let color = this.getRandomColour();
     let cube1;
@@ -41,7 +41,22 @@ export class Piece  {
     let cube3;
     let cube4;
 
-    switch (rand) {
+    let arrayCube = this.SwitchCaseCreatePiece(rand,color);
+
+    arrayCube.forEach(cube => {
+        cube.Cube.position.y += 20;
+        this.listeCube.push(cube.Cube)
+    });
+
+    return piece;
+  }
+
+  SwitchCaseCreatePiece(pieceNum,color){
+    
+    let cube1,cube2,cube3,cube4;
+
+
+    switch (pieceNum) {
       case 1: // I Shape
         // let cube1 = new Cube(2.5,color,0,,-2.5);
         cube1 = new Cube(2.5, color, 0, 5, -2.5);
@@ -74,8 +89,8 @@ export class Piece  {
         cube4 = new Cube(2.5, color, -2.5, 2.5, -2.5);
         break;
       case 6: // T Shape
-        cube1 = new Cube(2.5, color, 0, 0, -2.5);
-        cube2 = new Cube(2.5, color, -2.5, 0, -2.5);
+        cube1 = new Cube(2.5, color, -2.5, 0, -2.5);
+        cube2 = new Cube(2.5, color, 0, 0, -2.5);
         cube3 = new Cube(2.5, color, 2.5, 0, -2.5);
         cube4 = new Cube(2.5, color, 0, 2.5, -2.5);
         break;
@@ -87,15 +102,8 @@ export class Piece  {
         break;
     }
 
-    cube1.Cube.position.y += 20;
-    cube2.Cube.position.y += 20;
-    cube3.Cube.position.y += 20;
-    cube4.Cube.position.y += 20;
-    this.listeCube.push(cube1.Cube);
-    this.listeCube.push(cube2.Cube);
-    this.listeCube.push(cube3.Cube);
-    this.listeCube.push(cube4.Cube);
-    return piece;
+    return [cube1,cube2,cube3,cube4];
+
   }
 
   createPiece(pieceNum) {
@@ -170,6 +178,7 @@ export class Piece  {
     piece.add(cube2.Cube);
     piece.add(cube3.Cube);
     piece.add(cube4.Cube);
+
     return piece;
   }
 }
