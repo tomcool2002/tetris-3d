@@ -36,10 +36,6 @@ export class Piece  {
     let rand = 6;
     let piece = new THREE.Group();
     let color = this.getRandomColour();
-    let cube1;
-    let cube2;
-    let cube3;
-    let cube4;
 
     let arrayCube = this.SwitchCaseCreatePiece(rand,color);
 
@@ -54,8 +50,6 @@ export class Piece  {
   SwitchCaseCreatePiece(pieceNum,color){
     
     let cube1,cube2,cube3,cube4;
-
-
     switch (pieceNum) {
       case 1: // I Shape
         // let cube1 = new Cube(2.5,color,0,,-2.5);
@@ -110,74 +104,15 @@ export class Piece  {
     //random number 1-7
     let piece = new THREE.Group();
     let color = this.getRandomColour();
-    //console.log(rand);
-    let cube1;
-    let cube2;
-    let cube3;
-    let cube4;
 
-    switch (pieceNum) {
-      case 1: // I Shape
-        // let cube1 = new Cube(2.5,color,0,,-2.5);
-        cube1 = new Cube(2.5, color, 0, 5, -2.5);
-        cube2 = new Cube(2.5, color, 0, 2.5, -2.5);
-        cube3 = new Cube(2.5, color, 0, 0, -2.5);
-        cube4 = new Cube(2.5, color, 0, -2.5, -2.5);
-
-        break;
-      case 2: // j Shape
-        cube1 = new Cube(2.5, color, 0, 0, -2.5);
-        cube2 = new Cube(2.5, color, 2.5, 0, -2.5);
-        cube3 = new Cube(2.5, color, 2.5, 2.5, -2.5);
-        cube4 = new Cube(2.5, color, 2.5, 5, -2.5);
-        break;
-      case 3: // L Shape
-        cube1 = new Cube(2.5, color, 0, 0, -2.5);
-        cube2 = new Cube(2.5, color, -2.5, 0, -2.5);
-        cube3 = new Cube(2.5, color, -2.5, 2.5, -2.5);
-        cube4 = new Cube(2.5, color, -2.5, 5, -2.5);
-        break;
-      case 4: // O Shape
-        cube1 = new Cube(2.5, color, 0, 0, -2.5);
-        cube2 = new Cube(2.5, color, 2.5, 0, -2.5);
-        cube3 = new Cube(2.5, color, 2.5, 2.5, -2.5);
-        cube4 = new Cube(2.5, color, 0, 2.5, -2.5);
-        break;
-      case 5: // Z Shape
-        cube1 = new Cube(2.5, color, 0, 0, -2.5);
-        cube2 = new Cube(2.5, color, 2.5, 0, -2.5);
-        cube3 = new Cube(2.5, color, 0, 2.5, -2.5);
-        cube4 = new Cube(2.5, color, -2.5, 2.5, -2.5);
-        break;
-      case 6: // T Shape
-        cube1 = new Cube(2.5, color, 0, 0, -2.5);
-        cube2 = new Cube(2.5, color, -2.5, 0, -2.5);
-        cube3 = new Cube(2.5, color, 2.5, 0, -2.5);
-        cube4 = new Cube(2.5, color, 0, 2.5, -2.5);
-        break;
-      case 7: // S Shape
-      cube1 = new Cube(2.5, color, 0, 0, -2.5);
-      cube2 = new Cube(2.5, color, -2.5, 0, -2.5);
-      cube3 = new Cube(2.5, color, 0, 2.5, -2.5);
-      cube4 = new Cube(2.5, color, 2.5, 2.5, -2.5);
-        break;
-    }
-
-    cube1.Cube.position.y += 17;
-    cube2.Cube.position.y += 17;
-    cube3.Cube.position.y += 17;
-    cube4.Cube.position.y += 17;
-
-    cube1.Cube.position.x -= 25;
-    cube2.Cube.position.x -= 25;
-    cube3.Cube.position.x -= 25;
-    cube4.Cube.position.x -= 25;
+    let arrayCube = this.SwitchCaseCreatePiece(pieceNum,color);
 
 
-    piece.add(cube1.Cube);
-    piece.add(cube2.Cube);
-    piece.add(cube3.Cube);
-    piece.add(cube4.Cube);
+    arrayCube.forEach(cube => {
+      cube.Cube.position.y += 17;
+      cube.Cube.position.x -= 25;
+      piece.add(cube.Cube);
+    });
 
     return piece;
   }
