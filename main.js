@@ -133,15 +133,20 @@ function setupKeyControls() {
       switch (e.key) {
         case "ArrowDown":
           data.Deplacement('b');
-          break;
+        break;
+        
         case "ArrowRight":
           data.Deplacement('d');
-          break;
+        break;
+        
         case "ArrowLeft":
           data.Deplacement('g');
 
-          break;
+        break;
 
+        case "ArrowUp":
+          data.Deplacement('r');
+        break;  
       }
     }
   };

@@ -91,15 +91,10 @@ export class Data {
   }
 
   Deplacement(dir) {
-    let mouv_2D = 0;
-    let mouv_3D = 0;
     let peutDeplacer = true;
 
     switch (dir) {
       case "g": // gauche
-        mouv_2D = -1;
-        mouv_3D = -2.5;
-
         for (let i = 0; i < this.positionPiece.length; i++) {
           peutDeplacer = this.isValid(
             this.piecePrincipale[0] + this.positionPiece[i][0],
@@ -125,8 +120,6 @@ export class Data {
         }
       break;
       case "d": // droite
-        mouv_2D = 1;
-        mouv_3D = 2.5;
         for (let i = 0; i < this.positionPiece.length; i++) {
           peutDeplacer = this.isValid(
             this.piecePrincipale[0] + this.positionPiece[i][0],
@@ -151,18 +144,15 @@ export class Data {
           this.Reconstruction(this.piecePrincipale[0], this.piecePrincipale[1]);
         }
       break;
+
       case "b": // bas
-        mouv_2D = 1;
-        mouv_3D = 2.5;
         for (let i = 0; i < this.positionPiece.length; i++) {
           peutDeplacer = this.isValid(
             this.piecePrincipale[0] + 1 + this.positionPiece[i][0],
             this.piecePrincipale[1] + this.positionPiece[i][1]
           );
 
-          if (!peutDeplacer) {
-            break;
-          }
+          if (!peutDeplacer)break;
         }
 
         if (peutDeplacer) {
@@ -171,9 +161,7 @@ export class Data {
             this.piecePrincipale[1]
           );
         }
-        this.positionPiece;
 
-        debugger
         if (peutDeplacer) {
           this.Deconstruction();
           this.piecePrincipale[0]++; // modifie position piece "D" dans le tableau 2d
@@ -184,7 +172,34 @@ export class Data {
         }
 
       break;
+
+      case 'r':
+        for (let i = 0; i < this.positionPiece.length; i++) {
+          let [x,y] = this.BigMath(this.positionPiece[i][1],this.positionPiece[i][0]);
+          peutDeplacer = this.isValid(this.piecePrincipale[0] + y,this.piecePrincipale[1] + x);
+          if (!peutDeplacer)break;
+        }
+
+        if(peutDeplacer){
+          this.Deconstruction();
+          for (let i = 0; i < this.positionPiece.length; i++) {
+            let x = this.positionPiece[i][1];
+            let y = this.positionPiece[i][0];
+            let [new_x,new_y] = this.BigMath(x,y);
+            this.positionPiece[i][1];
+            this.positionPiece[i][1] = new_x;
+            this.positionPiece[i][0] = new_y;
+          }
+          this.positionPiece;
+          // debugger
+          this.Reconstruction(this.piecePrincipale[0],this.piecePrincipale[1]);
+        }
+      break;
     }
+  }
+
+  BigMath(x,y){
+    return [y * -1,x];
   }
 
   PlaceBlock() {
