@@ -13,25 +13,7 @@ export class Piece  {
     this.isControlled = false;
   }
 
-  createRandomColorCube(size, color, x, y, z) {
-    let colour = new THREE.Color(color);
-    let geometry = new THREE.BoxGeometry(size, size, size);
-
-    let material = new THREE.MeshBasicMaterial({ color: colour });
-    let cube = new THREE.Mesh(geometry, material);
-    cube.position.set(x, y, z);
-    // console.log(cube.material.color)
-
-    return cube;
-  }
-
   getRandomColour() {
-    // var letters = "0123456789ABCDEF";
-    // var colour = "#";
-    // for (var i = 0; i < 6; i++) {
-    //   colour += letters[Math.floor(Math.random() * 16)];
-    // }
-    // return colour;
 
     let colors = [
       0x03fbf9,
@@ -47,9 +29,6 @@ export class Piece  {
     return couleur;
   }
 
-  //enleveCube(){
-  //  this.remove(this.listeCube[0]);
-  //}
 
   createRandomPiece() {
     //random number 1-7
@@ -69,7 +48,6 @@ export class Piece  {
         cube2 = new Cube(2.5, color, 0, 2.5, -2.5);
         cube3 = new Cube(2.5, color, 0, 0, -2.5);
         cube4 = new Cube(2.5, color, 0, -2.5, -2.5);
-
         break;
       case 2: // j Shape
         cube1 = new Cube(2.5, color, 0, 0, -2.5);
