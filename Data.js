@@ -4,6 +4,7 @@ import { Cube } from "./cube";
 import { Piece } from "./piece";
 import { Score } from "./score";
 
+
 export class Data {
   constructor(camera) {
     this.HAUTEUR = 20;
@@ -120,7 +121,7 @@ export class Data {
           this.MoveBlock();
           this.Reconstruction(this.piecePrincipale[0], this.piecePrincipale[1]);
         }
-        break;
+      break;
       case "d": // droite
         mouv_2D = 1;
         mouv_3D = 2.5;
@@ -147,7 +148,7 @@ export class Data {
           this.MoveBlock();
           this.Reconstruction(this.piecePrincipale[0], this.piecePrincipale[1]);
         }
-        break;
+      break;
       case "b": // bas
         mouv_2D = 1;
         mouv_3D = 2.5;
@@ -168,7 +169,9 @@ export class Data {
             this.piecePrincipale[1]
           );
         }
+        this.positionPiece;
 
+        debugger
         if (peutDeplacer) {
           this.Deconstruction();
           this.piecePrincipale[0]++; // modifie position piece "D" dans le tableau 2d
@@ -178,7 +181,7 @@ export class Data {
           this.PlaceBlock();
         }
 
-        break;
+      break;
     }
   }
 
