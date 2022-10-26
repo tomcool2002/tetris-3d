@@ -4,7 +4,6 @@ import { Cube } from "./cube";
 import { Piece } from "./piece";
 import { Score } from "./score";
 
-
 export class Data {
   constructor(camera) {
     this.HAUTEUR = 20;
@@ -12,10 +11,10 @@ export class Data {
     this.tableau = this.createBaseTableau();
     this.camera = camera;
 
+    this.ProchainePiece = this.InitPiece();
+
     this.positionPiece = [];
     this.piecePrincipale;
-
-    
 
     this.points = 0;
     this.score = new Score();
@@ -27,6 +26,18 @@ export class Data {
   }
   HighwayToHell() {
     this.Deplacement("b");
+  }
+
+  InitPiece() {
+    let listePiece = [];
+
+    for (let i = 0; i < 3; i++) {
+      //console.log(i*10-20);
+      listePiece.push(new Piece(20, 0));
+    }
+
+    console.log(listePiece[0]);
+    return listePiece;
   }
 
   startGame(scene) {
@@ -55,6 +66,7 @@ export class Data {
     }
 
     if (this.score.IsReady) {
+      //console.log(this.points);
       this.score.ShowNumbers(this.scene, this.points);
     }
 
@@ -84,10 +96,23 @@ export class Data {
       }
     }
 
-    let pieceInit = new Piece();
-    this.AjouterCubesTableau(pieceInit.listeCube);
+
+    
+    let pieceInit = this.ProchainePiece.shift();
     for (let i = 0; i < pieceInit.listeCube.length; i++) {
+      pieceInit.listeCube[i].position.x -= 20;
+      pieceInit.listeCube[i].position.y += 20;
       scene.add(pieceInit.listeCube[i]);
+    }
+    this.AjouterCubesTableau(pieceInit.listeCube);
+
+    this.ProchainePiece.push(new Piece(20, 0));
+
+    for (let i = 0; i < this.ProchainePiece.length; i++) {
+      this.ProchainePiece[i].listeCube.forEach(cube => {
+       //cube.position.y += 10;
+        scene.add(cube);
+      });
     }
   }
 
@@ -107,10 +132,10 @@ export class Data {
           }
         }
         if (peutDeplacer) {
-        peutDeplacer = this.isValid(
-          this.piecePrincipale[0],
-          this.piecePrincipale[1] - 1
-        );
+          peutDeplacer = this.isValid(
+            this.piecePrincipale[0],
+            this.piecePrincipale[1] - 1
+          );
         }
 
         if (peutDeplacer) {
@@ -119,7 +144,7 @@ export class Data {
           this.MoveBlock();
           this.Reconstruction(this.piecePrincipale[0], this.piecePrincipale[1]);
         }
-      break;
+        break;
       case "d": // droite
         for (let i = 0; i < this.positionPiece.length; i++) {
           peutDeplacer = this.isValid(
@@ -132,10 +157,10 @@ export class Data {
           }
         }
         if (peutDeplacer) {
-        peutDeplacer = this.isValid(
-          this.piecePrincipale[0],
-          this.piecePrincipale[1] + 1
-        );
+          peutDeplacer = this.isValid(
+            this.piecePrincipale[0],
+            this.piecePrincipale[1] + 1
+          );
         }
 
         if (peutDeplacer) {
@@ -144,7 +169,7 @@ export class Data {
           this.MoveBlock();
           this.Reconstruction(this.piecePrincipale[0], this.piecePrincipale[1]);
         }
-      break;
+        break;
 
       case "b": // bas
         for (let i = 0; i < this.positionPiece.length; i++) {
@@ -153,7 +178,7 @@ export class Data {
             this.piecePrincipale[1] + this.positionPiece[i][1]
           );
 
-          if (!peutDeplacer)break;
+          if (!peutDeplacer) break;
         }
 
         if (peutDeplacer) {
@@ -172,35 +197,41 @@ export class Data {
           this.PlaceBlock();
         }
 
-      break;
+        break;
 
-      case 'r':
+      case "r":
         for (let i = 0; i < this.positionPiece.length; i++) {
-          let [x,y] = this.BigMath(this.positionPiece[i][1],this.positionPiece[i][0]);
-          peutDeplacer = this.isValid(this.piecePrincipale[0] + y,this.piecePrincipale[1] + x);
-          if (!peutDeplacer)break;
+          let [x, y] = this.BigMath(
+            this.positionPiece[i][1],
+            this.positionPiece[i][0]
+          );
+          peutDeplacer = this.isValid(
+            this.piecePrincipale[0] + y,
+            this.piecePrincipale[1] + x
+          );
+          if (!peutDeplacer) break;
         }
 
-        if(peutDeplacer){
+        if (peutDeplacer) {
           this.Deconstruction();
           for (let i = 0; i < this.positionPiece.length; i++) {
             let x = this.positionPiece[i][1];
             let y = this.positionPiece[i][0];
-            let [new_x,new_y] = this.BigMath(x,y);
+            let [new_x, new_y] = this.BigMath(x, y);
             this.positionPiece[i][1];
             this.positionPiece[i][1] = new_x;
             this.positionPiece[i][0] = new_y;
           }
           this.positionPiece;
           // debugger
-          this.Reconstruction(this.piecePrincipale[0],this.piecePrincipale[1]);
+          this.Reconstruction(this.piecePrincipale[0], this.piecePrincipale[1]);
         }
-      break;
+        break;
     }
   }
 
-  BigMath(x,y){
-    return [y * -1,x];
+  BigMath(x, y) {
+    return [-y, x];
   }
 
   PlaceBlock() {
@@ -324,7 +355,8 @@ export class Data {
   }
 
   AfficherTableau2D() {
-    console.clear();
+    console.log(this.ProchainePiece);
+    //console.clear();
     // console.log(this.positionPiece);
     //console.log(this.piecePrincipale);
     for (let y = 0; y < this.HAUTEUR; y++) {

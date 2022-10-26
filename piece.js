@@ -3,12 +3,14 @@ import { Vector3 } from "three";
 import { Cube } from "./cube";
 
 export class Piece  {
-  constructor(ajouterCubeTableau) {
+  constructor(x = 0,y = 0) {
     // super();
     // this.orientation = orientation;
     // this.pos = pos;
+    this.x = x;
+    this.y = y;
     this.listeCube = [];
-    this.ajouterCubeTableau = ajouterCubeTableau;
+    // this.ajouterCubeTableau = ajouterCubeTableau;
     this.Piece = this.createRandomPiece();
     this.isControlled = false;
   }
@@ -40,7 +42,8 @@ export class Piece  {
     let arrayCube = this.SwitchCaseCreatePiece(rand,color);
 
     arrayCube.forEach(cube => {
-        cube.Cube.position.y += 20;
+        cube.Cube.position.y += this.y;
+        cube.Cube.position.x += this.x;
         this.listeCube.push(cube.Cube)
     });
 
