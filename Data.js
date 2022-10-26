@@ -97,7 +97,7 @@ export class Data {
     }
 
 
-    
+
     let pieceInit = this.ProchainePiece.shift();
     for (let i = 0; i < pieceInit.listeCube.length; i++) {
       pieceInit.listeCube[i].position.x -= 20;
@@ -109,10 +109,13 @@ export class Data {
     this.ProchainePiece.push(new Piece(20, 0));
 
     for (let i = 0; i < this.ProchainePiece.length; i++) {
-      this.ProchainePiece[i].listeCube.forEach(cube => {
+      if(i ==0){
+              this.ProchainePiece[i].listeCube.forEach(cube => {
        //cube.position.y += 10;
         scene.add(cube);
       });
+      }
+
     }
   }
 
