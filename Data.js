@@ -40,7 +40,7 @@ export class Data {
     return listePiece;
   }
 
-  startGame(scene) {
+  game(scene) {
     this.scene = scene;
     let lignePleine = this.CheckLine();
 
@@ -79,7 +79,7 @@ export class Data {
     });
 
     if (lignePleine.length > 0) {
-      this.camera.newPosition();
+      // this.camera.newPosition();
       for (let y = lignePleine[lignePleine.length - 1]; y >= 0; y--) {
         for (let x = 0; x <= this.LONGEUR - 1; x++) {
           if (this.tableau[y][x][1] != null) {
@@ -263,7 +263,7 @@ export class Data {
     this.positionPiece.length = 0; // delete le tableau position piece
     this.memoireblock.length = 0; // delete le tableau memoireblock
 
-    this.startGame(this.scene);
+    this.game(this.scene);
   }
 
   MoveBlock() {
