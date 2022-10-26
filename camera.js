@@ -8,8 +8,7 @@ const Positions = {
     2 : 50,
     3 : 75,
     4 : -25,
-    5 : -50,
-    6 : -75
+    5 : -50
 
 };
 
@@ -35,7 +34,7 @@ export class Camera extends THREE.PerspectiveCamera{
 
     newPosition(){
         // random number from 0 to 8
-        const key = Math.floor(Math.random() * 8); 
+        const key = Math.floor(Math.random() * 6); 
         this.position.y = Positions[key];
     }
 
