@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'https://unpkg.com/three@0.127.0/examples/jsm/loaders/GLTFLoader.js';
 import { Scene } from 'three';
 
-
+const NbStars = 200;
 export class Effects extends THREE.Group{
     constructor() {
         super();
@@ -14,6 +14,7 @@ export class Effects extends THREE.Group{
         let star = new THREE.Mesh(geometry, material);
 
         const [x, y, z] = Array(3).fill().map(() => THREE.MathUtils.randFloatSpread(150));
+        star.name = "star";
 
         star.position.set(x,y,z)
         
@@ -22,9 +23,24 @@ export class Effects extends THREE.Group{
 
 
     Stars(scene){
-        for(let i = 0; i < 200; i++){
+        for(let i = 0; i <= NbStars; i++){
             this.AddStar(scene);
         }
+    }
+
+    changeColor(scene){
+        // let star = scene.getObjectByName('star');
+        
+        // for(let i = 0; i <= NbStars; i++){
+        //     star.material.color = 0xffffff;
+        // }
+        // // while(star != undefined){
+        // //     // star.material.color = 0xffffff;
+        // //     scene.remove(star);
+        // //     star = scene.getObjectByName('star');
+        // //     debugger
+        // // }
+        // scene.remove();
     }
 
 }

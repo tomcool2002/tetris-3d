@@ -70,7 +70,7 @@ function init() {
 
   const light = new THREE.AmbientLight( 0xffffff ); 
   scene.add(light);
-
+    
 
 
   // holder
@@ -81,6 +81,7 @@ function init() {
   let effects = new Effects();
   effects.Stars(scene);
   
+  effects.changeColor(scene);
 }
 
 function horizontalLine() {
