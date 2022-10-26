@@ -45,7 +45,7 @@ function init() {
 
   World.position.y = 1;
   data = new Data(cam);
-  data.startGame(scene)
+  data.game(scene)
   data.AfficherTableau2D();
   
   setupKeyControls();;
