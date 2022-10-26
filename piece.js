@@ -26,7 +26,7 @@ export class Piece  {
       0xff00ee,
       0xe46000,
     ];
-    let randomNum = Math.floor(Math.random() * 7)
+    let randomNum = Math.floor(Math.random() * 7);
     let couleur = colors[randomNum];
     return couleur;
   }

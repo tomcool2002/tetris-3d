@@ -79,6 +79,7 @@ export class Data {
     });
 
     if (lignePleine.length > 0) {
+      this.camera.newPosition();
       for (let y = lignePleine[lignePleine.length - 1]; y >= 0; y--) {
         for (let x = 0; x <= this.LONGEUR - 1; x++) {
           if (this.tableau[y][x][1] != null) {

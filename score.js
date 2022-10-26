@@ -1,6 +1,5 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'https://unpkg.com/three@0.127.0/examples/jsm/loaders/GLTFLoader.js';
-import { Scene } from 'three';
 
 const stringToName = {
     0:"Zero",
@@ -74,6 +73,8 @@ export class Score extends THREE.Group {
 
     ShowNumbers(scene, number = 0) {
         // remove previous score
+        
+        // if(number == 140)debugger
         scene.remove(scene.getObjectByName('Zero'));
         scene.remove(scene.getObjectByName('One'));
         scene.remove(scene.getObjectByName('Two'));
