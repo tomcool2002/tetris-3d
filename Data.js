@@ -32,9 +32,11 @@ export class Data {
     let listePiece = [];
 
     for (let i = 0; i < 3; i++) {
-      listePiece.push(new Piece(20, 20));
+      //console.log(i*10-20);
+      listePiece.push(new Piece(20, 0));
     }
 
+    console.log(listePiece[0]);
     return listePiece;
   }
 
@@ -93,17 +95,21 @@ export class Data {
       }
     }
 
+
+    
     let pieceInit = this.ProchainePiece.shift();
     for (let i = 0; i < pieceInit.listeCube.length; i++) {
       pieceInit.listeCube[i].position.x -= 20;
+      pieceInit.listeCube[i].position.y += 20;
       scene.add(pieceInit.listeCube[i]);
     }
     this.AjouterCubesTableau(pieceInit.listeCube);
 
-    this.ProchainePiece.push(new Piece(20, 20));
+    this.ProchainePiece.push(new Piece(20, 0));
 
     for (let i = 0; i < this.ProchainePiece.length; i++) {
       this.ProchainePiece[i].listeCube.forEach(cube => {
+       //cube.position.y += 10;
         scene.add(cube);
       });
     }
