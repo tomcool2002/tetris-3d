@@ -12,6 +12,8 @@ export class Data {
     this.tableau = this.createBaseTableau();
     this.camera = camera;
 
+    this.ProchainePiece = this.InitPiece();
+
     this.positionPiece = [];
     this.piecePrincipale;
 
@@ -27,6 +29,18 @@ export class Data {
   }
   HighwayToHell() {
     this.Deplacement("b");
+  }
+
+
+  InitPiece(){
+    let listePiece = [];
+
+    for(let i =0; i< 3; i++){
+      listePiece.push(new Piece());
+    }
+
+    return listePiece;
+
   }
 
   startGame(scene) {
@@ -55,6 +69,7 @@ export class Data {
     }
 
     if (this.score.IsReady) {
+      console.log(this.points);
       this.score.ShowNumbers(this.scene, this.points);
     }
 
@@ -83,11 +98,15 @@ export class Data {
       }
     }
 
-    let pieceInit = new Piece();
+
+
+    let pieceInit = this.ProchainePiece.shift();
     this.AjouterCubesTableau(pieceInit.listeCube);
     for (let i = 0; i < pieceInit.listeCube.length; i++) {
       scene.add(pieceInit.listeCube[i]);
     }
+
+    this.ProchainePiece.push(new Piece());
   }
 
   Deplacement(dir) {
@@ -199,7 +218,7 @@ export class Data {
   }
 
   BigMath(x,y){
-    return [y * -1,x];
+    return [-y,x];
   }
 
   PlaceBlock() {
@@ -323,7 +342,8 @@ export class Data {
   }
 
   AfficherTableau2D() {
-    console.clear();
+    console.log(this.ProchainePiece);
+    //console.clear();
     // console.log(this.positionPiece);
     //console.log(this.piecePrincipale);
     for (let y = 0; y < this.HAUTEUR; y++) {
