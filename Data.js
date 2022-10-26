@@ -1,11 +1,10 @@
-import * as THREE from "three";
-import { Scene } from "three";
-import { Cube } from "./cube";
 import { Piece } from "./piece";
 import { Score } from "./score";
+import { Holder } from './hold';
+
 
 export class Data {
-  constructor(camera) {
+  constructor(camera,scene) {
     this.HAUTEUR = 20;
     this.LONGEUR = 9;
     this.tableau = this.createBaseTableau();
@@ -14,6 +13,7 @@ export class Data {
     this.ProchainePiece = this.InitPiece();
 
     this.positionPiece = [];
+    this.shapePiece = null;
     this.piecePrincipale;
 
     this.points = 0;
@@ -22,7 +22,11 @@ export class Data {
     this.memoirePiece;
     this.memoireblock = [];
 
-    this.scene;
+    this.scene = scene;
+
+    this.holder = new Holder(this.scene);
+
+    this.doingHold = false;
   }
   HighwayToHell() {
     this.Deplacement("b");
@@ -35,9 +39,25 @@ export class Data {
       //console.log(i*10-20);
       listePiece.push(new Piece(20, 0));
     }
-
-    console.log(listePiece[0]);
     return listePiece;
+  }
+
+  holdPiece(){
+    this.doingHold = true;
+    this.holder.AddPieceToHolder(this.shapePiece, this.scene);
+
+    this.piecePrincipale = undefined;
+    this.Deconstruction();
+    
+    let cubeD = this.memoirePiece; // le cube D
+    this.scene.remove(cubeD);
+    for(let i = 0; i < this.memoireblock.length; i++){
+      let cubeI = this.memoireblock[i]; // le cube i
+      this.scene.remove(cubeI);
+    }
+    
+    this.AddPiece();
+    this.doingHold = false;
   }
 
   game(scene) {
@@ -97,26 +117,35 @@ export class Data {
     }
 
 
+    debugger
+    this.AddPiece();
+  }
 
-    let pieceInit = this.ProchainePiece.shift();
-    for (let i = 0; i < pieceInit.listeCube.length; i++) {
-      pieceInit.listeCube[i].position.x -= 20;
-      pieceInit.listeCube[i].position.y += 20;
-      scene.add(pieceInit.listeCube[i]);
-    }
-    this.AjouterCubesTableau(pieceInit.listeCube);
-
-    this.ProchainePiece.push(new Piece(20, 0));
-
-    for (let i = 0; i < this.ProchainePiece.length; i++) {
-      if(i ==0){
-              this.ProchainePiece[i].listeCube.forEach(cube => {
-       //cube.position.y += 10;
-        scene.add(cube);
-      });
+  AddPiece(fromHold = false){
+    
+    if(!fromHold){
+      let pieceInit = this.ProchainePiece.shift();
+      this.shapePiece = pieceInit.name;
+      for (let i = 0; i < pieceInit.listeCube.length; i++) {
+        pieceInit.listeCube[i].position.x -= 20;
+        pieceInit.listeCube[i].position.y += 20;
+        this.scene.add(pieceInit.listeCube[i]);
       }
-
+      this.AjouterCubesTableau(pieceInit.listeCube); // ces lui qui reconstruit pieceprincipale
+  
+      this.ProchainePiece.push(new Piece(20, 0));
+  
+      for (let i = 0; i < this.ProchainePiece.length; i++) {
+        if(i ==0){
+                this.ProchainePiece[i].listeCube.forEach(cube => {
+         //cube.position.y += 10;
+          this.scene.add(cube);
+        });
+        }
+  
+      }
     }
+    
   }
 
   Deplacement(dir) {
@@ -175,32 +204,36 @@ export class Data {
         break;
 
       case "b": // bas
-        for (let i = 0; i < this.positionPiece.length; i++) {
-          peutDeplacer = this.isValid(
-            this.piecePrincipale[0] + 1 + this.positionPiece[i][0],
-            this.piecePrincipale[1] + this.positionPiece[i][1]
-          );
-
-          if (!peutDeplacer) break;
+        if(!this.doingHold){
+          for (let i = 0; i < this.positionPiece.length; i++) {
+            peutDeplacer = this.isValid(
+              this.piecePrincipale[0] + 1 + this.positionPiece[i][0],
+              this.piecePrincipale[1] + this.positionPiece[i][1]
+            );
+  
+            if (!peutDeplacer){ debugger; break;}
+          }
+  
+          if (peutDeplacer) {
+            peutDeplacer = this.isValid(
+              this.piecePrincipale[0] + 1,
+              this.piecePrincipale[1]
+            );
+          }
+  
+          if (peutDeplacer) {
+            this.Deconstruction();
+            this.piecePrincipale[0]++; // modifie position piece "D" dans le tableau 2d
+            this.MoveBlock();
+            this.Reconstruction(this.piecePrincipale[0], this.piecePrincipale[1]);
+          } else if(this.piecePrincipale != null) {
+            debugger
+            this.PlaceBlock();
+          }
         }
+        
 
-        if (peutDeplacer) {
-          peutDeplacer = this.isValid(
-            this.piecePrincipale[0] + 1,
-            this.piecePrincipale[1]
-          );
-        }
-
-        if (peutDeplacer) {
-          this.Deconstruction();
-          this.piecePrincipale[0]++; // modifie position piece "D" dans le tableau 2d
-          this.MoveBlock();
-          this.Reconstruction(this.piecePrincipale[0], this.piecePrincipale[1]);
-        } else {
-          this.PlaceBlock();
-        }
-
-        break;
+      break;
 
       case "r":
         for (let i = 0; i < this.positionPiece.length; i++) {
@@ -226,7 +259,6 @@ export class Data {
             this.positionPiece[i][0] = new_y;
           }
           this.positionPiece;
-          // debugger
           this.Reconstruction(this.piecePrincipale[0], this.piecePrincipale[1]);
         }
         break;
@@ -315,6 +347,8 @@ export class Data {
 
   AjouterCubesTableau(listeCube) {
     let compteur = 0;
+    this.piecePrincipale;
+    debugger
     listeCube.forEach((cube) => {
       let pos = this.TransformerPosition(
         cube.position.x,
@@ -326,6 +360,7 @@ export class Data {
       let y = pos[1];
 
       if (compteur == 1) {
+        
         this.piecePrincipale = [y, x];
         this.memoirePiece = cube;
         this.tableau[y][x][0] = "D";
@@ -358,8 +393,8 @@ export class Data {
   }
 
   AfficherTableau2D() {
-    console.log(this.ProchainePiece);
-    //console.clear();
+    console.clear();
+    // console.log(this.ProchainePiece);
     // console.log(this.positionPiece);
     //console.log(this.piecePrincipale);
     for (let y = 0; y < this.HAUTEUR; y++) {

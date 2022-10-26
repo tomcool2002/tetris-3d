@@ -4,7 +4,6 @@ import { Camera } from "./camera";
 import { MouseClicker } from "./mouseClicker";
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 let scene, renderer, cam, base;
-import { Holder } from './hold';
 import { Effects } from './Effects';
 // let pieceInit;
 let data;
@@ -44,11 +43,11 @@ function init() {
   World.add(PlayGround2);
 
   World.position.y = 1;
-  data = new Data(cam);
-  data.game(scene)
+  data = new Data(cam,scene);
+  data.game(scene);
   data.AfficherTableau2D();
   
-  setupKeyControls();;
+  setupKeyControls();
 
 
   scene.add(World);
@@ -74,8 +73,7 @@ function init() {
 
 
   // holder
-  let holder = new Holder(scene);
-  holder.AddPieceToHolder("Z", scene);
+  
 
   // effects
   let effects = new Effects();
@@ -159,6 +157,9 @@ function setupKeyControls() {
         case "ArrowUp":
           data.Deplacement('r');
         break;  
+
+        case "h":
+          data.holdPiece();
       }
     }
   };
