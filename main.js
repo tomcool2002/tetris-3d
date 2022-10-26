@@ -5,6 +5,7 @@ import { MouseClicker } from "./mouseClicker";
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 let scene, renderer, cam, base;
 import { Holder } from './hold';
+import { Effects } from './Effects';
 // let pieceInit;
 let data;
 
@@ -24,7 +25,12 @@ function init() {
     antialias: false
   });
   renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setClearColor(0x00867f, 1);
+  renderer.setClearColor(0x00867f, 0.5);
+
+  // background
+  // const background = new THREE.TextureLoader().load('./models/background.gif');
+  // scene.background = background;
+
 
   cam = new Camera(renderer);
   pause = false;
@@ -34,7 +40,7 @@ function init() {
   let PlayGround1 = CreatePlayGround();
   World.add(PlayGround1);
   let PlayGround2 = CreatePlayGround();
-  PlayGround2.position.z = -5;
+  PlayGround2.position.z = -5;''
   World.add(PlayGround2);
 
   World.position.y = 1;
@@ -70,6 +76,11 @@ function init() {
   // holder
   let holder = new Holder(scene);
   holder.AddPieceToHolder("Z", scene);
+
+  // effects
+  let effects = new Effects();
+  effects.Stars(scene);
+  
 }
 
 function horizontalLine() {

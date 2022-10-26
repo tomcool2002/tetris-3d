@@ -2,6 +2,17 @@
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import * as THREE from 'three';
 
+const Positions = {
+    0: 0,
+    1 : 25,
+    2 : 50,
+    3 : 75,
+    4 : -25,
+    5 : -50,
+    6 : -75
+
+};
+
 export class Camera extends THREE.PerspectiveCamera{
     constructor(renderer = new THREE.WebGLRenderer({ antialias: false })){
         super(
@@ -14,13 +25,18 @@ export class Camera extends THREE.PerspectiveCamera{
         this.rotationSpeed = 2;
         this.lookAt(0, 0, 0);
         this.position.set(0, 0, 100);
-        // this.position.set(50, 0, 100);
         
 
         this.controls.autoRotate  = true;
         this.controls.autoRotateSpeed = this.rotationSpeed;
         this.controls.enablePan = false;
         this.controls.enableRotate = false;
+    }
+
+    newPosition(){
+        // random number from 0 to 8
+        const key = Math.floor(Math.random() * 8); 
+        this.position.y = Positions[key];
     }
 
     newRotation(){
