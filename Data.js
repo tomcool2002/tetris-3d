@@ -118,6 +118,13 @@ export class Data {
     this.AddPiece();
   }
 
+  RemovePiece(){
+    this.scene.remove(this.memoirePiece);
+    this.memoireblock.forEach(block => {
+      this.scene.remove(block);
+    });
+  }
+  
   AddPiece(fromHold = false){
     
     let pieceInit = this.ProchainePiece.shift();
