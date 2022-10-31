@@ -52,7 +52,6 @@ export class Holder extends THREE.Group {
     // }
 
     /**
-     * 
      * @param {THREE.scene} scene 
      * @param {Array} positionPiece positionPiece cest les positions relatives des cube "i" dans le tableau
      * @param {Array} piecePrincipale la position de la piece "D" dans le tableau 2D
