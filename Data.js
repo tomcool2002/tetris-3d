@@ -44,9 +44,10 @@ export class Data {
 
   holdPiece(){
     this.holder.AddPieceToHolder(this.scene,
-      this.positionPiece, this.piecePrincipale, this.memoirePiece, this.memoireblock);
+      this.positionPiece, this.piecePrincipale, this.memoirePiece, this.memoireblock
+    );
 
-    this.RemovePiece()
+    this.RemovePiece();
     this.piecePrincipale = undefined;
     this.positionPiece = [];
     this.Deconstruction();
@@ -276,7 +277,9 @@ export class Data {
         }
       }
     }
+
     this.camera.newRotation();
+
     this.memoireblock.forEach((block) => {
       let coorTableau = this.TransformerPosition(
         block.position.x,
@@ -336,7 +339,6 @@ export class Data {
   Deconstruction() {
     for (let y = 0; y <=this.HAUTEUR - 1; y++) {
       for (let x = 0; x <= this.LONGEUR -1 ; x++) {
-        let ch = this.tableau[y][x];
         if (this.tableau[y][x][0] == "i" || this.tableau[y][x][0] == "D") {
           this.tableau[y][x][0] = "v";
           this.tableau[y][x][1] = null;
