@@ -43,10 +43,10 @@ export class Data {
   }
 
   holdPiece(){
-    this.doingHold = true;
     this.holder.AddPieceToHolder(this.shapePiece, this.scene);
 
     this.piecePrincipale = undefined;
+    this.positionPiece = [];
     this.Deconstruction();
     
     let cubeD = this.memoirePiece; // le cube D
@@ -56,8 +56,8 @@ export class Data {
       this.scene.remove(cubeI);
     }
     
-    this.AddPiece();
-    this.doingHold = false;
+    this.AddPiece(true);
+    // this.doingHold = false;
   }
 
   game(scene) {
@@ -115,34 +115,28 @@ export class Data {
         }
       }
     }
-
-
-    debugger
     this.AddPiece();
   }
 
   AddPiece(fromHold = false){
     
-    if(!fromHold){
-      let pieceInit = this.ProchainePiece.shift();
-      this.shapePiece = pieceInit.name;
-      for (let i = 0; i < pieceInit.listeCube.length; i++) {
-        pieceInit.listeCube[i].position.x -= 20;
-        pieceInit.listeCube[i].position.y += 20;
-        this.scene.add(pieceInit.listeCube[i]);
-      }
-      this.AjouterCubesTableau(pieceInit.listeCube); // ces lui qui reconstruit pieceprincipale
-  
-      this.ProchainePiece.push(new Piece(20, 0));
-  
-      for (let i = 0; i < this.ProchainePiece.length; i++) {
-        if(i ==0){
-                this.ProchainePiece[i].listeCube.forEach(cube => {
-         //cube.position.y += 10;
-          this.scene.add(cube);
-        });
-        }
-  
+    let pieceInit = this.ProchainePiece.shift();
+    this.shapePiece = pieceInit.name;
+    for (let i = 0; i < pieceInit.listeCube.length; i++) {
+      pieceInit.listeCube[i].position.x -= 20;
+      pieceInit.listeCube[i].position.y += 20;
+      this.scene.add(pieceInit.listeCube[i]);
+    }
+    this.AjouterCubesTableau(pieceInit.listeCube); // ces lui qui reconstruit pieceprincipale
+
+    this.ProchainePiece.push(new Piece(20, 0));
+
+    for (let i = 0; i < this.ProchainePiece.length; i++) {
+      if(i ==0){
+              this.ProchainePiece[i].listeCube.forEach(cube => {
+        //cube.position.y += 10;
+        this.scene.add(cube);
+      });
       }
     }
     
@@ -201,38 +195,34 @@ export class Data {
           this.MoveBlock();
           this.Reconstruction(this.piecePrincipale[0], this.piecePrincipale[1]);
         }
-        break;
+      break;
 
       case "b": // bas
-        if(!this.doingHold){
-          for (let i = 0; i < this.positionPiece.length; i++) {
-            peutDeplacer = this.isValid(
-              this.piecePrincipale[0] + 1 + this.positionPiece[i][0],
-              this.piecePrincipale[1] + this.positionPiece[i][1]
-            );
-  
-            if (!peutDeplacer){ debugger; break;}
-          }
-  
-          if (peutDeplacer) {
-            peutDeplacer = this.isValid(
-              this.piecePrincipale[0] + 1,
-              this.piecePrincipale[1]
-            );
-          }
-  
-          if (peutDeplacer) {
-            this.Deconstruction();
-            this.piecePrincipale[0]++; // modifie position piece "D" dans le tableau 2d
-            this.MoveBlock();
-            this.Reconstruction(this.piecePrincipale[0], this.piecePrincipale[1]);
-          } else if(this.piecePrincipale != null) {
-            debugger
-            this.PlaceBlock();
-          }
-        }
-        
+        let t = this.positionPiece;
+        for (let i = 0; i < this.positionPiece.length; i++) {
+          peutDeplacer = this.isValid(
+            this.piecePrincipale[0] + 1 + this.positionPiece[i][0],
+            this.piecePrincipale[1] + this.positionPiece[i][1]
+          );
 
+          if (!peutDeplacer){  break;}
+        }
+
+        if (peutDeplacer) {
+          peutDeplacer = this.isValid(
+            this.piecePrincipale[0] + 1,
+            this.piecePrincipale[1]
+          );
+        }
+
+        if (peutDeplacer) {
+          this.Deconstruction();
+          this.piecePrincipale[0]++; // modifie position piece "D" dans le tableau 2d
+          this.MoveBlock();
+          this.Reconstruction(this.piecePrincipale[0], this.piecePrincipale[1]);
+        } else if(this.piecePrincipale != null) {
+          this.PlaceBlock();
+        }
       break;
 
       case "r":
@@ -335,8 +325,9 @@ export class Data {
   }
 
   Deconstruction() {
-    for (let y = this.HAUTEUR - 1; y >= 0; y--) {
-      for (let x = this.LONGEUR - 1; x >= 0; x--) {
+    for (let y = 0; y <=this.HAUTEUR - 1; y++) {
+      for (let x = 0; x <= this.LONGEUR -1 ; x++) {
+        let ch = this.tableau[y][x];
         if (this.tableau[y][x][0] == "i" || this.tableau[y][x][0] == "D") {
           this.tableau[y][x][0] = "v";
           this.tableau[y][x][1] = null;
@@ -348,7 +339,6 @@ export class Data {
   AjouterCubesTableau(listeCube) {
     let compteur = 0;
     this.piecePrincipale;
-    debugger
     listeCube.forEach((cube) => {
       let pos = this.TransformerPosition(
         cube.position.x,
@@ -376,6 +366,7 @@ export class Data {
       piece[0] -= this.piecePrincipale[0];
       piece[1] -= this.piecePrincipale[1];
     });
+    // debugger
   }
 
   TransformerPosition(x, y, duTableau) {
