@@ -69,11 +69,12 @@ export class Holder extends THREE.Group {
         // cube.Cube.position.x -= 25;
         scene.add(memoirePiece);
         for(let i = 0; i < memoireCubes.length; i++){
-            memoireCubes[i].position.y += 17;
-            memoireCubes[i].position.x -= 25;
+            memoireCubes[i].position.y = 17;
+            memoireCubes[i].position.x = 25;
+            let things = memoireCubes[i].position;
+            debugger
             scene.add(memoireCubes[i])
         }
-        debugger
         // scene.add(memoireblock);
     }
 }

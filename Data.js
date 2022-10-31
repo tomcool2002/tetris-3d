@@ -46,16 +46,17 @@ export class Data {
     this.holder.AddPieceToHolder(this.scene,
       this.positionPiece, this.piecePrincipale, this.memoirePiece, this.memoireblock);
 
+    this.RemovePiece()
     this.piecePrincipale = undefined;
     this.positionPiece = [];
     this.Deconstruction();
     
-    let cubeD = this.memoirePiece; // le cube D
-    this.scene.remove(cubeD);
-    for(let i = 0; i < this.memoireblock.length; i++){
-      let cubeI = this.memoireblock[i]; // le cube i
-      this.scene.remove(cubeI);
-    }
+    // let cubeD = this.memoirePiece; // le cube D
+    // this.scene.remove(cubeD);
+    // for(let i = 0; i < this.memoireblock.length; i++){
+    //   let cubeI = this.memoireblock[i]; // le cube i
+    //   this.scene.remove(cubeI);
+    // }
     
     this.AddPiece(true);
   }
