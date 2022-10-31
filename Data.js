@@ -13,7 +13,6 @@ export class Data {
     this.ProchainePiece = this.InitPiece();
 
     this.positionPiece = [];
-    this.shapePiece = null;
     this.piecePrincipale;
 
     this.points = 0;
@@ -25,8 +24,9 @@ export class Data {
     this.scene = scene;
 
     this.holder = new Holder(this.scene);
+    this.shapePiece = null;
+    this.colorPiece;
 
-    this.doingHold = false;
   }
   HighwayToHell() {
     this.Deplacement("b");
@@ -43,7 +43,8 @@ export class Data {
   }
 
   holdPiece(){
-    this.holder.AddPieceToHolder(this.shapePiece, this.scene);
+    this.holder.AddPieceToHolder(this.scene,
+      this.positionPiece, this.piecePrincipale, this.memoirePiece, this.memoireblock);
 
     this.piecePrincipale = undefined;
     this.positionPiece = [];
@@ -57,7 +58,6 @@ export class Data {
     }
     
     this.AddPiece(true);
-    // this.doingHold = false;
   }
 
   game(scene) {
@@ -122,6 +122,7 @@ export class Data {
     
     let pieceInit = this.ProchainePiece.shift();
     this.shapePiece = pieceInit.name;
+    this.colorPiece = pieceInit.listeCube[0].material.color;
     for (let i = 0; i < pieceInit.listeCube.length; i++) {
       pieceInit.listeCube[i].position.x -= 20;
       pieceInit.listeCube[i].position.y += 20;
