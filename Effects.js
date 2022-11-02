@@ -1,8 +1,8 @@
 import * as THREE from 'three';
-// import { GLTFLoader } from 'https://unpkg.com/three@0.127.0/examples/jsm/loaders/GLTFLoader.js';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 // import { Scene } from 'three';
 
-const NbStars = 100;
+const NbStars = 200;
 
 const Colors = [
     0x062eb9,
@@ -15,6 +15,11 @@ const Colors = [
 export class Effects {
     constructor() {
         this.compteur = -1;
+        let loader = new GLTFLoader();
+        this.startMesh;
+        this.gameOverMesh;
+        const addingFunc = this.Loading.bind(this);
+        loader.load('./models/buttons.gltf', addingFunc);
     }
 
     AddStar(scene){
@@ -30,6 +35,22 @@ export class Effects {
         scene.add(star);
     }
 
+    Loading(gltf){
+        const startButton = gltf.scene.children.find((child) => child.name == "start" );
+        const gameOver = gltf.scene.children.find((child) => child.name == "gameOver" );
+
+        startButton.scale.set(startButton.scale.x * 2, startButton.scale.y * 2, startButton.scale.z * 2);
+        gameOver.scale.set(gameOver.scale.x * 2, gameOver.scale.y * 2, gameOver.scale.z * 2);
+        
+        startButton.position.y = 40;
+        gameOver.position.y = 0;
+        gameOver.position.x = -10;
+        this.startMesh = startButton;
+        this.gameOverMesh = gameOver;
+    }
+    gameOver(scene){
+        scene.add(this.gameOverMesh)
+    }
 
     Stars(scene){
         for(let i = 0; i <= NbStars; i++){

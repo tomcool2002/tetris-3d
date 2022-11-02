@@ -12,7 +12,8 @@ export class Data {
     this.camera = camera;
     // this.effects =  new Effects();
     // this.effects.Stars(scene);
-    
+    this.gameOver = false;
+   
 
     this.ProchainePiece = this.InitPiece();
 
@@ -166,7 +167,8 @@ export class Data {
         this.ProchainePiece[0].listeCube.forEach(cube =>{
           this.scene.add(cube);
         })
-      }
+      }else
+        this.gameOver = true;
     }
     
   }

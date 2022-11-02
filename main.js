@@ -64,21 +64,7 @@ function init() {
     }
   );
 
-  loader.load('./models/buttons.gltf',
-    function(gltf){
-      const startButton = gltf.scene.children.find((child) => child.name == "start" );
-      const gameOver = gltf.scene.children.find((child) => child.name == "gameOver" );
-
-      startButton.scale.set(startButton.scale.x * 2, startButton.scale.y * 2, startButton.scale.z * 2);
-      gameOver.scale.set(gameOver.scale.x * 2, gameOver.scale.y * 2, gameOver.scale.z * 2);
-      
-      startButton.position.y = 40;
-      gameOver.position.y = 30;
-
-      scene.add(startButton);
-      scene.add(gameOver);
-    } 
-  );
+  
 
   const light = new THREE.AmbientLight( 0xffffff ); 
   scene.add(light);
@@ -208,6 +194,9 @@ function gameLoop(timeAtPlay){
     if(data.points != points){ 
       effects.changeColor(scene);
       points = data.points;
+    }
+    if(data.gameOver){
+      effects.gameOver(scene)
     }
     if(now > lastUpdate + 1000){
       data.HighwayToHell();
