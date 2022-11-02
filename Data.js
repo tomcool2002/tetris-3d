@@ -44,6 +44,7 @@ export class Data {
   }
 
   holdPiece(){
+    
     let info = this.holder.SwitchPiece(this.positionPiece,this.piecePrincipale,this.memoirePiece,this.memoireblock);
 
     this.removePiece();// enleve les object 3d du tableau
