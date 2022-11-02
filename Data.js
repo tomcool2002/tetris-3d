@@ -43,23 +43,7 @@ export class Data {
   }
 
   holdPiece(){
-    this.holder.AddPieceToHolder(this.scene,
-      this.positionPiece, this.piecePrincipale, this.memoirePiece, this.memoireblock
-    );
-
-    this.RemovePiece();
-    this.piecePrincipale = undefined;
-    this.positionPiece = [];
-    this.Deconstruction();
-    
-    // let cubeD = this.memoirePiece; // le cube D
-    // this.scene.remove(cubeD);
-    // for(let i = 0; i < this.memoireblock.length; i++){
-    //   let cubeI = this.memoireblock[i]; // le cube i
-    //   this.scene.remove(cubeI);
-    // }
-    
-    this.AddPiece(true);
+    this.holder.SwitchPiece(this.positionPiece,this.piecePrincipale,this.memoirePiece,this.memoireblock);
   }
 
   game(scene) {
@@ -128,23 +112,23 @@ export class Data {
   }
   
   AddPiece(){
-    
     let pieceInit = this.ProchainePiece.shift();
     this.shapePiece = pieceInit.name;
     this.colorPiece = pieceInit.listeCube[0].material.color;
+
     for (let i = 0; i < pieceInit.listeCube.length; i++) {
       pieceInit.listeCube[i].position.x -= 20;
       pieceInit.listeCube[i].position.y += 20;
       this.scene.add(pieceInit.listeCube[i]);
     }
+    
     this.AjouterCubesTableau(pieceInit.listeCube); // ces lui qui reconstruit pieceprincipale
-
+    
     this.ProchainePiece.push(new Piece(20, 0));
 
     this.ProchainePiece[0].listeCube.forEach(cube =>{
       this.scene.add(cube);
     })
-
     
   }
 
@@ -345,7 +329,6 @@ export class Data {
 
   AjouterCubesTableau(listeCube) {
     let compteur = 0;
-    this.piecePrincipale;
     listeCube.forEach((cube) => {
       let pos = this.TransformerPosition(
         cube.position.x,
@@ -373,7 +356,6 @@ export class Data {
       piece[0] -= this.piecePrincipale[0];
       piece[1] -= this.piecePrincipale[1];
     });
-    // debugger
   }
 
   TransformerPosition(x, y, duTableau) {
@@ -391,7 +373,7 @@ export class Data {
   }
 
   AfficherTableau2D() {
-    console.clear();
+    //console.clear();
     // console.log(this.ProchainePiece);
     // console.log(this.positionPiece);
     //console.log(this.piecePrincipale);
