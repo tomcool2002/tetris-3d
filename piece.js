@@ -91,8 +91,8 @@ export class Piece {
         cube4 = new Cube(2.5, color, 0, 2.5, -2.5);
         break;
       case 5: // Z Shape
-        cube1 = new Cube(2.5, color, 0, 0, -2.5);
-        cube2 = new Cube(2.5, color, 2.5, 0, -2.5);
+        cube1 = new Cube(2.5, color, 2.5, 0, -2.5);
+        cube2 = new Cube(2.5, color, 0, 0, -2.5);
         cube3 = new Cube(2.5, color, 0, 2.5, -2.5);
         cube4 = new Cube(2.5, color, -2.5, 2.5, -2.5);
         break;
@@ -103,8 +103,8 @@ export class Piece {
         cube4 = new Cube(2.5, color, 0, 2.5, -2.5);
         break;
       case 7: // S Shape
-        cube1 = new Cube(2.5, color, 0, 0, -2.5);
-        cube2 = new Cube(2.5, color, -2.5, 0, -2.5);
+        cube1 = new Cube(2.5, color, -2.5, 0, -2.5);
+        cube2 = new Cube(2.5, color, 0, 0, -2.5);
         cube3 = new Cube(2.5, color, 0, 2.5, -2.5);
         cube4 = new Cube(2.5, color, 2.5, 2.5, -2.5);
         break;
