@@ -51,6 +51,7 @@ export class Data {
 
     this.memoirePiece = info[1];
     this.memoireblock = info[2];
+    this.MoveBlock();
     this.Deconstruction();
     this.Reconstruction(this.piecePrincipale[0], this.piecePrincipale[1]);
     this.AffichePiece();
