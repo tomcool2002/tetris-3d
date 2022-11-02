@@ -46,10 +46,30 @@ export class Data {
   holdPiece(){
     let info = this.holder.SwitchPiece(this.positionPiece,this.piecePrincipale,this.memoirePiece,this.memoireblock);
 
-    this.positionPiece = info[0]
-    
+    this.removePiece();
+    this.positionPiece = info[0];
 
+    this.memoirePiece = info[1];
+    this.memoireblock = info[2];
+    this.Deconstruction();
+    this.Reconstruction(this.piecePrincipale[0], this.piecePrincipale[1]);
+    this.AffichePiece();
   }
+
+  removePiece(){
+    this.scene.remove(this.memoirePiece);
+    this.memoireblock.forEach(cube => {
+      this.scene.remove(cube);
+    });
+  }
+
+  AffichePiece(){
+    this.scene.add(this.memoirePiece);
+    this.memoireblock.forEach(cube => {
+      this.scene.add(cube);
+    });
+  }
+
     /**
      * Check si le la ligne est pleine et change le tableau acordement
      * @param {THREE.scene} scene 
