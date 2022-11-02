@@ -3,8 +3,10 @@ import { Data } from './Data';
 import { Camera } from "./camera";
 import { MouseClicker } from "./mouseClicker";
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-let scene, renderer, cam, base;
 import { Effects } from './Effects';
+
+let scene, renderer, cam, base, effects;
+
 // let pieceInit;
 let data;
 
@@ -15,7 +17,7 @@ const gameHeight = 20;
 
 
 
-
+let points = 0;
 function init() {
   scene = new THREE.Scene();
 
@@ -27,7 +29,7 @@ function init() {
   renderer.setClearColor(0x00867f, 0.5);
 
   // background
-  // const background = new THREE.TextureLoader().load('./models/background.gif');
+  // const background = new THREE.TextureLoader().load('./models/wallpaper.png');
   // scene.background = background;
 
 
@@ -43,11 +45,7 @@ function init() {
   World.add(PlayGround2);
 
   World.position.y = 1;
-  data = new Data(cam,scene);
-  data.game(scene);
-  data.AfficherTableau2D();
-  
-  setupKeyControls();
+ 
 
 
   scene.add(World);
@@ -85,17 +83,18 @@ function init() {
 
   const light = new THREE.AmbientLight( 0xffffff ); 
   scene.add(light);
-    
-
-
-  // holder
+  data = new Data(cam,scene);
+  data.game(scene);
+  data.AfficherTableau2D();
+  points = data.points;
   
+  setupKeyControls();
 
-  // effects
-  let effects = new Effects();
+  effects =  new Effects();
   effects.Stars(scene);
-  
-  effects.changeColor(scene);
+  // effects.changeColor(scene);
+
+
 }
 
 function horizontalLine() {
@@ -201,13 +200,16 @@ window.addEventListener('mouseup', clearClickPosition);
 
 let lastUpdate = Date.now();
 let timeAtPaused;
-let points = 0;
+
 
 function gameLoop(timeAtPlay){
   if(pause == false){
     let now = Date.now();
     
-    
+    if(data.points != points){ 
+      effects.changeColor(scene);
+      points = data.points;
+    }
     if(now > lastUpdate + 1000){
       data.HighwayToHell();
       data.AfficherTableau2D();

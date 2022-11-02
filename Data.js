@@ -1,6 +1,7 @@
 import { Piece } from "./piece";
 import { Score } from "./score";
 import { Holder } from './hold';
+// import { Effects } from './Effects';
 
 
 export class Data {
@@ -9,6 +10,9 @@ export class Data {
     this.LONGEUR = 9;
     this.tableau = this.createBaseTableau();
     this.camera = camera;
+    // this.effects =  new Effects();
+    // this.effects.Stars(scene);
+    
 
     this.ProchainePiece = this.InitPiece();
 
@@ -99,6 +103,10 @@ export class Data {
       }
     }
 
+    // if(lignePleine.length > 0){
+    //   // debugger
+    //   this.effects.changeColor(this.scene)
+    // }
     if (this.score.IsReady) {
       //console.log(this.points);
       this.score.ShowNumbers(this.scene, this.points);

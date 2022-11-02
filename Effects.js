@@ -1,11 +1,20 @@
 import * as THREE from 'three';
-import { GLTFLoader } from 'https://unpkg.com/three@0.127.0/examples/jsm/loaders/GLTFLoader.js';
-import { Scene } from 'three';
+// import { GLTFLoader } from 'https://unpkg.com/three@0.127.0/examples/jsm/loaders/GLTFLoader.js';
+// import { Scene } from 'three';
 
 const NbStars = 100;
-export class Effects extends THREE.Group{
+
+const Colors = [
+    0x00e4d9,
+    0x00e421,
+    0x062eb9,
+    0xe40b00,
+    0xffffff,
+
+];
+export class Effects {
     constructor() {
-        super();
+        this.compteur = -1;
     }
 
     AddStar(scene){
@@ -16,7 +25,7 @@ export class Effects extends THREE.Group{
         const [x, y, z] = Array(3).fill().map(() => THREE.MathUtils.randFloatSpread(150));
         star.name = "star";
 
-        star.position.set(x,y,z)
+        star.position.set(x,y,z);
         
         scene.add(star);
     }
@@ -28,19 +37,22 @@ export class Effects extends THREE.Group{
         }
     }
 
+    nextColor(){
+        if(this.compteur < Colors.length - 1)
+            return Colors[++this.compteur];
+        else
+            return Colors[this.compteur];
+
+    }
+
     changeColor(scene){
-        // let star = scene.getObjectByName('star');
+        let color = this.nextColor();
+        scene.children.forEach(function(child){
+            if(child.name == "star"){
+                child.material.color.set(color);
+            }
+        })
         
-        // for(let i = 0; i <= NbStars; i++){
-        //     star.material.color = 0xffffff;
-        // }
-        // // while(star != undefined){
-        // //     // star.material.color = 0xffffff;
-        // //     scene.remove(star);
-        // //     star = scene.getObjectByName('star');
-        // //     debugger
-        // // }
-        // scene.remove();
     }
 
 }
