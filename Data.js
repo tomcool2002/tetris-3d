@@ -382,7 +382,6 @@ export class Data {
       
       
       
-      debugger
       if(peutPlacer){
         listeCube.forEach((cube) => {
           let pos = this.TransformerPosition(
