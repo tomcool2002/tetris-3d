@@ -127,7 +127,7 @@ export class Data {
     });
   }
   
-  AddPiece(fromHold = false){
+  AddPiece(){
     
     let pieceInit = this.ProchainePiece.shift();
     this.shapePiece = pieceInit.name;
@@ -141,14 +141,10 @@ export class Data {
 
     this.ProchainePiece.push(new Piece(20, 0));
 
-    for (let i = 0; i < this.ProchainePiece.length; i++) {
-      if(i ==0){
-              this.ProchainePiece[i].listeCube.forEach(cube => {
-        //cube.position.y += 10;
-        this.scene.add(cube);
-      });
-      }
-    }
+    this.ProchainePiece[0].listeCube.forEach(cube =>{
+      this.scene.add(cube);
+    })
+
     
   }
 
