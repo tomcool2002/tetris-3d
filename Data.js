@@ -61,7 +61,10 @@ export class Data {
     
     this.AddPiece(true);
   }
-
+    /**
+     * Check si le la ligne est pleine et change le tableau acordement
+     * @param {THREE.scene} scene 
+     */
   game(scene) {
     this.scene = scene;
     let lignePleine = this.CheckLine();
@@ -101,7 +104,6 @@ export class Data {
     });
 
     if (lignePleine.length > 0) {
-      // this.camera.newPosition();
       for (let y = lignePleine[lignePleine.length - 1]; y >= 0; y--) {
         for (let x = 0; x <= this.LONGEUR - 1; x++) {
           if (this.tableau[y][x][1] != null) {
@@ -126,7 +128,9 @@ export class Data {
       this.scene.remove(block);
     });
   }
-  
+  /**
+   * Ajoute la nouvelle piece au tableau
+   */
   AddPiece(){
     
     let pieceInit = this.ProchainePiece.shift();
@@ -264,7 +268,9 @@ export class Data {
   BigMath(x, y) {
     return [-y, x];
   }
-
+  /**
+   * change le block I en X
+   */
   PlaceBlock() {
     for (let y = this.HAUTEUR - 1; y >= 0; y--) {
       for (let x = this.LONGEUR - 1; x >= 0; x--) {
