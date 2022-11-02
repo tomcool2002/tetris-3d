@@ -48,7 +48,6 @@ export class Data {
 
     this.removePiece();
     this.positionPiece = info[0];
-
     this.memoirePiece = info[1];
     this.memoireblock = info[2];
     this.MoveBlock();
