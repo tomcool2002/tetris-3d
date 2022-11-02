@@ -26,6 +26,7 @@ export class Data {
     this.holder = new Holder(this.scene);
     this.shapePiece = null;
     this.colorPiece;
+    this.peutPlacer = true;
 
   }
   HighwayToHell() {
@@ -132,23 +133,30 @@ export class Data {
    * Ajoute la nouvelle piece au tableau
    */
   AddPiece(){
-    
-    let pieceInit = this.ProchainePiece.shift();
-    this.shapePiece = pieceInit.name;
-    this.colorPiece = pieceInit.listeCube[0].material.color;
-    for (let i = 0; i < pieceInit.listeCube.length; i++) {
-      pieceInit.listeCube[i].position.x -= 20;
-      pieceInit.listeCube[i].position.y += 20;
-      this.scene.add(pieceInit.listeCube[i]);
+    if(this.peutPlacer){
+      let pieceInit = this.ProchainePiece.shift();
+      this.shapePiece = pieceInit.name;
+      this.colorPiece = pieceInit.listeCube[0].material.color;
+  
+      // Deplace
+      for (let i = 0; i < pieceInit.listeCube.length; i++) {
+        pieceInit.listeCube[i].position.x -= 20;
+        pieceInit.listeCube[i].position.y += 20;
+        // this.scene.add(pieceInit.listeCube[i]);
+      }
+      this.peutPlacer = this.AjouterCubesTableau(pieceInit.listeCube);
+      if(this.peutPlacer){
+         // ces lui qui reconstruit pieceprincipal
+        for (let i = 0; i < pieceInit.listeCube.length; i++) {
+          this.scene.add(pieceInit.listeCube[i]);
+        }
+        this.ProchainePiece.push(new Piece(20, 0));
+  
+        this.ProchainePiece[0].listeCube.forEach(cube =>{
+          this.scene.add(cube);
+        })
+      }
     }
-    this.AjouterCubesTableau(pieceInit.listeCube); // ces lui qui reconstruit pieceprincipale
-
-    this.ProchainePiece.push(new Piece(20, 0));
-
-    this.ProchainePiece[0].listeCube.forEach(cube =>{
-      this.scene.add(cube);
-    })
-
     
   }
 
@@ -208,7 +216,6 @@ export class Data {
       break;
 
       case "b": // bas
-        let t = this.positionPiece;
         for (let i = 0; i < this.positionPiece.length; i++) {
           peutDeplacer = this.isValid(
             this.piecePrincipale[0] + 1 + this.positionPiece[i][0],
@@ -280,7 +287,9 @@ export class Data {
       }
     }
 
-    this.camera.newRotation();
+    if(this.peutPlacer){ this.camera.newRotation();}
+    else{this.camera.pause()}
+   
 
     this.memoireblock.forEach((block) => {
       let coorTableau = this.TransformerPosition(
@@ -350,36 +359,61 @@ export class Data {
   }
 
   AjouterCubesTableau(listeCube) {
-    let compteur = 0;
-    this.piecePrincipale;
-    listeCube.forEach((cube) => {
-      let pos = this.TransformerPosition(
-        cube.position.x,
-        cube.position.y,
-        false
-      );
-
-      let x = pos[0];
-      let y = pos[1];
-
-      if (compteur == 1) {
+    if(this.peutPlacer){
+      let compteur = 0;
+      let peutPlacer;
+  
+      for(let i = 0; i < listeCube.length; i++){
+  
+        let pos = this.TransformerPosition(
+          listeCube[i].position.x,
+          listeCube[i].position.y,
+          false
+        );
+  
+        let x = pos[0];
+        let y = pos[1];
         
-        this.piecePrincipale = [y, x];
-        this.memoirePiece = cube;
-        this.tableau[y][x][0] = "D";
-      } else {
-        this.positionPiece.push([y, x]);
-        this.memoireblock.push(cube);
-        this.tableau[y][x][0] = "i";
+  
+        peutPlacer = this.isValid(y,x);
+        if(!peutPlacer) break;
       }
-      compteur++;
-    });
-
-    this.positionPiece.forEach((piece) => {
-      piece[0] -= this.piecePrincipale[0];
-      piece[1] -= this.piecePrincipale[1];
-    });
-    // debugger
+  
+      
+      
+      
+      debugger
+      if(peutPlacer){
+        listeCube.forEach((cube) => {
+          let pos = this.TransformerPosition(
+            cube.position.x,
+            cube.position.y,
+            false
+          );
+          let x = pos[0];
+          let y = pos[1];
+          if (compteur == 1) {
+            
+            this.piecePrincipale = [y, x];
+            this.memoirePiece = cube;
+            this.tableau[y][x][0] = "D";
+          } else {
+            this.positionPiece.push([y, x]);
+            this.memoireblock.push(cube);
+            this.tableau[y][x][0] = "i";
+          }
+          compteur++;
+        })
+  
+  
+        this.positionPiece.forEach((piece) => {
+          piece[0] -= this.piecePrincipale[0];
+          piece[1] -= this.piecePrincipale[1];
+        });
+      }
+      this.peutPlacer = peutPlacer;
+    }
+    return this.peutPlacer;
   }
 
   TransformerPosition(x, y, duTableau) {
