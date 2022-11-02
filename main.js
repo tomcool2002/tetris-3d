@@ -29,8 +29,7 @@ function init() {
   renderer.setClearColor(0x00867f, 0.5);
 
   // background
-  // const background = new THREE.TextureLoader().load('./models/wallpaper.png');
-  // scene.background = background;
+  scene.background= new THREE.TextureLoader().load('./models/wallpaper.png');
 
 
   cam = new Camera(renderer);

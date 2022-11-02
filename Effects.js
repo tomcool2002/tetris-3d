@@ -5,9 +5,9 @@ import * as THREE from 'three';
 const NbStars = 100;
 
 const Colors = [
+    0x062eb9,
     0x00e4d9,
     0x00e421,
-    0x062eb9,
     0xe40b00,
     0xffffff,
 
