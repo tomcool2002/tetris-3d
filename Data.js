@@ -44,7 +44,11 @@ export class Data {
   }
 
   holdPiece(){
-    this.holder.SwitchPiece(this.positionPiece,this.piecePrincipale,this.memoirePiece,this.memoireblock);
+    let info = this.holder.SwitchPiece(this.positionPiece,this.piecePrincipale,this.memoirePiece,this.memoireblock);
+
+    this.positionPiece = info[0]
+    
+
   }
     /**
      * Check si le la ligne est pleine et change le tableau acordement
@@ -107,12 +111,6 @@ export class Data {
     this.AddPiece();
   }
 
-  RemovePiece(){
-    this.scene.remove(this.memoirePiece);
-    this.memoireblock.forEach(block => {
-      this.scene.remove(block);
-    });
-  }
   /**
    * Ajoute la nouvelle piece au tableau
    */

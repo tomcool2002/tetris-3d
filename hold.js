@@ -132,6 +132,11 @@ export class Holder extends THREE.Group {
 
   SwitchPiece(positionPiece, piecePrincipale, memoirePiece, memoireblock) {
     this.DeleteCurrentHold();
+    let oldmemoirePiece = this.memoirePiece;
+    let oldmemoireblock = this.memoireblock;
+    let oldpositionpiece = this.positionPiece;
+
+    this.positionPiece = positionPiece;
     this.memoirePiece = memoirePiece.clone();
     this.memoirePiece.position.x = -25;
     this.memoirePiece.position.y = 17.5;
@@ -148,12 +153,14 @@ export class Holder extends THREE.Group {
         // console.log(cube.position);
         // console.log(positionPiece[compteur]);
 
-        newCube.position.x = -25 + positionPiece[compteur][1] * 2.5;
-        newCube.position.y = 17.5 + -positionPiece[compteur][0] * 2.5;
+        newCube.position.x = -25 + this.positionPiece[compteur][1] * 2.5;
+        newCube.position.y = 17.5 + -this.positionPiece[compteur][0] * 2.5;
         this.memoireblock.push(newCube);
         compteur++;
     });
 
     this.AfficherPiece();
+
+    return [oldpositionpiece,oldmemoirePiece,oldmemoireblock];
   }
 }
