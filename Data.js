@@ -46,14 +46,14 @@ export class Data {
   holdPiece(){
     let info = this.holder.SwitchPiece(this.positionPiece,this.piecePrincipale,this.memoirePiece,this.memoireblock);
 
-    this.removePiece();
-    this.positionPiece = info[0];
+    this.removePiece();// enleve les object 3d du tableau
+    this.positionPiece = info[0]; // change les donne pour celle dans le hold
     this.memoirePiece = info[1];
     this.memoireblock = info[2];
-    this.MoveBlock();
-    this.Deconstruction();
-    this.Reconstruction(this.piecePrincipale[0], this.piecePrincipale[1]);
-    this.AffichePiece();
+    this.MoveBlock(); // deplace le bloc D (3d)
+    this.Deconstruction(); // eneleve les points D et I (tableau 2d)
+    this.Reconstruction(this.piecePrincipale[0], this.piecePrincipale[1]); // remets les points D et i (tableau 2d)
+    this.AffichePiece(); // affiche les objets 3d
   }
 
   removePiece(){
