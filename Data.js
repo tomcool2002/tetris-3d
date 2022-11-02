@@ -44,23 +44,7 @@ export class Data {
   }
 
   holdPiece(){
-    this.holder.AddPieceToHolder(this.scene,
-      this.positionPiece, this.piecePrincipale, this.memoirePiece, this.memoireblock
-    );
-
-    this.RemovePiece();
-    this.piecePrincipale = undefined;
-    this.positionPiece = [];
-    this.Deconstruction();
-    
-    // let cubeD = this.memoirePiece; // le cube D
-    // this.scene.remove(cubeD);
-    // for(let i = 0; i < this.memoireblock.length; i++){
-    //   let cubeI = this.memoireblock[i]; // le cube i
-    //   this.scene.remove(cubeI);
-    // }
-    
-    this.AddPiece(true);
+    this.holder.SwitchPiece(this.positionPiece,this.piecePrincipale,this.memoirePiece,this.memoireblock);
   }
     /**
      * Check si le la ligne est pleine et change le tableau acordement
@@ -430,7 +414,7 @@ export class Data {
   }
 
   AfficherTableau2D() {
-    console.clear();
+    //console.clear();
     // console.log(this.ProchainePiece);
     // console.log(this.positionPiece);
     //console.log(this.piecePrincipale);
