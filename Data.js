@@ -362,7 +362,10 @@ export class Data {
         peutPlacer = this.isValid(y,x);
         if(!peutPlacer) break;
       }
-
+  
+      
+      
+      
       if(peutPlacer){
         listeCube.forEach((cube) => {
           let pos = this.TransformerPosition(
