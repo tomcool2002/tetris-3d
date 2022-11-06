@@ -18,7 +18,7 @@ export class Holder extends THREE.Group {
 
     const loader = new GLTFLoader();
 
-    loader.load("./models/holdSquare.glb", function (gltf) {
+    loader.load("./misc/holdSquare.glb", function (gltf) {
       const holdMesh = gltf.scene.children.find(
         (child) => child.name == "holdSquare"
       );

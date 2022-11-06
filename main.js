@@ -18,9 +18,10 @@ const gameHeight = 20;
 
 
 let points = 0;
+let music;
+
 function init() {
   scene = new THREE.Scene();
-
   renderer = new THREE.WebGLRenderer({
     canvas: document.querySelector("#bg"),
     antialias: false
@@ -29,7 +30,7 @@ function init() {
   renderer.setClearColor(0x00867f, 0.5);
 
   // background
-  scene.background= new THREE.TextureLoader().load('./models/wallpaper.png');
+  scene.background= new THREE.TextureLoader().load('./misc/wallpaper.png');
 
 
   cam = new Camera(renderer);
@@ -45,14 +46,16 @@ function init() {
 
   World.position.y = 1;
  
-
+  new Audio('./misc/music.mp3');
+  music.autoplay = true;
+  music.play();
 
   scene.add(World);
 
   renderer.outputEncoding = THREE.sRGBEncoding;
   // pause for now, add to ui later
   const loader = new GLTFLoader();
-  loader.load('./models/pauseModel.glb', 
+  loader.load('./misc/pauseModel.glb', 
     function (gltf) {
       const pauseMesh = gltf.scene.children.find((child) => child.name == "Circle" );
       pauseMesh.scale.set(pauseMesh.scale.x * 5, pauseMesh.scale.y * 5, pauseMesh.scale.z * 5);

@@ -10,7 +10,6 @@ const Colors = [
     0x00e421,
     0xe40b00,
     0xffffff,
-
 ];
 export class Effects {
     constructor() {
@@ -19,7 +18,7 @@ export class Effects {
         this.startMesh;
         this.gameOverMesh;
         const addingFunc = this.Loading.bind(this);
-        loader.load('./models/buttons.gltf', addingFunc);
+        loader.load('./misc/buttons.gltf', addingFunc);
     }
 
     AddStar(scene){

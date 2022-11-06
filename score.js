@@ -23,9 +23,9 @@ export class Score extends THREE.Group {
         this.theNumbers = {};
         this.IsReady = false;
         const addingFunc = this.Loading.bind(this);
-        loader.load('./models/numbers.glb', addingFunc);
-        // this.texture = new THREE.TextureLoader().load('./models/checkers.jpg');
-        // this.texture = new THREE.TextureLoader().load('./models/honeycomb.jpg');
+        loader.load('./misc/numbers.glb', addingFunc);
+        // this.texture = new THREE.TextureLoader().load('./misc/checkers.jpg');
+        // this.texture = new THREE.TextureLoader().load('./misc/honeycomb.jpg');
 
     }
     
