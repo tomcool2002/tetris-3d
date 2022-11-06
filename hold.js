@@ -130,6 +130,10 @@ export class Holder extends THREE.Group {
     });
   }
 
+  getInfo(){
+    return [this.positionPiece,this.memoirePiece,this.memoireblock];
+  }
+
   SwitchPiece(positionPiece, piecePrincipale, memoirePiece, memoireblock) {
     this.DeleteCurrentHold();
     let oldmemoirePiece = this.memoirePiece;
