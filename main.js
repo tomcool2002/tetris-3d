@@ -99,16 +99,28 @@ function VecticalLine() {
 
 function CreatePlayGround() {
   let PlayGround = new THREE.Group();
-  for (let i = 0; i < 21; i++) {
-    const Hline1 = horizontalLine();
-    Hline1.position.y = -2.5 * i + 25;
-    PlayGround.add(Hline1)
-  }
-  for (let i = 0; i < 10; i++) {
-    const Vline1 = VecticalLine();
-    Vline1.position.x = -2.5 * i + 11.25;
-    PlayGround.add(Vline1)
-  }
+  const Hline1 = horizontalLine();
+  Hline1.position.y = 25;
+  PlayGround.add(Hline1);
+
+  const Vline1 = VecticalLine();
+  Vline1.position.x = 11.25;
+  PlayGround.add(Vline1);
+
+  const Vline2 = VecticalLine();
+  Vline2.position.x = -11.25;
+  PlayGround.add(Vline2);
+
+  // for (let i = 0; i < 21; i++) {
+  //   const Hline1 = horizontalLine();
+  //   Hline1.position.y = -2.5 * i + 25;
+  //   PlayGround.add(Hline1)
+  // }
+  // for (let i = 0; i < 10; i++) {
+  //   const Vline1 = VecticalLine();
+  //   Vline1.position.x = -2.5 * i + 11.25;
+  //   PlayGround.add(Vline1)
+  // }
   let geometry = new THREE.BoxGeometry(22.5, 1, 5);
   const texture = new THREE.MeshBasicMaterial({ color: 0x431616 });
   base = new THREE.Mesh(geometry, texture);
