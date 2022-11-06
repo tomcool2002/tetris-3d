@@ -15,6 +15,7 @@ let pause;
 
 const gamewidth = 9;
 const gameHeight = 20;
+let startTime = Date.now();
 
 
 
@@ -22,6 +23,8 @@ let points = 0;
 let music;
 let gameOverMusic;
 let pointsSound;
+let speedUpSound;
+
 
 function init() {
   scene = new THREE.Scene();
@@ -92,6 +95,8 @@ function init() {
   gameOverMusic.volume = 0.5;
 
   pointsSound = new Audio('./misc/clearLine.mp3');
+
+  speedUpSound = new Audio('./misc/speed.mp3')
 
 
 
@@ -220,6 +225,13 @@ function gameLoop(timeAtPlay){
   if(pause == false){
     if(music.paused && data.gameOver == false){
       music.play();
+    }
+
+    // speed up
+    if(startTime + 15000 <= Date.now() ){
+      startTime = Date.now();
+      cam.speedUp();
+      speedUpSound.play();
     }
 
     let now = Date.now();
