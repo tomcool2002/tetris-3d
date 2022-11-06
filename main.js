@@ -4,6 +4,7 @@ import { Camera } from "./camera";
 import { MouseClicker } from "./mouseClicker";
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { Effects } from './Effects';
+import { EllipseCurve } from 'three';
 
 let scene, renderer, cam, base, effects;
 
@@ -19,6 +20,8 @@ const gameHeight = 20;
 
 let points = 0;
 let music;
+let gameOverMusic;
+let pointsSound;
 
 function init() {
   scene = new THREE.Scene();
@@ -46,14 +49,12 @@ function init() {
 
   World.position.y = 1;
  
-  new Audio('./misc/music.mp3');
-  music.autoplay = true;
-  music.play();
-
+  
   scene.add(World);
 
   renderer.outputEncoding = THREE.sRGBEncoding;
-  // pause for now, add to ui later
+
+
   const loader = new GLTFLoader();
   loader.load('./misc/pauseModel.glb', 
     function (gltf) {
@@ -80,7 +81,18 @@ function init() {
 
   effects =  new Effects();
   effects.Stars(scene);
-  // effects.changeColor(scene);
+
+
+  music = new Audio('./misc/music.mp3');
+  music.autoplay = true;
+  music.volume = 0.3;
+  music.play();
+  
+  gameOverMusic = new Audio('./misc/game_over.mp3');
+  gameOverMusic.volume = 0.5;
+
+  pointsSound = new Audio('./misc/clearLine.mp3');
+
 
 
 }
@@ -192,14 +204,21 @@ let timeAtPaused;
 
 function gameLoop(timeAtPlay){
   if(pause == false){
+    if(music.paused && data.gameOver == false){
+      music.play();
+    }
+
     let now = Date.now();
     
     if(data.points != points){ 
       effects.changeColor(scene);
       points = data.points;
+      pointsSound.play()
     }
     if(data.gameOver){
-      effects.gameOver(scene)
+      effects.gameOver(scene);
+      music.pause();
+      gameOverMusic.play();
     }
     if(now > lastUpdate + 1000){
       data.HighwayToHell();
@@ -222,7 +241,9 @@ function gameLoop(timeAtPlay){
         cam.pause();
       }
     } 
-  } 
+  }else{
+    music.pause()
+  }
 
   if (timeAtPaused != undefined){
     let truechose = (Date.now() - timeAtPaused >= 100);
