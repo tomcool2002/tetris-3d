@@ -17,7 +17,7 @@ export class MouseClicker {
         // this.objectClicked.material.color.setHex( 0xffffff );
         let lenom = this.objectClicked.name;
         // debugger
-        if(lenom == "Circle")
+        if(lenom == "Pause")
           return true
         return false
         // console.log(`clicked: ${this.objectClicked.name}`);

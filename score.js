@@ -35,16 +35,16 @@ export class Score extends THREE.Group {
     }
     
     Loading(gltf) {
-        const zeroMesh = gltf.scene.children.find((child) => child.name == "Zero");
-        const oneMesh = gltf.scene.children.find((child) => child.name == "One");
-        const twoMesh = gltf.scene.children.find((child) => child.name == "Two");
-        const threeMesh = gltf.scene.children.find((child) => child.name == "Three");
-        const fourMesh = gltf.scene.children.find((child) => child.name == "Four");
-        const fiveMesh = gltf.scene.children.find((child) => child.name == "Five");
-        const sixMesh = gltf.scene.children.find((child) => child.name == "Six");
-        const sevenMesh = gltf.scene.children.find((child) => child.name == "Seven");
-        const eightMesh = gltf.scene.children.find((child) => child.name == "Eight");
-        const nineMesh = gltf.scene.children.find((child) => child.name == "Nine");
+        const zeroMesh = gltf.scene.children.find((child) => child.name == stringToName[0]);
+        const oneMesh = gltf.scene.children.find((child) => child.name == stringToName[1]);
+        const twoMesh = gltf.scene.children.find((child) => child.name == stringToName[2]);
+        const threeMesh = gltf.scene.children.find((child) => child.name == stringToName[3]);
+        const fourMesh = gltf.scene.children.find((child) => child.name == stringToName[4]);
+        const fiveMesh = gltf.scene.children.find((child) => child.name == stringToName[5]);
+        const sixMesh = gltf.scene.children.find((child) => child.name == stringToName[6]);
+        const sevenMesh = gltf.scene.children.find((child) => child.name == stringToName[7]);
+        const eightMesh = gltf.scene.children.find((child) => child.name == stringToName[8]);
+        const nineMesh = gltf.scene.children.find((child) => child.name == stringToName[9]);
 
         zeroMesh.scale.set(zeroMesh.scale.x * 5, zeroMesh.scale.y * 5, zeroMesh.scale.z * 5);
         oneMesh.scale.set(oneMesh.scale.x * 5, oneMesh.scale.y * 5, oneMesh.scale.z * 5);
@@ -75,16 +75,39 @@ export class Score extends THREE.Group {
         // remove previous score
         
         // if(number == 140)debugger
-        scene.remove(scene.getObjectByName('Zero'));
-        scene.remove(scene.getObjectByName('One'));
-        scene.remove(scene.getObjectByName('Two'));
-        scene.remove(scene.getObjectByName('Three'));
-        scene.remove(scene.getObjectByName('Four'));
-        scene.remove(scene.getObjectByName('Five'));
-        scene.remove(scene.getObjectByName('Six'));
-        scene.remove(scene.getObjectByName('Seven'));
-        scene.remove(scene.getObjectByName('Eight'));
-        scene.remove(scene.getObjectByName('Nine'));
+
+        // scene.remove(scene.getObjectByName(stringToName[0]));
+        // scene.remove(scene.getObjectByName(stringToName[1]));
+        // scene.remove(scene.getObjectByName(stringToName[2]));
+        // scene.remove(scene.getObjectByName(stringToName[3]));
+        // scene.remove(scene.getObjectByName(stringToName[4]));
+        // scene.remove(scene.getObjectByName(stringToName[5]));
+        // scene.remove(scene.getObjectByName(stringToName[6]));
+        // scene.remove(scene.getObjectByName(stringToName[7]));
+        // scene.remove(scene.getObjectByName(stringToName[8]));
+        // scene.remove(scene.getObjectByName(stringToName[9]));
+        let previousScore = true;
+        while(previousScore){
+            let number = scene.children.find(
+                function(child){
+                    if(child.name == stringToName[0] || 
+                        child.name == stringToName[1] ||
+                        child.name == stringToName[2] ||
+                        child.name == stringToName[3] ||
+                        child.name == stringToName[4] ||
+                        child.name == stringToName[5] ||
+                        child.name == stringToName[6] ||
+                        child.name == stringToName[7] ||
+                        child.name == stringToName[8] ||
+                        child.name == stringToName[9] ){
+                        return child;
+                    }
+                }
+            );
+            scene.remove(number);
+            // debugger
+            if(number == undefined) { previousScore = false;}
+        }
         
 
         let listOfNumbers = `${number}`.split('');

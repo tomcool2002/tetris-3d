@@ -1,7 +1,6 @@
 import { Piece } from "./piece";
 import { Score } from "./score";
 import { Holder } from "./hold";
-// import { Effects } from './Effects';
 
 export class Data {
   constructor(camera, scene) {

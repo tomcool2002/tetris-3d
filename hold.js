@@ -22,7 +22,9 @@ export class Holder extends THREE.Group {
       const holdMesh = gltf.scene.children.find(
         (child) => child.name == "holdSquare"
       );
-      holdMesh.material = new THREE.MeshBasicMaterial({ color: 0xfb4003 });
+      // holdMesh.material = new THREE.MeshBasicMaterial({ color: 0xfb4003 });
+      holdMesh.material = new THREE.MeshNormalMaterial();
+      
       holdMesh.scale.set(
         holdMesh.scale.x * 0.5,
         holdMesh.scale.y * 8,

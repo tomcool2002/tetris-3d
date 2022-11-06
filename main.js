@@ -58,12 +58,12 @@ function init() {
   const loader = new GLTFLoader();
   loader.load('./misc/pauseModel.glb', 
     function (gltf) {
-      const pauseMesh = gltf.scene.children.find((child) => child.name == "Circle" );
-      pauseMesh.scale.set(pauseMesh.scale.x * 5, pauseMesh.scale.y * 5, pauseMesh.scale.z * 5);
+      const pauseMesh = gltf.scene.children.find((child) => child.name == "Pause" );
+      pauseMesh.scale.set(pauseMesh.scale.x * 8, pauseMesh.scale.y * 8, pauseMesh.scale.z * 8);
       pauseMesh.position.x = 20;
       pauseMesh.position.y = 20;
       pauseMesh.position.z = -2.5;
-      pauseMesh.material = new THREE.MeshNormalMaterial({color:0xfa4040})
+      pauseMesh.material = new THREE.MeshNormalMaterial();
       scene.add(pauseMesh);
     }
   );
@@ -85,7 +85,7 @@ function init() {
 
   music = new Audio('./misc/music.mp3');
   music.autoplay = true;
-  music.volume = 0.3;
+  music.volume = 0.1;
   music.play();
   
   gameOverMusic = new Audio('./misc/game_over.mp3');
@@ -99,14 +99,16 @@ function init() {
 
 function horizontalLine() {
   const geometry = new THREE.BoxGeometry(22.5, 0.5, 0.02);
-  const texture = new THREE.MeshBasicMaterial({ color: 0x333333 });
+  // const texture = new THREE.MeshBasicMaterial({ color: 0x333333 });
+  const texture = new THREE.MeshNormalMaterial();
   const line = new THREE.Mesh(geometry, texture);
   return line;
 }
 
 function VecticalLine() {
   const geometry = new THREE.BoxGeometry(0.5, 50, 0.02);
-  const texture = new THREE.MeshBasicMaterial({ color: 0x555555 });
+  // const texture = new THREE.MeshBasicMaterial({ color: 0x555555 });
+  const texture = new THREE.MeshNormalMaterial();
   const line = new THREE.Mesh(geometry, texture);
   return line;
 }
@@ -137,7 +139,7 @@ function CreatePlayGround() {
   //   PlayGround.add(Vline1)
   // }
   let geometry = new THREE.BoxGeometry(22.5, 1, 5);
-  const texture = new THREE.MeshBasicMaterial({ color: 0x431616 });
+  const texture = new THREE.MeshBasicMaterial({ color: 0x06c7c0  });
   base = new THREE.Mesh(geometry, texture);
   base.position.y = -25;
   PlayGround.add(base);
