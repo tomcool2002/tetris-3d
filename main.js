@@ -223,12 +223,12 @@ let timeAtPaused;
 
 function gameLoop(timeAtPlay){
   if(pause == false){
-    if(music.paused && data.gameOver == false){
+    if(music.paused && !data.gameOver){
       music.play();
     }
 
     // speed up
-    if(startTime + 15000 <= Date.now() ){
+    if(startTime + 20000 <= Date.now() && !data.gameOver && cam.rotationSpeed != 10 && cam.rotationSpeed != -10 ){
       startTime = Date.now();
       cam.speedUp();
       speedUpSound.play();
