@@ -41,14 +41,22 @@ export class Data {
       //console.log(i*10-20);
       listePiece.push(new Piece(20, 0));
     }
+    this.testJson();
     return listePiece;
+  }
+
+  testJson() {
+    let promise = fetch('/data.json');
+
+    console.log(promise);
+
+
   }
 
   holdPiece() {
     let peutSwitch = true;
     let CheckInfo = this.holder.getInfo(); // recupere les info du block dans le hold
     let positionPiece = CheckInfo[0];
-
 
     for (let i = 0; i < positionPiece.length; i++) {
       peutSwitch = this.isValid(
@@ -60,7 +68,6 @@ export class Data {
         break;
       }
     }
-
 
     if (peutSwitch) {
       let info = this.holder.SwitchPiece(
