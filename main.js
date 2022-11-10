@@ -4,7 +4,8 @@ import { Camera } from "./camera";
 import { MouseClicker } from "./mouseClicker";
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { Effects } from './Effects';
-import { EllipseCurve } from 'three';
+import { Letters } from './Letters';
+
 
 let scene, renderer, cam, base, effects;
 
@@ -24,6 +25,7 @@ let music;
 let gameOverMusic;
 let pointsSound;
 let speedUpSound;
+let letters;
 
 
 function init() {
@@ -96,10 +98,9 @@ function init() {
 
   pointsSound = new Audio('./misc/clearLine.mp3');
 
-  speedUpSound = new Audio('./misc/speed.mp3')
+  speedUpSound = new Audio('./misc/speed.mp3');
 
-
-
+  letters = new Letters();
 }
 
 function horizontalLine() {
@@ -227,6 +228,9 @@ function gameLoop(timeAtPlay){
       music.play();
     }
 
+    // if(letters.IsReady){
+    //   letters.showLetters(scene);
+    // }
     // speed up
     if(startTime + 20000 <= Date.now() && !data.gameOver && cam.rotationSpeed != 10 && cam.rotationSpeed != -10 ){
       startTime = Date.now();
