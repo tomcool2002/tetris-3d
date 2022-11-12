@@ -15,10 +15,10 @@ const stringToName = {
 }
 
 
-export class Score extends THREE.Group {
+export class Score {
     
     constructor() {
-        super();
+        // super();
         const loader = new GLTFLoader();
         this.theNumbers = {};
         this.IsReady = false;
@@ -72,20 +72,6 @@ export class Score extends THREE.Group {
     }
 
     ShowNumbers(scene, number = 0) {
-        // remove previous score
-        
-        // if(number == 140)debugger
-
-        // scene.remove(scene.getObjectByName(stringToName[0]));
-        // scene.remove(scene.getObjectByName(stringToName[1]));
-        // scene.remove(scene.getObjectByName(stringToName[2]));
-        // scene.remove(scene.getObjectByName(stringToName[3]));
-        // scene.remove(scene.getObjectByName(stringToName[4]));
-        // scene.remove(scene.getObjectByName(stringToName[5]));
-        // scene.remove(scene.getObjectByName(stringToName[6]));
-        // scene.remove(scene.getObjectByName(stringToName[7]));
-        // scene.remove(scene.getObjectByName(stringToName[8]));
-        // scene.remove(scene.getObjectByName(stringToName[9]));
         let previousScore = true;
         while(previousScore){
             let number = scene.children.find(
@@ -130,11 +116,7 @@ export class Score extends THREE.Group {
             let number = listOfNumbers[i];
             let name = stringToName[number];
             let number3D = this.theNumbers[name].clone();
-            // let texture = this.texture;
-            // number3D.material = new THREE.MeshStandardMaterial({ 
-            //     color: 0xff8080,
-            //     map:texture
-            // });
+            
             number3D.material = new THREE.MeshNormalMaterial();
             number3D.position.y = 30;
             number3D.position.z = -2.5;
