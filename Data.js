@@ -2,6 +2,7 @@ import { Piece } from "./piece";
 import { Score } from "./score";
 import { Holder } from "./hold";
 
+
 export class Data {
   constructor(camera, scene) {
     this.HAUTEUR = 20;
@@ -45,12 +46,17 @@ export class Data {
     return listePiece;
   }
 
+  async getText(file) {
+    let object = await fetch(file);
+    if(object.ok){
+      let text = await object.json();
+      console.log(text[0].nom);
+    }
+
+  }
+
   testJson() {
-    let promise = fetch('/data.json');
-
-    console.log(promise);
-
-
+    this.getText('data.json');
   }
 
   holdPiece() {
