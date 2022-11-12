@@ -140,14 +140,16 @@ export class Letters{
 
     showLetters(scene, letters = "???"){
         const positionX = {
-            0 : -11,
+            0 : -7,
             1 : -2,
-            2 : 6
+            2 : 4
         };
 
         for(let i = 0; i < 3; i++){
-            let letter = letters[i];
-            if(letter = "?"){ letter = "Unknown"}
+            let letter = letters[i].toLocaleUpperCase();
+            letter = stringToName[letter];
+            // debugger
+            if(letter == "?" || letter ==undefined){ letter = "Unknown"}
             // debugger
             let letter3D = this.theLetters[letter].clone();
             letter3D.material = new THREE.MeshNormalMaterial();
