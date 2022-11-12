@@ -19,6 +19,7 @@ export class Effects {
         this.gameOverMesh;
         const addingFunc = this.Loading.bind(this);
         loader.load('./misc/buttons.gltf', addingFunc);
+        this.loaded = false;
     }
 
     AddStar(scene){
@@ -37,18 +38,33 @@ export class Effects {
     Loading(gltf){
         const startButton = gltf.scene.children.find((child) => child.name == "start" );
         const gameOver = gltf.scene.children.find((child) => child.name == "gameOver" );
+        const aboutMesh = gltf.scene.children.find((child) => child.name == "About" );
 
         startButton.scale.set(startButton.scale.x * 2, startButton.scale.y * 2, startButton.scale.z * 2);
         gameOver.scale.set(gameOver.scale.x * 2, gameOver.scale.y * 2, gameOver.scale.z * 2);
+        aboutMesh.scale.set(aboutMesh.scale.x * 2, aboutMesh.scale.y * 2, aboutMesh.scale.z * 2);
+
+        aboutMesh.position.x = 20;
+        aboutMesh.position.y = -30;
+        aboutMesh.position.z = -2.5;
         
         startButton.position.y = 40;
         gameOver.position.y = 0;
         gameOver.position.x = -10;
         this.startMesh = startButton;
         this.gameOverMesh = gameOver;
+        this.aboutMesh = aboutMesh;
+        this.loaded = true;
     }
     gameOver(scene){
         scene.add(this.gameOverMesh)
+    }
+
+    addAbout(scene){
+        if(this.loaded){
+            scene.add(this.aboutMesh);
+            this.loaded = false;
+        }
     }
 
     Stars(scene){

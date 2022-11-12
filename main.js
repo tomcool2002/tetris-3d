@@ -222,15 +222,35 @@ let lastUpdate = Date.now();
 let timeAtPaused;
 
 
+let timeAtAbout =  Date.now();
+
 function gameLoop(timeAtPlay){
+  //about page
+  let thing = Date.now() - timeAtAbout;
+  let enoughTime = ( thing >= 500);
+  if((mouseClicker.click(clickPosition, scene, cam,"About_1") 
+  || mouseClicker.click(clickPosition, scene, cam,"About_2") )
+     && enoughTime){
+      document.location.href = './about.html';
+    timeAtAbout = Date.now();
+    // debugger
+  }
+
+
+  let now = Date.now();
   if(pause == false){
     if(music.paused && !data.gameOver){
       music.play();
     }
 
-    // if(letters.IsReady){
-    //   letters.showLetters(scene);
-    // }
+    if(letters.IsReady){
+      letters.showLetters(scene);
+    }
+
+    if(effects.loaded){
+      effects.addAbout(scene);
+    }
+
     // speed up
     if(startTime + 20000 <= Date.now() && !data.gameOver && cam.rotationSpeed != 10 && cam.rotationSpeed != -10 ){
       startTime = Date.now();
@@ -238,7 +258,7 @@ function gameLoop(timeAtPlay){
       speedUpSound.play();
     }
 
-    let now = Date.now();
+    
     
     if(data.points != points){ 
       effects.changeColor(scene);
@@ -259,13 +279,13 @@ function gameLoop(timeAtPlay){
 
     //pause game
     if(timeAtPlay != undefined){
-      if(mouseClicker.click(clickPosition, scene, cam) && Date.now() - timeAtPlay >= 100){
+      if(mouseClicker.click(clickPosition, scene, cam,"Pause") && Date.now() - timeAtPlay >= 100){
         pause = true;
         timeAtPaused = Date.now();
         cam.pause();
       }
     } else {
-      if(mouseClicker.click(clickPosition, scene, cam) && pause == false){
+      if(mouseClicker.click(clickPosition, scene, cam,"Pause") && pause == false){
         pause = true;
         timeAtPaused = Date.now();
         cam.pause();
@@ -275,15 +295,17 @@ function gameLoop(timeAtPlay){
     music.pause()
   }
 
+
+
   if (timeAtPaused != undefined){
-    let truechose = (Date.now() - timeAtPaused >= 100);
-    if(mouseClicker.click(clickPosition, scene, cam) == true && truechose == true ){
+    let enoughTime = (Date.now() - timeAtPaused >= 100);
+    if(mouseClicker.click(clickPosition, scene, cam,"Pause") == true && enoughTime == true ){
       pause = false;
       cam.play();
       timeAtPlay = Date.now();
     }
   }else{
-    if(mouseClicker.click(clickPosition, scene, cam) == true && pause == true){
+    if(mouseClicker.click(clickPosition, scene, cam,"Pause") == true && pause == true){
       pause = false;
       cam.play();
       timeAtPlay = Date.now();
