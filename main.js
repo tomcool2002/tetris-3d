@@ -226,8 +226,8 @@ let timeAtAbout =  Date.now();
 
 function gameLoop(timeAtPlay){
   //about page
-  let thing = Date.now() - timeAtAbout;
-  let enoughTime = ( thing >= 500);
+  let deltaTime = Date.now() - timeAtAbout;
+  let enoughTime = ( deltaTime >= 500);
   if((mouseClicker.click(clickPosition, scene, cam,"About_1") 
   || mouseClicker.click(clickPosition, scene, cam,"About_2") )
      && enoughTime){
