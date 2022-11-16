@@ -53,7 +53,6 @@ export class Data {
       let text = await object.json();
       console.log(text[0].nom);
     }
-
   }
 
 
