@@ -1,9 +1,8 @@
-import { MouseClicker } from "./mouseClicker";
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import { Camera } from "./camera";
+import { MouseClicker } from "../mouseClicker";
+import { GLTFLoader } from '../node_modules/three/examples/jsm/loaders/GLTFLoader.js';
+import { Camera } from "../camera";
 import 'three';
 import * as THREE from 'three';
-
 let scene, cam, renderer;
 
 function init(){
@@ -17,14 +16,14 @@ function init(){
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setClearColor(0x00867f, 0.5);
 
-    scene.background= new THREE.TextureLoader().load('./misc/wallpaper.png');
+    scene.background= new THREE.TextureLoader().load('../misc/wallpaper.png');
 
     cam = new Camera(renderer);
 
     renderer.outputEncoding = THREE.sRGBEncoding;
 
     const loader = new GLTFLoader();
-    loader.load('./misc/about.gltf', 
+    loader.load('../misc/about.gltf', 
         function (gltf) {
         const aboutMesh = gltf.scene.children.find((child) => child.name == "About_Text" );
         aboutMesh.scale.set(aboutMesh.scale.x * 2, aboutMesh.scale.y * 2, aboutMesh.scale.z * 2);
@@ -36,7 +35,7 @@ function init(){
         }
     );
 
-    loader.load('./misc/buttons.gltf',
+    loader.load('../misc/buttons.gltf',
         function(gltf){
             const BackToGame = gltf.scene.children.find((child) => child.name == "BTG" );
             BackToGame.scale.set(BackToGame.scale.x * 2, BackToGame.scale.y * 2, BackToGame.scale.z * 2);
@@ -91,7 +90,7 @@ function animate() {
     if((mouseClicker.click(clickPosition, scene, cam,"BTG_1") 
     || mouseClicker.click(clickPosition, scene, cam,"BTG_2") )
         && enoughTime){
-        document.location.href = './index.html';
+        document.location.href = '../index.html';
         timeAtAbout = Date.now();
         // debugger
     }
