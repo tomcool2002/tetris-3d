@@ -6,6 +6,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { Effects } from './Effects';
 import { Letters } from './Letters';
 
+// import { smh } from './about/about.html'
 
 let scene, renderer, cam, base, effects;
 
@@ -217,7 +218,6 @@ window.addEventListener('mousedown', setClickPosition);
 window.addEventListener('mouseup', clearClickPosition);
 
 
-
 let lastUpdate = Date.now();
 let timeAtPaused;
 
@@ -231,7 +231,7 @@ function gameLoop(timeAtPlay){
   if((mouseClicker.click(clickPosition, scene, cam,"About_1") 
   || mouseClicker.click(clickPosition, scene, cam,"About_2") )
      && enoughTime){
-      document.location.href = './about.html';
+      document.location.href = './about/about.html';
     timeAtAbout = Date.now();
     // debugger
   }
