@@ -244,7 +244,7 @@ function gameLoop(timeAtPlay){
     }
 
     if(letters.IsReady){
-      letters.showLetters(scene, "THO");
+      letters.showLetters(scene, "TH$");
     }
 
     if(effects.loaded){

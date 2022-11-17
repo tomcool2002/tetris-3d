@@ -5,6 +5,8 @@ import 'three';
 import * as THREE from 'three';
 let scene, cam, renderer;
 
+let video;
+
 function init(){
     scene = new THREE.Scene();
 
@@ -50,8 +52,42 @@ function init(){
     const light = new THREE.AmbientLight( 0xffffff ); 
     scene.add(light);
     
-    cam.freeLook()
+    cam.freeLook();
+
+
+    video = document.getElementById("video");
+    
+    let videoTexture = new THREE.VideoTexture(video);
+
+    videoTexture.minFilter = THREE.LinearFilter;
+    videoTexture.magFilter = THREE.LinearFilter;
+
+    var videoMaterial = new THREE.MeshBasicMaterial({
+        map:videoTexture,
+        side: THREE.FrontSide,
+        toneMapped:false
+    });
+
+
+    let videoGeometry = new THREE.BoxGeometry(30,30,30);
+    let videoScreen = new THREE.Mesh(videoGeometry, videoMaterial);
+    videoScreen.position.set(0,20,0);
+    scene.add(videoScreen);
+
 }
+
+document.onkeydown = function (e) {
+    switch (e.key) {
+        case " ":
+            if(video.paused){video.play();  }
+            else {video.pause();  }
+        break;
+        case "m":
+            if(video.muted){video.muted = false;  }
+            else {video.muted = true;  }
+        break;    
+      }
+  };
 
 
 init();
