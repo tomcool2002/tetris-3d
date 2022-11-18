@@ -243,9 +243,9 @@ function gameLoop(timeAtPlay){
       music.play();
     }
 
-    if(letters.IsReady){
-      letters.showLetters(scene, "TH$");
-    }
+    // if(letters.IsReady){
+    //   letters.showLetters(scene, "TH$");
+    // }
 
     if(effects.loaded){
       effects.addAbout(scene);
