@@ -231,7 +231,7 @@ function gameLoop(timeAtPlay){
   if((mouseClicker.click(clickPosition, scene, cam,"About_1") 
   || mouseClicker.click(clickPosition, scene, cam,"About_2") )
      && enoughTime){
-      document.location.href = './about/about.html';
+      document.location.href = './about/index.html';
     timeAtAbout = Date.now();
     // debugger
   }
