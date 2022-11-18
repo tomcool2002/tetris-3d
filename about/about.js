@@ -89,16 +89,16 @@ function init(){
     light.position.y = 10;
     light.position.z = -40;
     light.position.x = 60;
-    const lightHelper = new THREE.HemisphereLightHelper(light);
-    scene.add(lightHelper);
+    // const lightHelper = new THREE.HemisphereLightHelper(light);
+    // scene.add(lightHelper);
     scene.add(light);
     
     const light2 = new THREE.HemisphereLight( 0xffffff, 0x717171,0.3 );
     light2.position.y = 10;
     light2.position.z = -40;
     light2.position.x = -60;
-    const lightHelper2 = new THREE.HemisphereLightHelper(light2);
-    scene.add(lightHelper2);
+    // const lightHelper2 = new THREE.HemisphereLightHelper(light2);
+    // scene.add(lightHelper2);
     scene.add(light2);
 
     cam.freeLook();
