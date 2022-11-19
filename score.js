@@ -24,8 +24,6 @@ export class Score {
         this.IsReady = false;
         const addingFunc = this.Loading.bind(this);
         loader.load('./misc/numbers.glb', addingFunc);
-        // this.texture = new THREE.TextureLoader().load('./misc/checkers.jpg');
-        // this.texture = new THREE.TextureLoader().load('./misc/honeycomb.jpg');
 
     }
     

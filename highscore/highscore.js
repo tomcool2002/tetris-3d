@@ -3,11 +3,13 @@ import { GLTFLoader } from '../node_modules/three/examples/jsm/loaders/GLTFLoade
 import { Camera } from "../camera";
 import 'three';
 import * as THREE from 'three';
-import { BoxGeometry } from "three";
-let scene, cam, renderer;
+import {ShowScores } from './ShowScores.js';
+import { data } from "jquery";
+let scene, cam, renderer,score,scores, video;
 
 // import {f} from '../public/misc/'
-let video;
+
+
 
 function init(){
     scene = new THREE.Scene();
@@ -26,26 +28,25 @@ function init(){
 
     renderer.outputEncoding = THREE.sRGBEncoding;
 
+    const scale = 1.5;
     const loader = new GLTFLoader();
     loader.load('../misc/buttons.gltf', 
         function (gltf) {
 
             const score_mesh = gltf.scene.children.find((child) => child.name == "Score" );
-            score_mesh.scale.set(score_mesh.scale.x * 3, score_mesh.scale.y * 3, score_mesh.scale.z * 3);
-            score_mesh.position.x = -30;
-            score_mesh.position.y = 20;
+            score_mesh.scale.set(score_mesh.scale.x * scale, score_mesh.scale.y * scale, score_mesh.scale.z * scale);
+            score_mesh.position.x = -15;
+            score_mesh.position.y = 35;
+            score_mesh.position.z = 0;
             score_mesh.material = new THREE.MeshStandardMaterial({color:0x717171});
-
-
             scene.add(score_mesh);
         }
     );
 
-    // TODO: add highscore logo
-    // create class that shows the first 10 players
+    
     
 
-    const light = new THREE.HemisphereLight( 0xffffff, 0x717171,0.3 );
+    const light = new THREE.HemisphereLight( 0xffffff, 0x717171,0.5 );
     light.position.y = 10;
     light.position.z = -40;
     light.position.x = 60;
@@ -53,13 +54,61 @@ function init(){
     // scene.add(lightHelper);
     scene.add(light);
     
-    const light2 = new THREE.HemisphereLight( 0xffffff, 0x717171,0.3 );
+    const light2 = new THREE.HemisphereLight( 0xffffff, 0x717171,0.5 );
     light2.position.y = 10;
     light2.position.z = -40;
     light2.position.x = -60;
     // const lightHelper2 = new THREE.HemisphereLightHelper(light2);
     // scene.add(lightHelper2);
     scene.add(light2);
+
+    // TODO: create class that shows the first 10 players
+    score = new ShowScores();
+    
+    scores = [
+        {
+            "Alias":"THO",
+            "Score":420
+        },
+        {
+            "Alias":"ANG",
+            "Score":69
+        },
+        {
+            "Alias":"ANG",
+            "Score":69
+        },
+        {
+            "Alias":"ANG",
+            "Score":69
+        },
+        {
+            "Alias":"ANG",
+            "Score":69
+        },
+        {
+            "Alias":"ANG",
+            "Score":69
+        },
+        {
+            "Alias":"ANG",
+            "Score":69
+        },
+        {
+            "Alias":"ANG",
+            "Score":69
+        },
+        {
+            "Alias":"ANG",
+            "Score":69
+        },
+        {
+            "Alias":"ANG",
+            "Score":69
+        },
+    ]
+    
+
 
     cam.freeLook();
 
@@ -109,20 +158,30 @@ function setClickPosition(event) {
 window.addEventListener('mousedown', setClickPosition);
 window.addEventListener('mouseup', clearClickPosition);
 
-let timeAtAbout =  Date.now();
+
+// let timeAtAbout =  Date.now();
+
+let now = Date.now();
 function animate() {
 
-    let deltaTime = Date.now() - timeAtAbout;
-    let enoughTime = ( deltaTime >= 500);
-    if((mouseClicker.click(clickPosition, scene, cam,"BTG_1") 
-    || mouseClicker.click(clickPosition, scene, cam,"BTG_2") )
-        && enoughTime){
-        document.location.href = '../index.html';
-        timeAtAbout = Date.now();
-        // debugger
+    // let deltaTime = Date.now() - timeAtAbout;
+    // let enoughTime = ( deltaTime >= 500);
+    // if((mouseClicker.click(clickPosition, scene, cam,"BTG_1") 
+    // || mouseClicker.click(clickPosition, scene, cam,"BTG_2") )
+    //     && enoughTime){
+    //     document.location.href = '../index.html';
+    //     timeAtAbout = Date.now();
+    //     // debugger
+    // }
+
+// || now + 3000<
+    if(score.IsReady ){
+        score.ShowScoresFR(scene,scores);
     }
+    
 
 
+    
     cam.reposition(); 
     requestAnimationFrame(animate);
     renderer.render(scene, cam);
