@@ -3,7 +3,6 @@ import { Score } from "./score";
 import { Holder } from "./hold";
 import jQuery from "jquery";
 
-
 export class Data {
   constructor(camera, scene) {
     this.HAUTEUR = 20;
@@ -49,15 +48,14 @@ export class Data {
 
   async getText(file) {
     let object = await fetch(file);
-    if(object.ok){
+    if (object.ok) {
       let text = await object.json();
       console.log(text[0].nom);
     }
   }
 
-
   testJson() {
-    this.getText('data.json');
+    this.getText("data.json");
   }
 
   holdPiece() {
@@ -153,24 +151,41 @@ export class Data {
         this.scene.remove(this.tableau[ligne][x][1]);
         this.tableau[ligne][x] = ["v", null];
       }
-    });
 
-    if (lignePleine.length > 0) {
-      for (let y = lignePleine[lignePleine.length - 1]; y >= 0; y--) {
+      //descend les lignes
+      for (let y = ligne; y >= 0; y--) {
         for (let x = 0; x <= this.LONGEUR - 1; x++) {
           if (this.tableau[y][x][1] != null) {
             this.tableau[y][x][1].position.y = this.TransformerPosition(
+              //modifie la position du block
               x,
-              y + lignePleine.length,
+              y + 1,
               true
             )[1];
 
-            this.tableau[y + lignePleine.length][x] = this.tableau[y][x];
-            this.tableau[y][x] = ["v", null];
+            this.tableau[y + 1][x] = this.tableau[y][x];
+            this.tableau[y][x] = ["v", null]; // enleve la ligne
           }
         }
       }
-    }
+    });
+
+    // if (lignePleine.length > 0) {
+    //   for (let y = lignePleine[lignePleine.length - 1]; y >= 0; y--) {
+    //     for (let x = 0; x <= this.LONGEUR - 1; x++) {
+    //       if (this.tableau[y][x][1] != null) {
+    //         this.tableau[y][x][1].position.y = this.TransformerPosition(
+    //           x,
+    //           y + lignePleine.length,
+    //           true
+    //         )[1];
+
+    //         this.tableau[y + lignePleine.length][x] = this.tableau[y][x];
+    //         this.tableau[y][x] = ["v", null];
+    //       }
+    //     }
+    //   }
+    // }
     this.AddPiece();
   }
 
