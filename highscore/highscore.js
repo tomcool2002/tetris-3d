@@ -4,7 +4,6 @@ import { Camera } from "../camera";
 import 'three';
 import * as THREE from 'three';
 import {ShowScores } from './ShowScores.js';
-import { data } from "jquery";
 let scene, cam, renderer,score,scores, video;
 
 
@@ -47,7 +46,7 @@ function init(){
             BackToGame.scale.set(BackToGame.scale.x * 2, BackToGame.scale.y * 2, BackToGame.scale.z * 2);
             BackToGame.position.x = -12;
             BackToGame.position.y = -30;
-            BackToGame.position.z = 2;
+            BackToGame.position.z = -1;
             scene.add(BackToGame);
         }
     );
@@ -180,8 +179,6 @@ function animate() {
         timeAtAbout = Date.now();
         // debugger
     }
-
-// || now + 3000<
     if(score.IsReady ){
         score.ShowScoresFR(scene,scores);
     }

@@ -137,9 +137,13 @@ export class Score {
                 let name = stringToName[number];
                 let number3D = this.theNumbers[name].clone();
                 
-                number3D.material = new THREE.MeshNormalMaterial();
+                if(j == 0){ number3D.material = new THREE.MeshBasicMaterial({color:0xefea11});}
+                else if(j == 1){ number3D.material = new THREE.MeshBasicMaterial({color:0xc7c7c7});}
+                else if(j == 2){ number3D.material = new THREE.MeshBasicMaterial({color:0x8f6818});}
+                else{ number3D.material = new THREE.MeshNormalMaterial();}
+
                 number3D.position.y = positionY[j];
-                number3D.position.z = -2.5;
+                number3D.position.z = -2;
 
                 number3D.position.x = positionX[i];
                 

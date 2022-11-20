@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { GLTFLoader } from '../node_modules/three/examples/jsm/loaders/GLTFLoader.js';
 import { Score } from './score';
+import { Letters } from './Letters';
 
 const stringToName = {
     0:"Zero",
@@ -29,6 +30,7 @@ export class ShowScores {
         this.positionsAdded = false;
 
         this.scoreAdder = new Score();
+        this.letterAdder = new Letters();
 
     }
     
@@ -150,12 +152,16 @@ export class ShowScores {
         
         
         let scores = [];
+        let alias = [];
         for(let i = 0; i < listeOfScores.length; i++){
-            let alias = listeOfScores[i].Alias;
+            alias.push(listeOfScores[i].Alias);
             scores.push(listeOfScores[i].Score);
         }
 
+
+        this.letterAdder.showLetters(scene, alias);
         this.scoreAdder.ShowNumbers(scene,scores);
+        this.IsReady = false;
 
         
         
