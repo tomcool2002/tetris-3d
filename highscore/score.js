@@ -1,6 +1,5 @@
 import * as THREE from 'three';
 import { GLTFLoader } from '../node_modules/three/examples/jsm/loaders/GLTFLoader.js';
-import { Score } from './score';
 
 const stringToName = {
     0:"Zero",
@@ -16,7 +15,7 @@ const stringToName = {
 }
 
 
-export class ShowScores {
+export class Score {
     
     constructor() {
         // super();
@@ -26,10 +25,6 @@ export class ShowScores {
         const addingFunc = this.Loading.bind(this);
         loader.load('../misc/numbers.glb', addingFunc);
 
-        this.positionsAdded = false;
-
-        this.scoreAdder = new Score();
-
     }
     
     AddNumbers(local) {
@@ -38,6 +33,7 @@ export class ShowScores {
     }
     
     Loading(gltf) {
+
         const scale = 3;
         const zeroMesh = gltf.scene.children.find((child) => child.name == stringToName[0]);
         const oneMesh = gltf.scene.children.find((child) => child.name == stringToName[1]);
@@ -49,9 +45,7 @@ export class ShowScores {
         const sevenMesh = gltf.scene.children.find((child) => child.name == stringToName[7]);
         const eightMesh = gltf.scene.children.find((child) => child.name == stringToName[8]);
         const nineMesh = gltf.scene.children.find((child) => child.name == stringToName[9]);
-        const pointMesh = gltf.scene.children.find((child) => child.name == "Point");
 
-        pointMesh.scale.set(pointMesh.scale.x * scale, pointMesh.scale.y * scale, pointMesh.scale.z * scale);
         zeroMesh.scale.set(zeroMesh.scale.x * scale, zeroMesh.scale.y * scale, zeroMesh.scale.z * scale);
         oneMesh.scale.set(oneMesh.scale.x * scale, oneMesh.scale.y * scale, oneMesh.scale.z * scale);
         twoMesh.scale.set(twoMesh.scale.x * scale, twoMesh.scale.y * scale, twoMesh.scale.z * scale);
@@ -64,7 +58,6 @@ export class ShowScores {
         nineMesh.scale.set(nineMesh.scale.x * scale, nineMesh.scale.y * scale, nineMesh.scale.z * scale);
 
         let local = {};
-        local.Point = pointMesh;
         local.Zero = zeroMesh;
         local.One = oneMesh;
         local.Two = twoMesh;
@@ -78,87 +71,82 @@ export class ShowScores {
         this.AddNumbers(local);
     }
 
-    ShowScoresFR(scene, listeOfScores) {
+    ShowNumbers(scene, scores) {
+        let previousScores = true;
+        while(previousScores){
+            let number = scene.children.find(
+                function(child){
+                    if(child.name == stringToName[0] || 
+                        child.name == stringToName[1] ||
+                        child.name == stringToName[2] ||
+                        child.name == stringToName[3] ||
+                        child.name == stringToName[4] ||
+                        child.name == stringToName[5] ||
+                        child.name == stringToName[6] ||
+                        child.name == stringToName[7] ||
+                        child.name == stringToName[8] ||
+                        child.name == stringToName[9] ){
+                        return child;
+                    }
+                }
+            );
+            scene.remove(number);
+            // debugger
+            if(number == undefined) { previousScores = false;}
+        }
+        
+        const positionX = {
+            0 : 5,
+            1 : 10,
+            2 : 15,
+            3 : 20,
+            4 : 25,
+            5 : 30,
+            6 : 35
+        };
+
+
         const positionY = {
-            1 : 25,
-            2 : 20,
-            3 : 15,
-            4 : 10,
-            5 : 5,
-            6 : 0,
-            7 : -5,
-            8 : -10,
-            9 : -15,
-            10 :-20,
+            0 : 25,
+            1 : 20,
+            2 : 15,
+            3 : 10,
+            4 : 5,
+            5 : 0,
+            6 : -5,
+            7 : -10,
+            8 : -15,
+            9 : -20,
+            10 :-25,
 
         };
 
-        if(this.positionsAdded == false){
-            for(let i = 1; i <= 10; i++){
-                if(i != 10){
-                    let name = stringToName[i];
-                
-                    let position3D = this.theNumbers[name].clone();
-                    
-                    
-                    position3D.position.y = positionY[i];
-                    
-                    
-                    position3D.position.z = -2;
-                    position3D.position.x = -20;
-                    position3D.name += "Position";
-                    scene.add(position3D);
-                    
-                }else{
-                    let oneMesh = this.theNumbers.One.clone();
-                    let zeroMesh = this.theNumbers.Zero.clone();
-
-                    oneMesh.position.y = positionY[i];
-                    zeroMesh.position.y = positionY[i];
-
-                    oneMesh.position.z = -2;
-                    zeroMesh.position.z = -2;
-
-                    oneMesh.position.x = -24;
-                    zeroMesh.position.x = -20;
-
-                    zeroMesh.name += "Position";
-                    oneMesh.name += "Position";
-
-                    scene.add(oneMesh);
-                    scene.add(zeroMesh);
-
-                }
-                let point = this.theNumbers.Point.clone();
-                let point2 = this.theNumbers.Point.clone();
-                point.position.x = -18;
-                point2.position.x = -18;
-
-                point.position.y = positionY[i];
-                point2.position.y = positionY[i] + 2;
-
-                point.position.z = -2;
-                point2.position.z = -2;
-                
-                scene.add(point);
-                scene.add(point2);
-    
+        for(let j = 0; j < scores.length; j++){
+            let listOfNumbers = `${scores[j]}`.split('');
+            listOfNumbers.length;
+            
+            for(let i = 0; i < listOfNumbers.length; i++){
+                listOfNumbers[i] = parseInt(listOfNumbers[i]);
             }
 
-            this.positionsAdded = true;
-        }
-        
-        
-        let scores = [];
-        for(let i = 0; i < listeOfScores.length; i++){
-            let alias = listeOfScores[i].Alias;
-            scores.push(listeOfScores[i].Score);
-        }
+            
 
-        this.scoreAdder.ShowNumbers(scene,scores);
 
-        
-        
+            for(let i = 0; i < listOfNumbers.length; i++){
+                let number = listOfNumbers[i];
+                let name = stringToName[number];
+                let number3D = this.theNumbers[name].clone();
+                
+                number3D.material = new THREE.MeshNormalMaterial();
+                number3D.position.y = positionY[j];
+                number3D.position.z = -2.5;
+
+                number3D.position.x = positionX[i];
+                
+
+                scene.add(number3D);
+            }
+        }
         
     }
 }
