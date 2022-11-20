@@ -39,14 +39,24 @@ export class Effects {
         const startButton = gltf.scene.children.find((child) => child.name == "start" );
         const gameOver = gltf.scene.children.find((child) => child.name == "gameOver" );
         const aboutMesh = gltf.scene.children.find((child) => child.name == "About" );
+        const highScoreMesh = gltf.scene.children.find((child) => child.name == "Scores_Bouton" );
 
         startButton.scale.set(startButton.scale.x * 2, startButton.scale.y * 2, startButton.scale.z * 2);
         gameOver.scale.set(gameOver.scale.x * 2, gameOver.scale.y * 2, gameOver.scale.z * 2);
         aboutMesh.scale.set(aboutMesh.scale.x * 2, aboutMesh.scale.y * 2, aboutMesh.scale.z * 2);
+        highScoreMesh.scale.set(highScoreMesh.scale.x * 2, highScoreMesh.scale.y * 2, highScoreMesh.scale.z * 2);
+        
 
         aboutMesh.position.x = 20;
         aboutMesh.position.y = -30;
         aboutMesh.position.z = -2.5;
+
+        highScoreMesh.position.z = -2.5;
+        highScoreMesh.position.y = -30;
+        highScoreMesh.position.x = -20;
+
+        
+        
         
         startButton.position.y = 40;
         gameOver.position.y = 0;
@@ -54,15 +64,17 @@ export class Effects {
         this.startMesh = startButton;
         this.gameOverMesh = gameOver;
         this.aboutMesh = aboutMesh;
+        this.highScoreMesh = highScoreMesh;
         this.loaded = true;
     }
     gameOver(scene){
         scene.add(this.gameOverMesh)
     }
 
-    addAbout(scene){
+    addButtons(scene){
         if(this.loaded){
             scene.add(this.aboutMesh);
+            scene.add(this.highScoreMesh);
             this.loaded = false;
         }
     }

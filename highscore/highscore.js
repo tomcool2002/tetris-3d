@@ -7,8 +7,6 @@ import {ShowScores } from './ShowScores.js';
 import { data } from "jquery";
 let scene, cam, renderer,score,scores, video;
 
-// import {f} from '../public/misc/'
-
 
 
 function init(){
@@ -43,7 +41,16 @@ function init(){
         }
     );
 
-    
+    loader.load('../misc/buttons.gltf',
+        function(gltf){
+            const BackToGame = gltf.scene.children.find((child) => child.name == "BTG" );
+            BackToGame.scale.set(BackToGame.scale.x * 2, BackToGame.scale.y * 2, BackToGame.scale.z * 2);
+            BackToGame.position.x = -12;
+            BackToGame.position.y = -30;
+            BackToGame.position.z = 2;
+            scene.add(BackToGame);
+        }
+    );
     
 
     const light = new THREE.HemisphereLight( 0xffffff, 0x717171,0.5 );
@@ -161,18 +168,18 @@ window.addEventListener('mouseup', clearClickPosition);
 
 // let timeAtAbout =  Date.now();
 
-let now = Date.now();
+let timeAtAbout =  Date.now();
 function animate() {
 
-    // let deltaTime = Date.now() - timeAtAbout;
-    // let enoughTime = ( deltaTime >= 500);
-    // if((mouseClicker.click(clickPosition, scene, cam,"BTG_1") 
-    // || mouseClicker.click(clickPosition, scene, cam,"BTG_2") )
-    //     && enoughTime){
-    //     document.location.href = '../index.html';
-    //     timeAtAbout = Date.now();
-    //     // debugger
-    // }
+    let deltaTime = Date.now() - timeAtAbout;
+    let enoughTime = ( deltaTime >= 500);
+    if((mouseClicker.click(clickPosition, scene, cam,"BTG_1") 
+    || mouseClicker.click(clickPosition, scene, cam,"BTG_2") )
+        && enoughTime){
+        document.location.href = '../index.html';
+        timeAtAbout = Date.now();
+        // debugger
+    }
 
 // || now + 3000<
     if(score.IsReady ){

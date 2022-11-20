@@ -222,18 +222,26 @@ let lastUpdate = Date.now();
 let timeAtPaused;
 
 
-let timeAtAbout =  Date.now();
+let timeAtButtons =  Date.now();
 
 function gameLoop(timeAtPlay){
   //about page
-  let deltaTime = Date.now() - timeAtAbout;
+  let deltaTime = Date.now() - timeAtButtons;
   let enoughTime = ( deltaTime >= 500);
+
   if((mouseClicker.click(clickPosition, scene, cam,"About_1") 
   || mouseClicker.click(clickPosition, scene, cam,"About_2") )
      && enoughTime){
+      // document.location.href = './highscore/index.html';
+      document.location.href = './about/index.html';
+    timeAtButtons = Date.now();
+    // debugger
+  }
+  if((mouseClicker.click(clickPosition, scene, cam,"Scores_Bouton_1") 
+  || mouseClicker.click(clickPosition, scene, cam,"Scores_Bouton_2") )
+     && enoughTime){
       document.location.href = './highscore/index.html';
-      // document.location.href = './about/index.html';
-    timeAtAbout = Date.now();
+    timeAtButtons = Date.now();
     // debugger
   }
 
@@ -249,7 +257,7 @@ function gameLoop(timeAtPlay){
     // }
 
     if(effects.loaded){
-      effects.addAbout(scene);
+      effects.addButtons(scene);
     }
 
     // speed up
