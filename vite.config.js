@@ -8,7 +8,7 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, 'index.html'),
         nested: resolve(__dirname, 'about/index.html'),
-        nested: resolve(__dirname, 'highscore/index.html')
+        nested2: resolve(__dirname, 'highscore/index.html')
       }
     }
   }

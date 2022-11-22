@@ -67,50 +67,48 @@ function init(){
     // const lightHelper2 = new THREE.HemisphereLightHelper(light2);
     // scene.add(lightHelper2);
     scene.add(light2);
-
-    // TODO: create class that shows the first 10 players
     score = new ShowScores();
     
     scores = [
         {
+            "Alias":"ANG",
+            "Score":69420
+        },
+        {
             "Alias":"THO",
-            "Score":420
+            "Score":42069
         },
         {
-            "Alias":"ANG",
-            "Score":69
+            "Alias":"JRT",
+            "Score":2125
         },
         {
-            "Alias":"ANG",
-            "Score":69
+            "Alias":"AAA",
+            "Score":1086
         },
         {
-            "Alias":"ANG",
-            "Score":69
+            "Alias":"BBB",
+            "Score":1000
         },
         {
-            "Alias":"ANG",
-            "Score":69
+            "Alias":"BUL",
+            "Score":365
         },
         {
-            "Alias":"ANG",
-            "Score":69
+            "Alias":"HEL",
+            "Score":250
         },
         {
-            "Alias":"ANG",
-            "Score":69
+            "Alias":"HEA",
+            "Score":140
         },
         {
-            "Alias":"ANG",
-            "Score":69
+            "Alias":"GOD",
+            "Score":50
         },
         {
-            "Alias":"ANG",
-            "Score":69
-        },
-        {
-            "Alias":"ANG",
-            "Score":69
+            "Alias":"DEV",
+            "Score":10
         },
     ]
     
