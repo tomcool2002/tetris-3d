@@ -56,8 +56,11 @@ function init(){
       start_mesh.position.z = -2.5;
       start_mesh.material = new THREE.MeshNormalMaterial();
       scene.add(start_mesh);
+      
     }
   );
+
+  
 
   const light = new THREE.AmbientLight( 0xffffff ); 
   scene.add(light);
@@ -113,10 +116,10 @@ function gameStart() {
   effects.Stars(scene);
 
 
-  // music = new Audio('./misc/music.mp3');
-  // music.volume = 0.1;
-  // music.play();
-  // music.autoplay = true;
+  music = new Audio('./misc/music.mp3');
+  music.volume = 0.1;
+  music.play();
+  music.autoplay = true;
   
   gameOverMusic = new Audio('./misc/game_over.mp3');
   gameOverMusic.volume = 0.5;
@@ -124,6 +127,7 @@ function gameStart() {
   pointsSound = new Audio('./misc/clearLine.mp3');
 
   speedUpSound = new Audio('./misc/speed.mp3');
+  speedUpSound.volume = 0.3;
 
   letters = new Letters();
 }
@@ -232,7 +236,7 @@ window.addEventListener('mouseup', clearClickPosition);
 
 let lastUpdate = Date.now();
 let timeAtPaused;
-
+let done = false;
 
 let timeAtButtons =  Date.now();
 
@@ -257,9 +261,9 @@ function gameLoop(timeAtPlay){
 
   let now = Date.now();
   if(pause == false){
-    // if(music.paused && !data.gameOver){
-    //   music.play();
-    // }
+    if(music.paused && !data.gameOver){
+      music.play();
+    }
 
     // if(letters.IsReady){
     //   letters.showLetters(scene, "TH$");
@@ -267,6 +271,8 @@ function gameLoop(timeAtPlay){
 
     if(effects.loaded){
       effects.addButtons(scene);
+      effects.loaded = false;
+      
     }
 
     // speed up
@@ -284,10 +290,13 @@ function gameLoop(timeAtPlay){
       pointsSound.play()
     }
 
-    if(data.gameOver){
+    if(data.gameOver && done == false){
       effects.gameOver(scene);
-      // music.pause();
+      
+      done = true;
+      music.pause();
       gameOverMusic.play();
+
     }
     if(now > lastUpdate + 1000){
       data.HighwayToHell();
@@ -311,7 +320,7 @@ function gameLoop(timeAtPlay){
       }
     } 
   }else{
-    // music.pause();
+    music.pause();
   }
 
 
@@ -354,7 +363,7 @@ function animate() {
         gameStart();
         isStarted = true;
         cam.play();
-    }
+      }
   }
   requestAnimationFrame(animate);
   renderer.render(scene, cam);

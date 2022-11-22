@@ -76,6 +76,7 @@ export class Effects {
             scene.add(this.aboutMesh);
             scene.add(this.highScoreMesh);
             this.loaded = false;
+            // debugger
         }
     }
 
