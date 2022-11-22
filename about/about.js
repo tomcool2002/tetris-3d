@@ -83,7 +83,7 @@ function init(){
         }
     );
 
-    const light = new THREE.HemisphereLight( 0xffffff, 0x717171,0.3 );
+    const light = new THREE.HemisphereLight( 0xffffff, 0x717171,0.5 );
     light.position.y = 10;
     light.position.z = -40;
     light.position.x = 60;
@@ -91,7 +91,7 @@ function init(){
     // scene.add(lightHelper);
     scene.add(light);
     
-    const light2 = new THREE.HemisphereLight( 0xffffff, 0x717171,0.3 );
+    const light2 = new THREE.HemisphereLight( 0xffffff, 0x717171,0.5);
     light2.position.y = 10;
     light2.position.z = -40;
     light2.position.x = -60;

@@ -66,7 +66,7 @@ function init(){
   scene.add(light);
 
   cam.freeLook();
-
+  effects =  new Effects();
 
 }
 
@@ -112,7 +112,7 @@ function gameStart() {
   
   setupKeyControls();
 
-  effects =  new Effects();
+  
   effects.Stars(scene);
 
 
@@ -240,8 +240,8 @@ let done = false;
 
 let timeAtButtons =  Date.now();
 
-function gameLoop(timeAtPlay){
-  //about page
+
+function clickLoop(){
   let deltaTime = Date.now() - timeAtButtons;
   let enoughTime = ( deltaTime >= 500);
 
@@ -258,6 +258,28 @@ function gameLoop(timeAtPlay){
     timeAtButtons = Date.now();
   }
 
+  if((mouseClicker.click(clickPosition, scene, cam,"start_1") 
+      || mouseClicker.click(clickPosition, scene, cam,"start_2") )
+      && enoughTime){
+      timeAtButtons = Date.now();
+    let startMesh = scene.children.find(((child) => child.name == "start" ));
+    scene.remove(startMesh)
+    gameStart();
+    isStarted = true;
+    cam.play();
+    
+  }
+  if(effects.loaded){
+    effects.addButtons(scene);
+    effects.loaded = false;
+    
+  }
+
+}
+function gameLoop(timeAtPlay){
+  //about page
+  
+
 
   let now = Date.now();
   if(pause == false){
@@ -269,11 +291,7 @@ function gameLoop(timeAtPlay){
     //   letters.showLetters(scene, "TH$");
     // }
 
-    if(effects.loaded){
-      effects.addButtons(scene);
-      effects.loaded = false;
-      
-    }
+    
 
     // speed up
     if(startTime + 20000 <= Date.now() && !data.gameOver && cam.rotationSpeed != 10 && cam.rotationSpeed != -10 ){
@@ -351,20 +369,12 @@ function animate() {
 
   if(isStarted){
     timeAtPlay =  gameLoop(timeAtPlay);
-  }else{
-    let deltaTime = Date.now() - timeNoStart;
-    let enoughTime = ( deltaTime >= 500);
-    if((mouseClicker.click(clickPosition, scene, cam,"start_1") 
-    || mouseClicker.click(clickPosition, scene, cam,"start_2") )
-        && enoughTime){
-        timeNoStart = Date.now();
-        let startMesh = scene.children.find(((child) => child.name == "start" ));
-        scene.remove(startMesh)
-        gameStart();
-        isStarted = true;
-        cam.play();
-      }
   }
+
+  clickLoop();
+
+  
+
   requestAnimationFrame(animate);
   renderer.render(scene, cam);
 }

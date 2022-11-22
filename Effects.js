@@ -36,32 +36,34 @@ export class Effects {
     }
 
     Loading(gltf){
-        const startButton = gltf.scene.children.find((child) => child.name == "start" );
         const gameOver = gltf.scene.children.find((child) => child.name == "gameOver" );
         const aboutMesh = gltf.scene.children.find((child) => child.name == "About" );
         const highScoreMesh = gltf.scene.children.find((child) => child.name == "Scores_Bouton" );
 
-        startButton.scale.set(startButton.scale.x * 2, startButton.scale.y * 2, startButton.scale.z * 2);
+        
+        const scale = 6;
         gameOver.scale.set(gameOver.scale.x * 2, gameOver.scale.y * 2, gameOver.scale.z * 2);
-        aboutMesh.scale.set(aboutMesh.scale.x * 2, aboutMesh.scale.y * 2, aboutMesh.scale.z * 2);
-        highScoreMesh.scale.set(highScoreMesh.scale.x * 2, highScoreMesh.scale.y * 2, highScoreMesh.scale.z * 2);
+        aboutMesh.scale.set(aboutMesh.scale.x * scale, aboutMesh.scale.y * scale, aboutMesh.scale.z * scale);
+        highScoreMesh.scale.set(highScoreMesh.scale.x * 5, highScoreMesh.scale.y * 5, highScoreMesh.scale.z * 5);
         
 
-        aboutMesh.position.x = 20;
-        aboutMesh.position.y = -30;
+        aboutMesh.position.x = -29;
+        aboutMesh.position.y = 5;
         aboutMesh.position.z = -2.5;
 
         highScoreMesh.position.z = -2.5;
-        highScoreMesh.position.y = -30;
-        highScoreMesh.position.x = -20;
+        highScoreMesh.position.y = -15;
+        highScoreMesh.position.x = -28;
+
+        // pauseMesh.position.x = 20;
+        // pauseMesh.position.y = 20;
+        // pauseMesh.position.z = -2.5;
 
         
         
         
-        startButton.position.y = 40;
         gameOver.position.y = 0;
         gameOver.position.x = -10;
-        this.startMesh = startButton;
         this.gameOverMesh = gameOver;
         this.aboutMesh = aboutMesh;
         this.highScoreMesh = highScoreMesh;
