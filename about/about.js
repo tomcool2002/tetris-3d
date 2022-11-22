@@ -24,8 +24,6 @@ function init(){
 
     cam = new Camera(renderer);
 
-    renderer.outputEncoding = THREE.sRGBEncoding;
-
     const loader = new GLTFLoader();
     loader.load('../misc/about.gltf', 
         function (gltf) {
@@ -123,69 +121,71 @@ function init(){
     videoScreen.position.set(0,0,-25);
     scene.add(videoScreen);
 
-    let cubeText1 = new THREE.TextureLoader().load('../misc/Capture_tetris_1.PNG');
-    let cubeText2 = new THREE.TextureLoader().load('../misc/Capture_tetris_2.PNG');
-    let cubeText3 = new THREE.TextureLoader().load('../misc/Capture_tetris_3.PNG');
-    let cubeText4 = new THREE.TextureLoader().load('../misc/Capture_tetris_4.PNG');
-    let cubeText5 = new THREE.TextureLoader().load('../misc/Capture_tetris_5.PNG');
 
-    let cubeMat1 = new THREE.MeshBasicMaterial({
-        map:cubeText1,
-        side:THREE.FrontSide,
-        toneMapped:false
-    })
-    let cubeMat2 = new THREE.MeshBasicMaterial({
-        map:cubeText2,
-        side:THREE.FrontSide,
-        toneMapped:false
-    })  
-    let cubeMat3 = new THREE.MeshBasicMaterial({
-        map:cubeText3,
-        side:THREE.FrontSide,
-        toneMapped:false
-    })   
-    let cubeMat4 = new THREE.MeshBasicMaterial({
-        map:cubeText4,
-        side:THREE.FrontSide,
-        toneMapped:false
-    });
+    /// this is for cube
+    // let cubeText1 = new THREE.TextureLoader().load('../misc/Capture_tetris_1.PNG');
+    // let cubeText2 = new THREE.TextureLoader().load('../misc/Capture_tetris_2.PNG');
+    // let cubeText3 = new THREE.TextureLoader().load('../misc/Capture_tetris_3.PNG');
+    // let cubeText4 = new THREE.TextureLoader().load('../misc/Capture_tetris_4.PNG');
+    // let cubeText5 = new THREE.TextureLoader().load('../misc/Capture_tetris_5.PNG');
 
-    let cubeMat5 = new THREE.MeshBasicMaterial({
-        map:cubeText5,
-        side:THREE.FrontSide,
-        toneMapped:false
-    })  
+    // let cubeMat1 = new THREE.MeshBasicMaterial({
+    //     map:cubeText1,
+    //     side:THREE.FrontSide,
+    //     toneMapped:false
+    // })
+    // let cubeMat2 = new THREE.MeshBasicMaterial({
+    //     map:cubeText2,
+    //     side:THREE.FrontSide,
+    //     toneMapped:false
+    // })  
+    // let cubeMat3 = new THREE.MeshBasicMaterial({
+    //     map:cubeText3,
+    //     side:THREE.FrontSide,
+    //     toneMapped:false
+    // })   
+    // let cubeMat4 = new THREE.MeshBasicMaterial({
+    //     map:cubeText4,
+    //     side:THREE.FrontSide,
+    //     toneMapped:false
+    // });
 
-    let cubeGeo = new BoxGeometry(15,15,15);
+    // let cubeMat5 = new THREE.MeshBasicMaterial({
+    //     map:cubeText5,
+    //     side:THREE.FrontSide,
+    //     toneMapped:false
+    // })  
 
-
-    let cube1 = new THREE.Mesh(cubeGeo, cubeMat1);
-    let cube2 = new THREE.Mesh(cubeGeo, cubeMat2)
-    let cube3 = new THREE.Mesh(cubeGeo, cubeMat3)
-    let cube4 = new THREE.Mesh(cubeGeo, cubeMat4)
-    let cube5 = new THREE.Mesh(cubeGeo, cubeMat5)
+    // let cubeGeo = new BoxGeometry(15,15,15);
 
 
-    cube1.position.x = -40;
-    cube2.position.x = -20;
-    cube3.position.x = 0;
-    cube4.position.x = 20;
-    cube5.position.x = 40;
+    // let cube1 = new THREE.Mesh(cubeGeo, cubeMat1);
+    // let cube2 = new THREE.Mesh(cubeGeo, cubeMat2)
+    // let cube3 = new THREE.Mesh(cubeGeo, cubeMat3)
+    // let cube4 = new THREE.Mesh(cubeGeo, cubeMat4)
+    // let cube5 = new THREE.Mesh(cubeGeo, cubeMat5)
+
+
+    // cube1.position.x = -40;
+    // cube2.position.x = -20;
+    // cube3.position.x = 0;
+    // cube4.position.x = 20;
+    // cube5.position.x = 40;
 
 
 
-    cube1.position.y = 30;
-    cube2.position.y = 30;
-    cube3.position.y = 30;
-    cube4.position.y = 30;
-    cube5.position.y = 30;
+    // cube1.position.y = 30;
+    // cube2.position.y = 30;
+    // cube3.position.y = 30;
+    // cube4.position.y = 30;
+    // cube5.position.y = 30;
 
     
-    scene.add(cube1);
-    scene.add(cube2);
-    scene.add(cube3);
-    scene.add(cube4);
-    scene.add(cube5);
+    // scene.add(cube1);
+    // scene.add(cube2);
+    // scene.add(cube3);
+    // scene.add(cube4);
+    // scene.add(cube5);
 }
 
 document.onkeydown = function (e) {

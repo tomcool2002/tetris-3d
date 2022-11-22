@@ -19,6 +19,8 @@ const gamewidth = 9;
 const gameHeight = 20;
 let startTime = Date.now();
 
+let isStarted = false;
+
 
 
 let points = 0;
@@ -29,20 +31,44 @@ let speedUpSound;
 let letters;
 
 
-function init() {
+
+function init(){
   scene = new THREE.Scene();
   renderer = new THREE.WebGLRenderer({
     canvas: document.querySelector("#bg"),
     antialias: false
   });
   renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setClearColor(0x00867f, 0.5);
+  // renderer.setClearColor(0x00867f, 0.5);
 
   // background
   scene.background= new THREE.TextureLoader().load('./misc/wallpaper.png');
-
-
   cam = new Camera(renderer);
+
+  const loader = new GLTFLoader();
+  loader.load('./misc/buttons.gltf', 
+    function (gltf) {
+      const scale = 6;
+      const start_mesh = gltf.scene.children.find((child) => child.name == "start" );
+      start_mesh.scale.set(start_mesh.scale.x * scale, start_mesh.scale.y * scale, start_mesh.scale.z * scale);
+      start_mesh.position.x = -30;
+      start_mesh.position.y = 25;
+      start_mesh.position.z = -2.5;
+      start_mesh.material = new THREE.MeshNormalMaterial();
+      scene.add(start_mesh);
+    }
+  );
+
+  const light = new THREE.AmbientLight( 0xffffff ); 
+  scene.add(light);
+
+  cam.freeLook();
+
+
+}
+
+function gameStart() {
+  
   pause = false;
 
   let World = new THREE.Group();
@@ -58,14 +84,13 @@ function init() {
   
   scene.add(World);
 
-  renderer.outputEncoding = THREE.sRGBEncoding;
-
 
   const loader = new GLTFLoader();
   loader.load('./misc/pauseModel.glb', 
     function (gltf) {
       const pauseMesh = gltf.scene.children.find((child) => child.name == "Pause" );
-      pauseMesh.scale.set(pauseMesh.scale.x * 8, pauseMesh.scale.y * 8, pauseMesh.scale.z * 8);
+      const scale = 8;
+      pauseMesh.scale.set(pauseMesh.scale.x * scale, pauseMesh.scale.y * scale, pauseMesh.scale.z * scale);
       pauseMesh.position.x = 20;
       pauseMesh.position.y = 20;
       pauseMesh.position.z = -2.5;
@@ -76,8 +101,7 @@ function init() {
 
   
 
-  const light = new THREE.AmbientLight( 0xffffff ); 
-  scene.add(light);
+  
   data = new Data(cam,scene);
   data.game(scene);
   data.AfficherTableau2D();
@@ -89,10 +113,10 @@ function init() {
   effects.Stars(scene);
 
 
-  music = new Audio('./misc/music.mp3');
-  music.autoplay = true;
-  music.volume = 0.1;
-  music.play();
+  // music = new Audio('./misc/music.mp3');
+  // music.volume = 0.1;
+  // music.play();
+  // music.autoplay = true;
   
   gameOverMusic = new Audio('./misc/game_over.mp3');
   gameOverMusic.volume = 0.5;
@@ -233,9 +257,9 @@ function gameLoop(timeAtPlay){
 
   let now = Date.now();
   if(pause == false){
-    if(music.paused && !data.gameOver){
-      music.play();
-    }
+    // if(music.paused && !data.gameOver){
+    //   music.play();
+    // }
 
     // if(letters.IsReady){
     //   letters.showLetters(scene, "TH$");
@@ -259,14 +283,15 @@ function gameLoop(timeAtPlay){
       points = data.points;
       pointsSound.play()
     }
+
     if(data.gameOver){
       effects.gameOver(scene);
-      music.pause();
+      // music.pause();
       gameOverMusic.play();
     }
     if(now > lastUpdate + 1000){
       data.HighwayToHell();
-      data.AfficherTableau2D();
+      // data.AfficherTableau2D();
       lastUpdate = Date.now();
     }
     cam.reposition();
@@ -286,7 +311,7 @@ function gameLoop(timeAtPlay){
       }
     } 
   }else{
-    music.pause()
+    // music.pause();
   }
 
 
@@ -312,9 +337,25 @@ function gameLoop(timeAtPlay){
 
 
 let timeAtPlay;
+let timeNoStart =  Date.now();
 function animate() {
 
-  timeAtPlay =  gameLoop(timeAtPlay);
+  if(isStarted){
+    timeAtPlay =  gameLoop(timeAtPlay);
+  }else{
+    let deltaTime = Date.now() - timeNoStart;
+    let enoughTime = ( deltaTime >= 500);
+    if((mouseClicker.click(clickPosition, scene, cam,"start_1") 
+    || mouseClicker.click(clickPosition, scene, cam,"start_2") )
+        && enoughTime){
+        timeNoStart = Date.now();
+        let startMesh = scene.children.find(((child) => child.name == "start" ));
+        scene.remove(startMesh)
+        gameStart();
+        isStarted = true;
+        cam.play();
+    }
+  }
   requestAnimationFrame(animate);
   renderer.render(scene, cam);
 }

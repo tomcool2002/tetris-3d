@@ -23,8 +23,6 @@ function init(){
 
     cam = new Camera(renderer);
 
-    renderer.outputEncoding = THREE.sRGBEncoding;
-
     const scale = 1.5;
     const loader = new GLTFLoader();
     loader.load('../misc/buttons.gltf', 
