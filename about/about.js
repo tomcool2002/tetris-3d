@@ -104,24 +104,24 @@ function init(){
     cam.freeLook();
 
 
-    // video = document.getElementById("video");
+    video = document.getElementById("video");
     
-    // let videoTexture = new THREE.VideoTexture(video);
+    let videoTexture = new THREE.VideoTexture(video);
 
-    // videoTexture.minFilter = THREE.LinearFilter;
-    // videoTexture.magFilter = THREE.LinearFilter;
+    videoTexture.minFilter = THREE.LinearFilter;
+    videoTexture.magFilter = THREE.LinearFilter;
 
-    // var videoMaterial = new THREE.MeshBasicMaterial({
-    //     map:videoTexture,
-    //     side: THREE.FrontSide,
-    //     toneMapped:false
-    // });
+    var videoMaterial = new THREE.MeshBasicMaterial({
+        map:videoTexture,
+        side: THREE.FrontSide,
+        toneMapped:false
+    });
 
 
-    // let videoGeometry = new THREE.BoxGeometry(32,15,18);
-    // let videoScreen = new THREE.Mesh(videoGeometry, videoMaterial);
-    // videoScreen.position.set(0,25,0);
-    // scene.add(videoScreen);
+    let videoGeometry = new THREE.BoxGeometry(64,30,36);
+    let videoScreen = new THREE.Mesh(videoGeometry, videoMaterial);
+    videoScreen.position.set(0,0,-25);
+    scene.add(videoScreen);
 
     let cubeText1 = new THREE.TextureLoader().load('../misc/Capture_tetris_1.PNG');
     let cubeText2 = new THREE.TextureLoader().load('../misc/Capture_tetris_2.PNG');

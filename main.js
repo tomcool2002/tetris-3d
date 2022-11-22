@@ -134,17 +134,6 @@ function CreatePlayGround() {
   const Vline2 = VecticalLine();
   Vline2.position.x = -11.25;
   PlayGround.add(Vline2);
-
-  // for (let i = 0; i < 21; i++) {
-  //   const Hline1 = horizontalLine();
-  //   Hline1.position.y = -2.5 * i + 25;
-  //   PlayGround.add(Hline1)
-  // }
-  // for (let i = 0; i < 10; i++) {
-  //   const Vline1 = VecticalLine();
-  //   Vline1.position.x = -2.5 * i + 11.25;
-  //   PlayGround.add(Vline1)
-  // }
   let geometry = new THREE.BoxGeometry(22.5, 1, 5);
   const texture = new THREE.MeshBasicMaterial({ color: 0x06c7c0  });
   base = new THREE.Mesh(geometry, texture);
@@ -204,7 +193,6 @@ function setupKeyControls() {
 function clearClickPosition() {
   clickPosition.x = -100000;
   clickPosition.y = -100000;
-  // mouseClicker.reset();
 }
 
 function setClickPosition(event) {
@@ -232,17 +220,14 @@ function gameLoop(timeAtPlay){
   if((mouseClicker.click(clickPosition, scene, cam,"About_1") 
   || mouseClicker.click(clickPosition, scene, cam,"About_2") )
      && enoughTime){
-      // document.location.href = './highscore/index.html';
       document.location.href = './about/index.html';
     timeAtButtons = Date.now();
-    // debugger
   }
   if((mouseClicker.click(clickPosition, scene, cam,"Scores_Bouton_1") 
   || mouseClicker.click(clickPosition, scene, cam,"Scores_Bouton_2") )
      && enoughTime){
       document.location.href = './highscore/index.html';
     timeAtButtons = Date.now();
-    // debugger
   }
 
 
