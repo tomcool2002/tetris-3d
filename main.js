@@ -372,6 +372,7 @@ function gameLoop(timeAtPlay){
       pointsSound.play()
     }
 
+    //gameover manager
     if(data.gameOver && done == false){
       effects.gameOver(scene);
       
@@ -380,6 +381,7 @@ function gameLoop(timeAtPlay){
       gameOverMusic.play();
 
     }
+    
     if(now > lastUpdate + 1000){
       data.HighwayToHell();
       // data.AfficherTableau2D();
