@@ -77,7 +77,13 @@ function init(){
 }
 
 function AddScores(data){
-    scores = data;
+    data.sort(function(a, b){
+        return b.Score - a.Score;
+    });
+
+    const slicedArray = data.slice(0, 10);
+
+    scores = slicedArray;
 }   
 
 function error(status) {
