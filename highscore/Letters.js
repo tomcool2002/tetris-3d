@@ -1,35 +1,35 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
-const stringToName = {
-    A:"A",
-    B:"B",
-    C:"C",
-    D:"D",
-    E:"E",
-    F:"F",
-    G:"G",
-    H:"H",
-    I:"I",
-    J:"J",
-    K:"K",
-    L:"L",
-    M:"M",
-    N:"N",
-    O:"O",
-    P:"P",
-    Q:"Q",
-    R:"R",
-    S:"S",
-    T:"T",
-    U:"U",
-    V:"V",
-    W:"W",
-    X:"X",
-    Y:"Y",
-    Z:"Z",
-    Unkown:"?",
-}
+const stringToName = [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+    "M",
+    "N",
+    "O",
+    "P",
+    "Q",
+    "R",
+    "S",
+    "T",
+    "U",
+    "V",
+    "W",
+    "X",
+    "Y",
+    "Z",
+    "?"
+]
 
 export class Letters{
     constructor(){
@@ -140,44 +140,6 @@ export class Letters{
     }
 
     showLetters(scene, alias){
-        let previousAlias = true;
-        while(previousAlias){
-            let letter = scene.children.find(
-                function(child){
-                    if(child.name == stringToName[0] || 
-                        child.name == stringToName[1] ||
-                        child.name == stringToName[2] ||
-                        child.name == stringToName[3] ||
-                        child.name == stringToName[4] ||
-                        child.name == stringToName[5] ||
-                        child.name == stringToName[6] ||
-                        child.name == stringToName[7] ||
-                        child.name == stringToName[8] ||
-                        child.name == stringToName[9] ||
-                        child.name == stringToName[10] ||
-                        child.name == stringToName[11] ||
-                        child.name == stringToName[12] ||
-                        child.name == stringToName[13] ||
-                        child.name == stringToName[14] ||
-                        child.name == stringToName[15] ||
-                        child.name == stringToName[16] ||
-                        child.name == stringToName[17] ||
-                        child.name == stringToName[18] ||
-                        child.name == stringToName[19] ||
-                        child.name == stringToName[20] ||
-                        child.name == stringToName[21] ||
-                        child.name == stringToName[22] ||
-                        child.name == stringToName[23] ||
-                        child.name == stringToName[24] ||
-                        child.name == stringToName[25] ||
-                        child.name == stringToName[26] ){
-                        return child;
-                    }
-                }
-            );
-            scene.remove(letter);
-            if(letter == undefined) { previousAlias = false;}
-        }
         const positionX = {
             0 : -14,
             1 : -10,
@@ -196,33 +158,80 @@ export class Letters{
             9  :-20,
         };
 
-        for(let j = 0; j < alias.length; j++){
-            let letters = alias[j];
-            // debugger
-            for(let i = 0; i < 3; i++){
-                let letter = letters[i].toLocaleUpperCase();
-                letter = stringToName[letter];
-                if(letter == "?" || letter ==undefined){ letter = "Unknown"}
-                let letter3D;
-                if(this.theLetters[letter] == undefined){
-                    debugger
-                    this.theLetters;
-                    sleep(1000);
-                    letter3D = this.theLetters[letter].clone();
-                } else{
-                    letter3D = this.theLetters[letter].clone();
-                }
+        if (alias != "" && alias != undefined) {
+            let previousAlias = true;
+            while (previousAlias) {
+                let thatthing = stringToName[0];
+                let letter = scene.children.find(
+                    function (child) {
+                        if (child.name == stringToName[0] ||
+                            child.name == stringToName[1] ||
+                            child.name == stringToName[2] ||
+                            child.name == stringToName[3] ||
+                            child.name == stringToName[4] ||
+                            child.name == stringToName[5] ||
+                            child.name == stringToName[6] ||
+                            child.name == stringToName[7] ||
+                            child.name == stringToName[8] ||
+                            child.name == stringToName[9] ||
+                            child.name == stringToName[10] ||
+                            child.name == stringToName[11] ||
+                            child.name == stringToName[12] ||
+                            child.name == stringToName[13] ||
+                            child.name == stringToName[14] ||
+                            child.name == stringToName[15] ||
+                            child.name == stringToName[16] ||
+                            child.name == stringToName[17] ||
+                            child.name == stringToName[18] ||
+                            child.name == stringToName[19] ||
+                            child.name == stringToName[20] ||
+                            child.name == stringToName[21] ||
+                            child.name == stringToName[22] ||
+                            child.name == stringToName[23] ||
+                            child.name == stringToName[24] ||
+                            child.name == stringToName[25] ||
+                            child.name == stringToName[26]) {
+                            return child;
+                        }
+                    }
+                );
+                if (letter == undefined) { previousAlias = false; }
+                scene.remove(letter);
+            }
 
-                if(j == 0){ letter3D.material = new THREE.MeshBasicMaterial({color:0xefea11});}
-                else if(j == 1){ letter3D.material = new THREE.MeshBasicMaterial({color:0xc7c7c7});}
-                else if(j == 2){ letter3D.material = new THREE.MeshBasicMaterial({color:0x8f6818});}
-                else{ letter3D.material = new THREE.MeshNormalMaterial();}
-                letter3D.position.x = positionX[i];
-                letter3D.position.y = positionY[j];
-                letter3D.position.z = -2;
-                scene.add(letter3D);
+
+            for(let j = 0; j < alias.length; j++){
+                let letters = alias[j];
+                
+                // debugger
+                for(let i = 0; i < 3; i++){
+                    let letter = letters[i].toLocaleUpperCase();
+                // debugger
+                    if(!stringToName.includes(letter) || undefined){
+                        letter = "Unknown";
+                    }
+                    let letter3D = this.theLetters[letter].clone();
+                    // if(this.theLetters[letter] == undefined){
+                    //     this.theLetters;
+                    //     sleep(1000);
+                    //     letter3D = this.theLetters[letter].clone();
+                    // } else{
+                    //     letter3D = this.theLetters[letter].clone();
+                    // }
+    
+                    if(j == 0){ letter3D.material = new THREE.MeshBasicMaterial({color:0xefea11});}
+                    else if(j == 1){ letter3D.material = new THREE.MeshBasicMaterial({color:0xc7c7c7});}
+                    else if(j == 2){ letter3D.material = new THREE.MeshBasicMaterial({color:0x8f6818});}
+                    else{ letter3D.material = new THREE.MeshNormalMaterial();}
+                    letter3D.position.x = positionX[i];
+                    letter3D.position.y = positionY[j];
+                    letter3D.position.z = -2;
+                    scene.add(letter3D);
+                }
             }
         }
+
+        
         
     }
 }

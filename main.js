@@ -30,6 +30,8 @@ let pointsSound;
 let speedUpSound;
 let letters;
 
+let alias = "";
+
 
 
 function init(){
@@ -67,7 +69,10 @@ function init(){
 
   cam.freeLook();
   effects =  new Effects();
+  AliasControls();
 
+  
+  letters = new Letters();
 }
 
 function gameStart() {
@@ -109,7 +114,8 @@ function gameStart() {
   data.game(scene);
   data.AfficherTableau2D();
   points = data.points;
-  
+  document.onkeydown = null;
+
   setupKeyControls();
 
   
@@ -128,9 +134,9 @@ function gameStart() {
 
   speedUpSound = new Audio('./misc/speed.mp3');
   speedUpSound.volume = 0.3;
-
-  letters = new Letters();
 }
+
+
 
 function horizontalLine() {
   const geometry = new THREE.BoxGeometry(22.5, 0.5, 0.02);
@@ -177,6 +183,7 @@ init();
 
 
 
+
 const clickPosition = { x: 0, y: 0 };
 let mouseClicker = new MouseClicker();
 clearClickPosition();
@@ -216,6 +223,33 @@ function setupKeyControls() {
       }
     }
   };
+}
+
+function AliasControls(){
+  document.onkeydown = function(e){
+    if(isStarted == false){
+      let keyString = e.key.toUpperCase();
+      if(keyString == "BACKSPACE" && alias.length > 0){
+        alias = alias.slice(0, -1); 
+      }
+
+      if(charIsLetter(keyString)){
+        if(alias.length < 3){
+          alias+=keyString;
+        }
+        alias;
+      }
+      
+    }
+  }
+}
+
+function charIsLetter(char) {
+  if (typeof char !== 'string') {
+    return false;
+  }
+
+  return /^[a-zA-Z]$/.test(char);
 }
 
 function clearClickPosition() {
@@ -262,17 +296,28 @@ function clickLoop(){
       || mouseClicker.click(clickPosition, scene, cam,"start_2") )
       && enoughTime){
       timeAtButtons = Date.now();
-    let startMesh = scene.children.find(((child) => child.name == "start" ));
-    scene.remove(startMesh)
+    const startMesh = scene.children.find(((child) => child.name == "start" ));
+    const aboutMesh = scene.children.find((child) => child.name == "About" );
+    const highScoreMesh = scene.children.find((child) => child.name == "Scores_Bouton" );
+    
+    scene.remove(startMesh);
+    scene.remove(aboutMesh);
+    scene.remove(highScoreMesh);
+    
     gameStart();
     isStarted = true;
     cam.play();
+    letters.IsReady == false;
     
   }
+
   if(effects.loaded){
     effects.addButtons(scene);
-    effects.loaded = false;
-    
+    effects.loaded = false; 
+  }
+
+  if(letters.IsReady){
+    letters.showLetters(scene, alias);
   }
 
 }
@@ -287,9 +332,7 @@ function gameLoop(timeAtPlay){
       music.play();
     }
 
-    // if(letters.IsReady){
-    //   letters.showLetters(scene, "TH$");
-    // }
+    
 
     
 
@@ -355,6 +398,7 @@ function gameLoop(timeAtPlay){
       pause = false;
       cam.play();
       timeAtPlay = Date.now();
+      
     }
   }
 
