@@ -5,6 +5,7 @@ import { MouseClicker } from "./mouseClicker";
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { Effects } from './Effects';
 import { Letters } from './Letters';
+import { Post } from './functionAPi'
 
 // import { smh } from './about/about.html'
 
@@ -342,6 +343,44 @@ function clickLoop(){
   }
 
 }
+
+function AddToDB(data){
+  console.log("Succesfully added player to dataBase")
+  console.log(data);
+}
+
+function error(status) {
+  let errorMessage = "";
+  switch (status) {
+      case 0:
+          errorMessage = "Le service ne répond pas";
+          break;
+      case 401:
+          errorMessage = "Requête non autorisée";
+          break;
+      case 400:
+      case 422:
+          errorMessage = "Requête invalide";
+          break;
+      case 404:
+          errorMessage = "Service ou données introuvables";
+          break;
+      case 409:
+          errorMessage = "Conflits de données: le email est déjà utiliser";
+          break;
+      case 500:
+          errorMessage = "Erreur interne du service";
+          break;
+      case 480:
+          errorMessage = "User n'est pas vérifier";
+      default:
+          errorMessage = "Une erreur est survenue";
+          break;
+  }
+  console.error(errorMessage);
+}
+
+
 function gameLoop(timeAtPlay){
   //about page
   
@@ -380,6 +419,12 @@ function gameLoop(timeAtPlay){
       music.pause();
       gameOverMusic.play();
 
+      // verifie que le game over
+      if(alias.length > 0 && data.points > 0){
+        let object = { Id: 0, Alias:alias, Score:data.points};
+        debugger
+        Post(object, AddToDB, error);
+      }
     }
     
     if(now > lastUpdate + 1000){

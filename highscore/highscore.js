@@ -4,7 +4,7 @@ import { Camera } from "../camera";
 import * as THREE from 'three';
 import { ShowScores } from './ShowScores.js';
 let scene, cam, renderer,score,scores, video;
-import { GET_TOP10, Post} from '../functionAPi'
+import { GET_TOP10 } from '../functionAPi';
 
 
 function init(){
@@ -78,7 +78,6 @@ function init(){
 
 function AddScores(data){
     scores = data;
-    // debugger;
 }   
 
 function error(status) {
@@ -111,6 +110,7 @@ function error(status) {
     }
     console.error(errorMessage);
 }
+
 
 document.onkeydown = function (e) {
     switch (e.key) {
