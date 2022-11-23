@@ -1,7 +1,6 @@
 import { Piece } from "./piece";
 import { Score } from "./score";
 import { Holder } from "./hold";
-import jQuery from "jquery";
 
 export class Data {
   constructor(camera, scene) {
