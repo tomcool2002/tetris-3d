@@ -42,22 +42,8 @@ export class Data {
       //console.log(i*10-20);
       listePiece.push(new Piece(20, 0));
     }
-    this.testJson();
     return listePiece;
   }
-
-  async getText(file) {
-    let object = await fetch(file);
-    if (object.ok) {
-      let text = await object.json();
-      console.log(text[0].nom);
-    }
-  }
-
-  testJson() {
-    this.getText("data.json");
-  }
-
   holdPiece() {
     let peutSwitch = true;
     let CheckInfo = this.holder.getInfo(); // recupere les info du block dans le hold
