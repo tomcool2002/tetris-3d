@@ -1,28 +1,28 @@
-function getData(path) {
-  let data = "probleme avec la requete";
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      data = this.responseText;
-    }
-  };
-  xhttp.open("GET", path, true);
-  xhttp.send();
+const baseURl = "https://api-final-projects.glitch.me/api/scores";
 
-  return data;
+function GET_TOP10(sucessCallBack,errorCallBack){
+  $.ajax({
+    url:baseURl,
+    type:'GET',
+    success: data=>{sucessCallBack(data);
+      
+    },
+    error: function(jqXHR) {
+      errorCallBack(jqXHR.status)
+    }
+  });
+
 }
 
-function postData(path,name,score) {
-  let data = "probleme avec requete";
-  var xhttp = new XMLHttpRequest();
 
-  xhttp.onreadystatechange = function () {
-    if (this.readyState == 4 && this.status == 200) {
-      data = this.responseText;
-    }
-  };
-  xhttp.open("POST", path, true);
-  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-  xhttp.send(`name=${name}&score=${score}`);
-  return data;
+function Post(score,sucessCallBack,errorCallBack){
+  $.ajax({
+    url:baseURl,
+    type:'POST',
+    contentType:'application/json',
+    data:JSON.stringify(score),
+    success: data=>{sucessCallBack(data);},
+    error: function(jqXHR) {errorCallBack(jqXHR.status)}
+  });
+  
 }
