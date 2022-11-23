@@ -31,7 +31,7 @@ function init(){
             const scale = 4;
             const text_thom_mesh = gltf.scene.children.find((child) => child.name == "thomas_about" );
             text_thom_mesh.scale.set(text_thom_mesh.scale.x * scale, text_thom_mesh.scale.y * scale, text_thom_mesh.scale.z * scale);
-            text_thom_mesh.position.x = -90;
+            text_thom_mesh.position.x = -70;
             text_thom_mesh.position.y = -15;
             text_thom_mesh.material = new THREE.MeshStandardMaterial({color:0xf69b93});
 
@@ -39,32 +39,32 @@ function init(){
 
             const email_thom_mesh = gltf.scene.children.find((child) => child.name == "thomas_email" );
             email_thom_mesh.scale.set(email_thom_mesh.scale.x * scale, email_thom_mesh.scale.y * scale, email_thom_mesh.scale.z * scale);
-            email_thom_mesh.position.x = -51.5;
+            email_thom_mesh.position.x = -32.5;
             email_thom_mesh.position.y = -31;
             email_thom_mesh.material = new THREE.MeshStandardMaterial({color:0x93f6f5});
 
             
             const text_julian_mesh =  gltf.scene.children.find((child) => child.name == "julian_about" );
             text_julian_mesh.scale.set(text_julian_mesh.scale.x * scale, text_julian_mesh.scale.y * scale, text_julian_mesh.scale.z * scale);
-            text_julian_mesh.position.x = 30;
+            text_julian_mesh.position.x = 7;
             text_julian_mesh.position.y = -15;
             text_julian_mesh.material = new THREE.MeshStandardMaterial({color:0xe86cfe});
 
             const email_julian_mesh = gltf.scene.children.find((child) => child.name == "julian_email" );
             email_julian_mesh.scale.set(email_julian_mesh.scale.x * scale, email_julian_mesh.scale.y * scale, email_julian_mesh.scale.z * scale);
-            email_julian_mesh.position.x = 34;
+            email_julian_mesh.position.x = 10.5;
             email_julian_mesh.position.y = -35;
             email_julian_mesh.material = new THREE.MeshStandardMaterial({color:0x93f6f5});
 
             const description_mesh = gltf.scene.children.find((child) => child.name == "description" );
             description_mesh.scale.set(description_mesh.scale.x * scale, description_mesh.scale.y * scale, description_mesh.scale.z * scale);
-            description_mesh.position.x = -90;
+            description_mesh.position.x = -70;
             description_mesh.position.y = 30;
             description_mesh.material = new THREE.MeshStandardMaterial({color:0xebf693});
 
             const superviseur_mesh = gltf.scene.children.find((child) => child.name == "superviseur" );
             superviseur_mesh.scale.set(superviseur_mesh.scale.x * scale, superviseur_mesh.scale.y * scale, superviseur_mesh.scale.z * scale);
-            superviseur_mesh.position.x = 50;
+            superviseur_mesh.position.x = 30;
             superviseur_mesh.position.y = 30;
             superviseur_mesh.material = new THREE.MeshStandardMaterial({color:0x6cfe7c});
 
@@ -82,14 +82,14 @@ function init(){
             const BackToGame = gltf.scene.children.find((child) => child.name == "BTG" );
             const scale = 3;
             BackToGame.scale.set(BackToGame.scale.x *scale, BackToGame.scale.y * scale, BackToGame.scale.z * scale);
-            BackToGame.position.x = -10;
-            BackToGame.position.y = -30;
+            BackToGame.position.x = 30;
+            BackToGame.position.y = 0;
             BackToGame.position.z = 2;
             scene.add(BackToGame);
         }
     );
 
-    const light = new THREE.HemisphereLight( 0xffffff, 0x717171,0.5 );
+    const light = new THREE.HemisphereLight( 0xffffff, 0x717171,0.7 );
     light.position.y = 10;
     light.position.z = -40;
     light.position.x = 60;
@@ -97,7 +97,7 @@ function init(){
     // scene.add(lightHelper);
     scene.add(light);
     
-    const light2 = new THREE.HemisphereLight( 0xffffff, 0x717171,0.5);
+    const light2 = new THREE.HemisphereLight( 0xffffff, 0x717171,0.7);
     light2.position.y = 10;
     light2.position.z = -40;
     light2.position.x = -60;
@@ -122,9 +122,9 @@ function init(){
     });
 
 
-    let videoGeometry = new THREE.BoxGeometry(64,30,36);
+    let videoGeometry = new THREE.BoxGeometry(128,60,72);
     let videoScreen = new THREE.Mesh(videoGeometry, videoMaterial);
-    videoScreen.position.set(0,0,-25);
+    videoScreen.position.set(0,0,-50);
     scene.add(videoScreen);
 
 

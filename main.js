@@ -74,6 +74,11 @@ function init(){
 
   
   letters = new Letters();
+
+  music = new Audio('./misc/music.mp3');
+  music.volume = 0.5;
+  music.play();
+  music.autoplay = true;
 }
 
 function gameStart() {
@@ -137,18 +142,15 @@ function gameStart() {
   effects.Stars(scene);
 
 
-  music = new Audio('./misc/music.mp3');
-  music.volume = 0.1;
-  music.play();
-  music.autoplay = true;
+  
   
   gameOverMusic = new Audio('./misc/game_over.mp3');
-  gameOverMusic.volume = 0.5;
+  gameOverMusic.volume = 0.4;
 
   pointsSound = new Audio('./misc/clearLine.mp3');
 
   speedUpSound = new Audio('./misc/speed.mp3');
-  speedUpSound.volume = 0.3;
+  speedUpSound.volume = 1;
 }
 
 
@@ -397,7 +399,7 @@ function gameLoop(timeAtPlay){
     
 
     // speed up
-    if(startTime + 20000 <= Date.now() && !data.gameOver && cam.rotationSpeed != 10 && cam.rotationSpeed != -10 ){
+    if(startTime + 20000 <= Date.now() && !data.gameOver){
       startTime = Date.now();
       cam.speedUp();
       speedUpSound.play();
