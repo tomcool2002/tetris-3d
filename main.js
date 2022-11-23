@@ -107,6 +107,20 @@ function gameStart() {
     }
   );
 
+  loader.load('./misc/buttons.gltf', 
+    function (gltf) {
+      const scale = 3;
+      const menu_mesh = gltf.scene.children.find((child) => child.name == "MENU" );
+      menu_mesh.scale.set(menu_mesh.scale.x * scale, menu_mesh.scale.y * scale, menu_mesh.scale.z * scale);
+      menu_mesh.position.x = -30;
+      menu_mesh.position.y = 0;
+      menu_mesh.position.z = -2.5;
+      menu_mesh.material = new THREE.MeshNormalMaterial();
+      scene.add(menu_mesh);
+      
+    }
+  );
+
   
 
   
@@ -289,6 +303,13 @@ function clickLoop(){
   || mouseClicker.click(clickPosition, scene, cam,"Scores_Bouton_2") )
      && enoughTime){
       document.location.href = './highscore/index.html';
+    timeAtButtons = Date.now();
+  }
+
+  if((mouseClicker.click(clickPosition, scene, cam,"MENU_1") 
+  || mouseClicker.click(clickPosition, scene, cam,"MENU_2") )
+     && enoughTime){
+      document.location.href = './index.html';
     timeAtButtons = Date.now();
   }
 

@@ -200,8 +200,8 @@ export class Letters {
                 }
                 let letter3D = this.theLetters[letter].clone();
                 letter3D.material = new THREE.MeshNormalMaterial();
-                letter3D.position.x = positionX[i];
-                letter3D.position.y = 0;
+                letter3D.position.x = positionX[i] - 23;
+                letter3D.position.y = -35;
                 letter3D.position.z = 0;
                 scene.add(letter3D);
             }
