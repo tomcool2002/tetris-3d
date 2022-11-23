@@ -51,10 +51,10 @@ function init(){
   const loader = new GLTFLoader();
   loader.load('./misc/buttons.gltf', 
     function (gltf) {
-      const scale = 6;
+      const scale = 4;
       const start_mesh = gltf.scene.children.find((child) => child.name == "start" );
       start_mesh.scale.set(start_mesh.scale.x * scale, start_mesh.scale.y * scale, start_mesh.scale.z * scale);
-      start_mesh.position.x = -30;
+      start_mesh.position.x = -52;
       start_mesh.position.y = 25;
       start_mesh.position.z = -2.5;
       start_mesh.material = new THREE.MeshNormalMaterial();
