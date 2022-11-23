@@ -1,6 +1,8 @@
+import * as THREE from './node_modules/jquery';
+
 const baseURl = "https://api-final-projects.glitch.me/api/scores";
 
-function GET_TOP10(sucessCallBack,errorCallBack){
+export function GET_TOP10(sucessCallBack,errorCallBack){
   $.ajax({
     url:baseURl,
     type:'GET',
@@ -11,7 +13,7 @@ function GET_TOP10(sucessCallBack,errorCallBack){
 }
 
 
-function Post(score,sucessCallBack,errorCallBack){
+export function Post(score,sucessCallBack,errorCallBack){
   $.ajax({
     url:baseURl,
     type:'POST',
