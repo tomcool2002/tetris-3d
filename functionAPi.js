@@ -4,12 +4,8 @@ function GET_TOP10(sucessCallBack,errorCallBack){
   $.ajax({
     url:baseURl,
     type:'GET',
-    success: data=>{sucessCallBack(data);
-      
-    },
-    error: function(jqXHR) {
-      errorCallBack(jqXHR.status)
-    }
+    success: data=>{sucessCallBack(data);},
+    error: function(jqXHR) {errorCallBack(jqXHR.status);}
   });
 
 }
@@ -22,7 +18,7 @@ function Post(score,sucessCallBack,errorCallBack){
     contentType:'application/json',
     data:JSON.stringify(score),
     success: data=>{sucessCallBack(data);},
-    error: function(jqXHR) {errorCallBack(jqXHR.status)}
+    error: function(jqXHR) {errorCallBack(jqXHR.status);}
   });
   
 }
