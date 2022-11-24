@@ -1,11 +1,10 @@
 import { MouseClicker } from "../mouseClicker";
 import { GLTFLoader } from '../node_modules/three/examples/jsm/loaders/GLTFLoader.js';
 import { Camera } from "../camera";
-import 'three';
 import * as THREE from 'three';
-import {ShowScores } from './ShowScores.js';
+import { ShowScores } from './ShowScores.js';
 let scene, cam, renderer,score,scores, video;
-
+import { GET_TOP10 } from '../functionAPi';
 
 
 function init(){
@@ -67,56 +66,57 @@ function init(){
     scene.add(light2);
     score = new ShowScores();
     
-    scores = [
-        {
-            "Alias":"ANG",
-            "Score":69420
-        },
-        {
-            "Alias":"THO",
-            "Score":42069
-        },
-        {
-            "Alias":"JRT",
-            "Score":2125
-        },
-        {
-            "Alias":"AAA",
-            "Score":1086
-        },
-        {
-            "Alias":"BBB",
-            "Score":1000
-        },
-        {
-            "Alias":"BUL",
-            "Score":365
-        },
-        {
-            "Alias":"HEL",
-            "Score":250
-        },
-        {
-            "Alias":"HEA",
-            "Score":140
-        },
-        {
-            "Alias":"GOD",
-            "Score":50
-        },
-        {
-            "Alias":"DEV",
-            "Score":10
-        },
-    ]
+    
     
 
 
     cam.freeLook();
-
+    GET_TOP10(AddScores, error);
 
     
 }
+
+function AddScores(data){
+    data.sort(function(a, b){
+        return b.Score - a.Score;
+    });
+
+    const slicedArray = data.slice(0, 10);
+
+    scores = slicedArray;
+}   
+
+function error(status) {
+    let errorMessage = "";
+    switch (status) {
+        case 0:
+            errorMessage = "Le service ne répond pas";
+            break;
+        case 401:
+            errorMessage = "Requête non autorisée";
+            break;
+        case 400:
+        case 422:
+            errorMessage = "Requête invalide";
+            break;
+        case 404:
+            errorMessage = "Service ou données introuvables";
+            break;
+        case 409:
+            errorMessage = "Conflits de données: le email est déjà utiliser";
+            break;
+        case 500:
+            errorMessage = "Erreur interne du service";
+            break;
+        case 480:
+            errorMessage = "User n'est pas vérifier";
+        default:
+            errorMessage = "Une erreur est survenue";
+            break;
+    }
+    console.error(errorMessage);
+}
+
 
 document.onkeydown = function (e) {
     switch (e.key) {

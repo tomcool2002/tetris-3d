@@ -5,6 +5,7 @@ import { MouseClicker } from "./mouseClicker";
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { Effects } from './Effects';
 import { Letters } from './Letters';
+import { Post } from './functionAPi'
 
 // import { smh } from './about/about.html'
 
@@ -50,10 +51,10 @@ function init(){
   const loader = new GLTFLoader();
   loader.load('./misc/buttons.gltf', 
     function (gltf) {
-      const scale = 6;
+      const scale = 4;
       const start_mesh = gltf.scene.children.find((child) => child.name == "start" );
       start_mesh.scale.set(start_mesh.scale.x * scale, start_mesh.scale.y * scale, start_mesh.scale.z * scale);
-      start_mesh.position.x = -30;
+      start_mesh.position.x = -52;
       start_mesh.position.y = 25;
       start_mesh.position.z = -2.5;
       start_mesh.material = new THREE.MeshNormalMaterial();
@@ -73,6 +74,11 @@ function init(){
 
   
   letters = new Letters();
+
+  music = new Audio('./misc/music.mp3');
+  music.volume = 0.1;
+  music.play();
+  music.autoplay = true;
 }
 
 function gameStart() {
@@ -136,18 +142,15 @@ function gameStart() {
   effects.Stars(scene);
 
 
-  music = new Audio('./misc/music.mp3');
-  music.volume = 0.1;
-  music.play();
-  music.autoplay = true;
+  
   
   gameOverMusic = new Audio('./misc/game_over.mp3');
-  gameOverMusic.volume = 0.5;
+  gameOverMusic.volume = 0.4;
 
   pointsSound = new Audio('./misc/clearLine.mp3');
 
   speedUpSound = new Audio('./misc/speed.mp3');
-  speedUpSound.volume = 0.3;
+  speedUpSound.volume = 1;
 }
 
 
@@ -342,6 +345,44 @@ function clickLoop(){
   }
 
 }
+
+function AddToDB(data){
+  console.log("Succesfully added player to dataBase")
+  console.log(data);
+}
+
+function error(status) {
+  let errorMessage = "";
+  switch (status) {
+      case 0:
+          errorMessage = "Le service ne répond pas";
+          break;
+      case 401:
+          errorMessage = "Requête non autorisée";
+          break;
+      case 400:
+      case 422:
+          errorMessage = "Requête invalide";
+          break;
+      case 404:
+          errorMessage = "Service ou données introuvables";
+          break;
+      case 409:
+          errorMessage = "Conflits de données: le email est déjà utiliser";
+          break;
+      case 500:
+          errorMessage = "Erreur interne du service";
+          break;
+      case 480:
+          errorMessage = "User n'est pas vérifier";
+      default:
+          errorMessage = "Une erreur est survenue";
+          break;
+  }
+  console.error(errorMessage);
+}
+
+
 function gameLoop(timeAtPlay){
   //about page
   
@@ -358,7 +399,7 @@ function gameLoop(timeAtPlay){
     
 
     // speed up
-    if(startTime + 20000 <= Date.now() && !data.gameOver && cam.rotationSpeed != 10 && cam.rotationSpeed != -10 ){
+    if(startTime + 20000 <= Date.now() && !data.gameOver){
       startTime = Date.now();
       cam.speedUp();
       speedUpSound.play();
@@ -380,6 +421,12 @@ function gameLoop(timeAtPlay){
       music.pause();
       gameOverMusic.play();
 
+      // verifie que le game over
+      if(alias.length > 0 && data.points > 0){
+        let object = { Id: 0, Alias:alias, Score:data.points};
+        // debugger
+        Post(object, AddToDB, error);
+      }
     }
     
     if(now > lastUpdate + 1000){
