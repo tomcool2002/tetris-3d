@@ -1,9 +1,7 @@
 import { MouseClicker } from "../mouseClicker";
 import { GLTFLoader } from '../node_modules/three/examples/jsm/loaders/GLTFLoader.js';
 import { Camera } from "../camera";
-import 'three';
 import * as THREE from 'three';
-import { BoxGeometry } from "three";
 let scene, cam, renderer;
 
 // import {f} from '../public/misc/'

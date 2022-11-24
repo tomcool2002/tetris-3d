@@ -76,7 +76,7 @@ function init(){
   letters = new Letters();
 
   music = new Audio('./misc/music.mp3');
-  music.volume = 0.5;
+  music.volume = 0.1;
   music.play();
   music.autoplay = true;
 }
@@ -424,7 +424,7 @@ function gameLoop(timeAtPlay){
       // verifie que le game over
       if(alias.length > 0 && data.points > 0){
         let object = { Id: 0, Alias:alias, Score:data.points};
-        debugger
+        // debugger
         Post(object, AddToDB, error);
       }
     }

@@ -1,5 +1,3 @@
-import * as THREE from './node_modules/jquery';
-
 const baseURl = "https://api-final-projects.glitch.me/api/scores";
 
 export function GET_TOP10(sucessCallBack,errorCallBack){
