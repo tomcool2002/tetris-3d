@@ -47,9 +47,9 @@ export class Camera extends THREE.PerspectiveCamera{
     }
     
     speedUp(){
-        if(this.rotationSpeed != 10 && this.rotationSpeed != -10 ){
-            if(this.rotationSpeed >0) this.rotationSpeed++;
-            else this.rotationSpeed--;
+        if(this.rotationSpeed <= 10 && this.rotationSpeed >= -10 ){
+            if(this.rotationSpeed >0) this.rotationSpeed+2;
+            else this.rotationSpeed-=2;
             this.controls.autoRotateSpeed = this.rotationSpeed;
         }
     }

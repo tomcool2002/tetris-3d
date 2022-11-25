@@ -153,15 +153,21 @@ export class ShowScores {
         
         let scores = [];
         let alias = [];
-        for(let i = 0; i < listeOfScores.length; i++){
-            alias.push(listeOfScores[i].Alias);
-            scores.push(listeOfScores[i].Score);
+
+        if(listeOfScores != undefined){
+            for(let i = 0; i < listeOfScores.length; i++){
+                alias.push(listeOfScores[i].Alias);
+                scores.push(listeOfScores[i].Score);
+            }
+    
+
+            this.letterAdder.showLetters(scene, alias);
+            this.scoreAdder.ShowNumbers(scene,scores);
+            this.IsReady = false;
         }
+        
 
-
-        this.letterAdder.showLetters(scene, alias);
-        this.scoreAdder.ShowNumbers(scene,scores);
-        this.IsReady = false;
+        
 
         
         
