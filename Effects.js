@@ -47,13 +47,13 @@ export class Effects {
         highScoreMesh.scale.set(highScoreMesh.scale.x * 5, highScoreMesh.scale.y * 5, highScoreMesh.scale.z * 5);
         
 
-        aboutMesh.position.x = -29;
+        aboutMesh.position.x = -35;
         aboutMesh.position.y = 5;
         aboutMesh.position.z = -2.5;
 
         highScoreMesh.position.z = -2.5;
         highScoreMesh.position.y = -15;
-        highScoreMesh.position.x = -28;
+        highScoreMesh.position.x = -35;
 
         // pauseMesh.position.x = 20;
         // pauseMesh.position.y = 20;

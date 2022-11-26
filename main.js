@@ -54,11 +54,27 @@ function init(){
       const scale = 4;
       const start_mesh = gltf.scene.children.find((child) => child.name == "start" );
       start_mesh.scale.set(start_mesh.scale.x * scale, start_mesh.scale.y * scale, start_mesh.scale.z * scale);
-      start_mesh.position.x = -52;
+      start_mesh.position.x = -60;
       start_mesh.position.y = 25;
       start_mesh.position.z = -2.5;
       start_mesh.material = new THREE.MeshNormalMaterial();
       scene.add(start_mesh);
+      
+    }
+  );
+
+  // public\misc\keycaps.gltf
+  loader.load('./misc/keycaps.gltf', 
+    function (gltf) {
+      const scale = 1.5;
+      const up_arrow_mesh = gltf.scene.children.find((child) => child.name == "Up_Key" );
+      up_arrow_mesh.scale.set(up_arrow_mesh.scale.x * scale, up_arrow_mesh.scale.y * scale, up_arrow_mesh.scale.z * scale);
+      up_arrow_mesh.rotation.set(1.5,0,0);
+      up_arrow_mesh.position.x = 30;
+      up_arrow_mesh.position.y = 25;
+      up_arrow_mesh.position.z = -2.5;
+      up_arrow_mesh.material = new THREE.MeshNormalMaterial();
+      scene.add(up_arrow_mesh);
       
     }
   );
