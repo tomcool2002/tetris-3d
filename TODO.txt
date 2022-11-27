@@ -4,5 +4,7 @@ animations
 
 a propos dire d'ou viens la music
 
+ajouter plus de couleurs pour les etoiles
+
 change pause icon
 

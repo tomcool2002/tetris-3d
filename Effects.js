@@ -11,6 +11,8 @@ const Colors = [
     0xe40b00,
     0xffffff,
 ];
+
+
 export class Effects {
     constructor() {
         this.compteur = -1;

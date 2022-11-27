@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { Piece } from './piece';
 
 
 export class Controls{
@@ -11,8 +12,8 @@ export class Controls{
                 const up_arrow_mesh = gltf.scene.children.find((child) => child.name == "Up_Key" );
                 up_arrow_mesh.scale.set(up_arrow_mesh.scale.x * scale, up_arrow_mesh.scale.y * scale, up_arrow_mesh.scale.z * scale);
                 up_arrow_mesh.rotation.set(1.5,0,0);
-                up_arrow_mesh.position.x = 30;
-                up_arrow_mesh.position.y = 25;
+                up_arrow_mesh.position.x = 20;
+                up_arrow_mesh.position.y = -15;
                 up_arrow_mesh.position.z = -2.5;
                 up_arrow_mesh.material = new THREE.MeshNormalMaterial();
 
@@ -20,14 +21,14 @@ export class Controls{
                 down_arrow_mesh.scale.set(down_arrow_mesh.scale.x * scale, down_arrow_mesh.scale.y * scale, down_arrow_mesh.scale.z * scale);
                 down_arrow_mesh.rotation.set(1.5,0,0);
                 down_arrow_mesh.position.x = 30;
-                down_arrow_mesh.position.y = 0;
+                down_arrow_mesh.position.y = -15;
                 down_arrow_mesh.position.z = -2.5;
                 down_arrow_mesh.material = new THREE.MeshNormalMaterial();
 
                 const rigth_arrow_mesh = gltf.scene.children.find((child) => child.name == "Right_Key" );
                 rigth_arrow_mesh.scale.set(rigth_arrow_mesh.scale.x * scale, rigth_arrow_mesh.scale.y * scale, rigth_arrow_mesh.scale.z * scale);
                 rigth_arrow_mesh.rotation.set(1.5,0,0);
-                rigth_arrow_mesh.position.x = 30;
+                rigth_arrow_mesh.position.x = 0;
                 rigth_arrow_mesh.position.y = -15;
                 rigth_arrow_mesh.position.z = -2.5;
                 rigth_arrow_mesh.material = new THREE.MeshNormalMaterial();
@@ -35,19 +36,45 @@ export class Controls{
                 const left_arrow_mesh = gltf.scene.children.find((child) => child.name == "Left_Key" );
                 left_arrow_mesh.scale.set(left_arrow_mesh.scale.x * scale, left_arrow_mesh.scale.y * scale, left_arrow_mesh.scale.z * scale);
                 left_arrow_mesh.rotation.set(1.5,0,0);
-                left_arrow_mesh.position.x = 30;
-                left_arrow_mesh.position.y = 15;
+                left_arrow_mesh.position.x = 10;
+                left_arrow_mesh.position.y = -15;
                 left_arrow_mesh.position.z = -2.5;
                 left_arrow_mesh.material = new THREE.MeshNormalMaterial();
+
+                
+                const h_mesh = gltf.scene.children.find((child) => child.name == "H_Key" );
+                h_mesh.scale.set(h_mesh.scale.x * scale, h_mesh.scale.y * scale, h_mesh.scale.z * scale);
+                h_mesh.rotation.set(1.5,0,0);
+                h_mesh.position.x = 40;
+                h_mesh.position.y = -15;
+                h_mesh.position.z = -2.5;
+                h_mesh.material = new THREE.MeshNormalMaterial();
+
+                const left_mesh = gltf.scene.children.find((child) => child.name == "Left_Arrow" );
+                left_mesh.scale.set(left_mesh.scale.x * scale, left_mesh.scale.y * scale, left_mesh.scale.z * scale);
+                left_mesh.position.x = 40;
+                left_mesh.position.y = 15;
+                left_mesh.position.z = -2.5;
+                // left_mesh.material = new THREE.MeshNormalMaterial();
+
 
                 scene.add(up_arrow_mesh);
                 scene.add(down_arrow_mesh);
                 scene.add(rigth_arrow_mesh);
                 scene.add(left_arrow_mesh);
+                scene.add(h_mesh);
+                scene.add(left_mesh);
             
             }
         );
+
+        let piece1 = new Piece();
+        piece1.name = "Piece_1";
+        scene.add(piece1);
+            
     }
+
+
 
     removeControls(scene){
         let areThere = true;
@@ -57,8 +84,10 @@ export class Controls{
                     if (child.name == "Up_Key"|| 
                         child.name == "Down_Key"|| 
                         child.name == "Right_Key"|| 
-                        child.name == "Left_Key") {
-                            // debugger
+                        child.name == "Left_Key" || 
+                        child.name == "H_Key" || 
+                        child.name == "Left_Arrow" || 
+                        child.name == "Piece_1") {
                         return child;
                     }
                 }

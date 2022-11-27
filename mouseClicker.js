@@ -16,7 +16,7 @@ export class MouseClicker {
         this.objectClicked = intersectedObjects[0].object;
 
         let lenom = this.objectClicked.name;
-        console.log(lenom);
+        // console.log(lenom);
         if(lenom == name)
           return true
         return false
