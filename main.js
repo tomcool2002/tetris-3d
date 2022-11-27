@@ -6,6 +6,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { Effects } from './Effects';
 import { Letters } from './Letters';
 import { Post } from './functionAPi'
+import { Controls } from './controls';
 
 // import { smh } from './about/about.html'
 
@@ -33,7 +34,7 @@ let letters;
 
 let alias = "";
 
-
+let controls;
 
 function init(){
   scene = new THREE.Scene();
@@ -64,20 +65,8 @@ function init(){
   );
 
   // public\misc\keycaps.gltf
-  loader.load('./misc/keycaps.gltf', 
-    function (gltf) {
-      const scale = 1.5;
-      const up_arrow_mesh = gltf.scene.children.find((child) => child.name == "Up_Key" );
-      up_arrow_mesh.scale.set(up_arrow_mesh.scale.x * scale, up_arrow_mesh.scale.y * scale, up_arrow_mesh.scale.z * scale);
-      up_arrow_mesh.rotation.set(1.5,0,0);
-      up_arrow_mesh.position.x = 30;
-      up_arrow_mesh.position.y = 25;
-      up_arrow_mesh.position.z = -2.5;
-      up_arrow_mesh.material = new THREE.MeshNormalMaterial();
-      scene.add(up_arrow_mesh);
-      
-    }
-  );
+  controls = new Controls(scene);
+  
 
   
 
@@ -432,6 +421,7 @@ function gameLoop(timeAtPlay){
     //gameover manager
     if(data.gameOver && done == false){
       effects.gameOver(scene);
+      cam.gameOver();
       
       done = true;
       music.pause();

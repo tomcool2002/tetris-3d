@@ -239,8 +239,8 @@ function animate() {
 
     let deltaTime = Date.now() - timeAtAbout;
     let enoughTime = ( deltaTime >= 500);
-    if((mouseClicker.click(clickPosition, scene, cam,"BTG_1") 
-    || mouseClicker.click(clickPosition, scene, cam,"BTG_2") )
+    if((mouseClicker.click(clickPosition, scene, cam,"BTG001") 
+    || mouseClicker.click(clickPosition, scene, cam,"BTG001_1") )
         && enoughTime){
         document.location.href = '../index.html';
         timeAtAbout = Date.now();

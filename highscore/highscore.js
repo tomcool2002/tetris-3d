@@ -41,7 +41,7 @@ function init(){
         function(gltf){
             const BackToGame = gltf.scene.children.find((child) => child.name == "BTG" );
             BackToGame.scale.set(BackToGame.scale.x * 2, BackToGame.scale.y * 2, BackToGame.scale.z * 2);
-            BackToGame.position.x = -12;
+            BackToGame.position.x = 0;
             BackToGame.position.y = -30;
             BackToGame.position.z = -1;
             scene.add(BackToGame);
@@ -168,8 +168,8 @@ function animate() {
 
     let deltaTime = Date.now() - timeAtAbout;
     let enoughTime = ( deltaTime >= 500);
-    if((mouseClicker.click(clickPosition, scene, cam,"BTG_1") 
-    || mouseClicker.click(clickPosition, scene, cam,"BTG_2") )
+    if((mouseClicker.click(clickPosition, scene, cam,"BTG001_1") 
+    || mouseClicker.click(clickPosition, scene, cam,"BTG001") )
         && enoughTime){
         document.location.href = '../index.html';
         timeAtAbout = Date.now();

@@ -63,7 +63,7 @@ export class Effects {
         
         
         gameOver.position.y = 0;
-        gameOver.position.x = -10;
+        gameOver.position.x = 0;
         this.gameOverMesh = gameOver;
         this.aboutMesh = aboutMesh;
         this.highScoreMesh = highScoreMesh;

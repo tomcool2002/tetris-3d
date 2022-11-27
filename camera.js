@@ -37,6 +37,10 @@ export class Camera extends THREE.PerspectiveCamera{
         this.controls.enableRotate = true;
     }
 
+    gameOver(){
+        this.position.set(0, 0, 100);
+    }
+
 
     pause(){
         this.controls.autoRotate  = false;

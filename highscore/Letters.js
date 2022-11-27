@@ -202,11 +202,9 @@ export class Letters{
 
             for(let j = 0; j < alias.length; j++){
                 let letters = alias[j];
-                
-                // debugger
-                for(let i = 0; i < 3; i++){
+                for(let i = 0; i < letters.length; i++){
+                    // debugger
                     let letter = letters[i].toLocaleUpperCase();
-                // debugger
                     if(!stringToName.includes(letter) || undefined){
                         letter = "Unknown";
                     }
