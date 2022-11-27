@@ -1,6 +1,8 @@
 ajouter controls
 
-a propos dire dou viens la music
+animations
+
+a propos dire d'ou viens la music
 
 change pause icon
 

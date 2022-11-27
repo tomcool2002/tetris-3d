@@ -87,7 +87,7 @@ function init(){
 }
 
 function gameStart() {
-  
+  controls.removeControls(scene);
   pause = false;
 
   let World = new THREE.Group();

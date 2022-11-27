@@ -49,4 +49,23 @@ export class Controls{
         );
     }
 
+    removeControls(scene){
+        let areThere = true;
+        while (areThere) {
+            let keycap = scene.children.find(
+                function (child) {
+                    if (child.name == "Up_Key"|| 
+                        child.name == "Down_Key"|| 
+                        child.name == "Right_Key"|| 
+                        child.name == "Left_Key") {
+                            // debugger
+                        return child;
+                    }
+                }
+            );
+            if (keycap == undefined) { areThere = false; }
+            scene.remove(keycap);
+        }
+    }
+
 }
