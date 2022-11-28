@@ -57,10 +57,33 @@ export class Controls{
                 left_mesh.position.y = 33;
                 left_mesh.position.z = -2.5;
                 left_mesh.material = new THREE.MeshStandardMaterial();
-
+                
                 // Right_Arrow
+                const right_mesh = gltf.scene.children.find((child) => child.name == "Right_Arrow" );
+                right_mesh.scale.set(right_mesh.scale.x * arrow_scale, right_mesh.scale.y * arrow_scale, right_mesh.scale.z * arrow_scale);
+                right_mesh.rotation.set(1.5,4.7,0);
+                right_mesh.position.x = 20;
+                right_mesh.position.y = 33;
+                right_mesh.position.z = -2.5;
+                right_mesh.material = new THREE.MeshStandardMaterial();
+
                 // Right_Turn
+                const turn_arrow_mesh = gltf.scene.children.find((child) => child.name == "Right_Turn" );
+                turn_arrow_mesh.scale.set(turn_arrow_mesh.scale.x * arrow_scale, turn_arrow_mesh.scale.y * arrow_scale, turn_arrow_mesh.scale.z * arrow_scale);
+                turn_arrow_mesh.position.x = 30;
+                turn_arrow_mesh.position.y = 33;
+                turn_arrow_mesh.position.z = -2.5;
+                turn_arrow_mesh.material = new THREE.MeshStandardMaterial();
+
+                
                 // Exchange
+                const exchange_mesh = gltf.scene.children.find((child) => child.name == "Exchange" );
+                exchange_mesh.scale.set(exchange_mesh.scale.x * arrow_scale, exchange_mesh.scale.y * arrow_scale, exchange_mesh.scale.z * arrow_scale);
+                exchange_mesh.position.x = 30;
+                exchange_mesh.position.y = 0;
+                exchange_mesh.position.z = -2.5;
+                exchange_mesh.material = new THREE.MeshStandardMaterial();
+
 
 
                 scene.add(up_arrow_mesh);
@@ -69,6 +92,9 @@ export class Controls{
                 scene.add(left_arrow_mesh);
                 scene.add(h_mesh);
                 scene.add(left_mesh);
+                scene.add(right_mesh);
+                scene.add(turn_arrow_mesh);
+                scene.add(exchange_mesh);
             
             }
         );
@@ -96,7 +122,11 @@ export class Controls{
                         child.name == "Left_Key" || 
                         child.name == "H_Key" || 
                         child.name == "Left_Arrow" || 
-                        child.name == "Piece_1") {
+                        child.name == "Right_Arrow" || 
+                        child.name == "Right_Turn" || 
+                        child.name == "Exchange" || 
+
+                        child.name == "Piece_1" ) {
                         return child;
                     }
                 }
