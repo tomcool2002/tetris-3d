@@ -8,7 +8,7 @@ export class Controls{
         const loader = new GLTFLoader();
         loader.load('./misc/keycaps.gltf', 
             function (gltf) {
-                const scale = 1.5;
+                const scale = 1;
                 const up_arrow_mesh = gltf.scene.children.find((child) => child.name == "Up_Key" );
                 up_arrow_mesh.scale.set(up_arrow_mesh.scale.x * scale, up_arrow_mesh.scale.y * scale, up_arrow_mesh.scale.z * scale);
                 up_arrow_mesh.rotation.set(1.5,0,0);
@@ -28,7 +28,7 @@ export class Controls{
                 const rigth_arrow_mesh = gltf.scene.children.find((child) => child.name == "Right_Key" );
                 rigth_arrow_mesh.scale.set(rigth_arrow_mesh.scale.x * scale, rigth_arrow_mesh.scale.y * scale, rigth_arrow_mesh.scale.z * scale);
                 rigth_arrow_mesh.rotation.set(1.5,0,0);
-                rigth_arrow_mesh.position.x = 0;
+                rigth_arrow_mesh.position.x = 10;
                 rigth_arrow_mesh.position.y = -15;
                 rigth_arrow_mesh.position.z = -2.5;
                 rigth_arrow_mesh.material = new THREE.MeshNormalMaterial();
@@ -36,8 +36,8 @@ export class Controls{
                 const left_arrow_mesh = gltf.scene.children.find((child) => child.name == "Left_Key" );
                 left_arrow_mesh.scale.set(left_arrow_mesh.scale.x * scale, left_arrow_mesh.scale.y * scale, left_arrow_mesh.scale.z * scale);
                 left_arrow_mesh.rotation.set(1.5,0,0);
-                left_arrow_mesh.position.x = 10;
-                left_arrow_mesh.position.y = -15;
+                left_arrow_mesh.position.x = 5;
+                left_arrow_mesh.position.y = 20;
                 left_arrow_mesh.position.z = -2.5;
                 left_arrow_mesh.material = new THREE.MeshNormalMaterial();
 
@@ -50,12 +50,17 @@ export class Controls{
                 h_mesh.position.z = -2.5;
                 h_mesh.material = new THREE.MeshNormalMaterial();
 
+                const arrow_scale = 0.7;
                 const left_mesh = gltf.scene.children.find((child) => child.name == "Left_Arrow" );
-                left_mesh.scale.set(left_mesh.scale.x * scale, left_mesh.scale.y * scale, left_mesh.scale.z * scale);
-                left_mesh.position.x = 40;
-                left_mesh.position.y = 15;
+                left_mesh.scale.set(left_mesh.scale.x * arrow_scale, left_mesh.scale.y * arrow_scale, left_mesh.scale.z * arrow_scale);
+                left_mesh.position.x = 5;
+                left_mesh.position.y = 33;
                 left_mesh.position.z = -2.5;
-                // left_mesh.material = new THREE.MeshNormalMaterial();
+                left_mesh.material = new THREE.MeshStandardMaterial();
+
+                // Right_Arrow
+                // Right_Turn
+                // Exchange
 
 
                 scene.add(up_arrow_mesh);
@@ -68,7 +73,11 @@ export class Controls{
             }
         );
 
-        let piece1 = new Piece();
+        let pieceCreator= new Piece(0,0);
+        let piece1 = pieceCreator.createPiece(5, 0xff0000);
+        piece1.position.y = 10;
+        piece1.position.x = 30;
+
         piece1.name = "Piece_1";
         scene.add(piece1);
             

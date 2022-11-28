@@ -42,15 +42,15 @@ export class Piece {
     let color = this.getRandomColour();
 
     let arrayCube = this.SwitchCaseCreatePiece(rand, color, shape);
-    switch (rand) {
-      case 1: this.name = "I"; break;
-      case 2: this.name = "J"; break;
-      case 3: this.name = "L"; break;
-      case 4: this.name = "O"; break;
-      case 5: this.name = "Z"; break;
-      case 6: this.name = "T"; break;
-      case 7: this.name = "S"; break;
-    }
+    // switch (rand) {
+    //   case 1: this.name = "I"; break;
+    //   case 2: this.name = "J"; break;
+    //   case 3: this.name = "L"; break;
+    //   case 4: this.name = "O"; break;
+    //   case 5: this.name = "Z"; break;
+    //   case 6: this.name = "T"; break;
+    //   case 7: this.name = "S"; break;
+    // }
 
     arrayCube.forEach(cube => {
       cube.Cube.position.y += this.y;
