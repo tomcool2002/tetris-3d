@@ -114,7 +114,7 @@ export class Piece {
 
   }
 
-  createPiece(pieceNum, color) {
+  createPiece(pieceNum, color, oriantation = false) {
     //random number 1-7
     let piece = new THREE.Group();
 
@@ -122,6 +122,15 @@ export class Piece {
 
 
     arrayCube.forEach(cube => {
+      if(oriantation){
+        let y = cube.Cube.position.y;
+        let x = cube.Cube.position.x;
+
+        let [new_x, new_y] = BigMath(x,y);
+        cube.Cube.position.y = new_y;
+        cube.Cube.position.x = new_x;
+
+      }
       cube.Cube.position.y += 17;
       cube.Cube.position.x -= 25;
       piece.add(cube.Cube);
@@ -129,4 +138,8 @@ export class Piece {
 
     return piece;
   }
+}
+
+function BigMath(x, y) {
+  return [-y, x];
 }
