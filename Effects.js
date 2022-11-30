@@ -5,10 +5,16 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 const NbStars = 200;
 
 const Colors = [
+    0x6b2b29,
     0x062eb9,
     0x00e4d9,
+    0x76a2c6,
     0x00e421,
+    0x23ff93,
     0xe40b00,
+    0xff5f52,
+    0xffbe39,
+    0xdc00e7,
     0xffffff,
 ];
 
