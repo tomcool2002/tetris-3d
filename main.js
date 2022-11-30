@@ -5,13 +5,14 @@ import { MouseClicker } from "./mouseClicker";
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { Effects } from './Effects';
 import { Letters } from './Letters';
-import { Post } from './functionAPi'
+import { Post } from './functionAPi';
 import { Controls } from './controls';
 
 // import { smh } from './about/about.html'
 
 let scene, renderer, cam, base, effects;
 
+let pausedMeshes = [];
 // let pieceInit;
 let data;
 
@@ -23,7 +24,7 @@ let startTime = Date.now();
 
 let isStarted = false;
 
-
+let targetList = [];
 
 let points = 0;
 let music;
@@ -35,6 +36,10 @@ let letters;
 let alias = "";
 
 let controls;
+
+let raycaster;
+let mouse;
+
 
 function init(){
   scene = new THREE.Scene();
@@ -66,8 +71,12 @@ function init(){
 
   // public\misc\keycaps.gltf
   controls = new Controls(scene);
-  
 
+  
+  
+  
+  raycaster = new THREE.Raycaster();
+  mouse = new THREE.Vector2();
   
 
   const light = new THREE.AmbientLight( 0xffffff ); 
@@ -105,7 +114,7 @@ function gameStart() {
 
 
   const loader = new GLTFLoader();
-  loader.load('./misc/pauseModel.glb', 
+  loader.load('./misc/pause_play.glb', 
     function (gltf) {
       const pauseMesh = gltf.scene.children.find((child) => child.name == "Pause" );
       const scale = 8;
@@ -114,7 +123,20 @@ function gameStart() {
       pauseMesh.position.y = 20;
       pauseMesh.position.z = -2.5;
       pauseMesh.material = new THREE.MeshNormalMaterial();
-      scene.add(pauseMesh);
+
+      const playMesh = gltf.scene.children.find((child) => child.name == "Play" );
+      playMesh.scale.set(playMesh.scale.x * scale, playMesh.scale.y * scale, playMesh.scale.z * scale);
+      playMesh.position.x = 20;
+      playMesh.position.y = 20;
+      playMesh.position.z = -2.5;
+      playMesh.material = new THREE.MeshNormalMaterial();
+
+
+
+      pausedMeshes.push(pauseMesh);
+      pausedMeshes.push(playMesh);
+
+      scene.add(pausedMeshes[0]);
     }
   );
 
@@ -208,7 +230,6 @@ init();
 
 const clickPosition = { x: 0, y: 0 };
 let mouseClicker = new MouseClicker();
-clearClickPosition();
 let canvas = document.querySelector("#bg");
 
 function getCanvasRelativePosition(event) {
@@ -274,57 +295,29 @@ function charIsLetter(char) {
   return /^[a-zA-Z]$/.test(char);
 }
 
-function clearClickPosition() {
-  clickPosition.x = -100000;
-  clickPosition.y = -100000;
-}
+
 
 function setClickPosition(event) {
   const pos = getCanvasRelativePosition(event);
   clickPosition.x = (pos.x / canvas.clientWidth) * 2 - 1;
-  clickPosition.y = (pos.y / canvas.clientHeight) * -2 + 1;  // note we flip Y
-}
-
-
-window.addEventListener('mousedown', setClickPosition);
-window.addEventListener('mouseup', clearClickPosition);
-
-
-let lastUpdate = Date.now();
-let timeAtPaused;
-let done = false;
-
-let timeAtButtons =  Date.now();
-
-
-function clickLoop(){
-  let deltaTime = Date.now() - timeAtButtons;
-  let enoughTime = ( deltaTime >= 500);
+  clickPosition.y = (pos.y / canvas.clientHeight) * -2 + 1;  // note we flip 
 
   if((mouseClicker.click(clickPosition, scene, cam,"About_1") 
-  || mouseClicker.click(clickPosition, scene, cam,"About_2") )
-     && enoughTime){
+  || mouseClicker.click(clickPosition, scene, cam,"About_2") )){
       document.location.href = './about/index.html';
-    timeAtButtons = Date.now();
   }
   if((mouseClicker.click(clickPosition, scene, cam,"Scores_Bouton_1") 
-  || mouseClicker.click(clickPosition, scene, cam,"Scores_Bouton_2") )
-     && enoughTime){
+  || mouseClicker.click(clickPosition, scene, cam,"Scores_Bouton_2") )){
       document.location.href = './highscore/index.html';
-    timeAtButtons = Date.now();
   }
 
   if((mouseClicker.click(clickPosition, scene, cam,"MENU_1") 
-  || mouseClicker.click(clickPosition, scene, cam,"MENU_2") )
-     && enoughTime){
+  || mouseClicker.click(clickPosition, scene, cam,"MENU_2") )){
       document.location.href = './index.html';
-    timeAtButtons = Date.now();
   }
 
   if((mouseClicker.click(clickPosition, scene, cam,"start_1") 
-      || mouseClicker.click(clickPosition, scene, cam,"start_2") )
-      && enoughTime){
-      timeAtButtons = Date.now();
+      || mouseClicker.click(clickPosition, scene, cam,"start_2") )){
     const startMesh = scene.children.find(((child) => child.name == "start" ));
     const aboutMesh = scene.children.find((child) => child.name == "About" );
     const highScoreMesh = scene.children.find((child) => child.name == "Scores_Bouton" );
@@ -340,16 +333,25 @@ function clickLoop(){
     
   }
 
-  if(effects.loaded){
-    effects.addButtons(scene);
-    effects.loaded = false; 
-  }
+  
 
-  if(letters.IsReady){
-    letters.showLetters(scene, alias);
+  if(mouseClicker.click(clickPosition, scene, cam,"Pause")){
+    pause = true;
+    cam.pause();
+    scene.remove(scene.getObjectByName("Pause"));
+    scene.add(pausedMeshes[1]);
+  }else if(mouseClicker.click(clickPosition, scene, cam,"Play")){
+    pause = false;
+    cam.play();
+    scene.remove(scene.getObjectByName("Play"));
+    scene.add(pausedMeshes[0]);
   }
-
 }
+
+
+window.addEventListener('mousedown', setClickPosition,false);
+let done = false;
+
 
 function AddToDB(data){
   console.log("Succesfully added player to dataBase")
@@ -387,21 +389,13 @@ function error(status) {
   console.error(errorMessage);
 }
 
-
+let lastUpdate = Date.now()
 function gameLoop(timeAtPlay){
-  //about page
-  
-
-
   let now = Date.now();
   if(pause == false){
     if(music.paused && !data.gameOver){
       music.play();
     }
-
-    
-
-    
 
     // speed up
     if(startTime + 20000 <= Date.now() && !data.gameOver){
@@ -409,8 +403,6 @@ function gameLoop(timeAtPlay){
       cam.speedUp();
       speedUpSound.play();
     }
-
-    
     
     if(data.points != points){ 
       effects.changeColor(scene);
@@ -430,7 +422,6 @@ function gameLoop(timeAtPlay){
       // verifie que le game over
       if(alias.length > 0 && data.points > 0){
         let object = { Id: 0, Alias:alias, Score:data.points};
-        // debugger
         Post(object, AddToDB, error);
       }
     }
@@ -441,59 +432,30 @@ function gameLoop(timeAtPlay){
       lastUpdate = Date.now();
     }
     cam.reposition();
-
-    //pause game
-    if(timeAtPlay != undefined){
-      if(mouseClicker.click(clickPosition, scene, cam,"Pause") && Date.now() - timeAtPlay >= 100){
-        pause = true;
-        timeAtPaused = Date.now();
-        cam.pause();
-      }
-    } else {
-      if(mouseClicker.click(clickPosition, scene, cam,"Pause") && pause == false){
-        pause = true;
-        timeAtPaused = Date.now();
-        cam.pause();
-      }
-    } 
   }else{
     music.pause();
   }
-
-
-
-  if (timeAtPaused != undefined){
-    let enoughTime = (Date.now() - timeAtPaused >= 100);
-    if(mouseClicker.click(clickPosition, scene, cam,"Pause") == true && enoughTime == true ){
-      pause = false;
-      cam.play();
-      timeAtPlay = Date.now();
-    }
-  }else{
-    if(mouseClicker.click(clickPosition, scene, cam,"Pause") == true && pause == true){
-      pause = false;
-      cam.play();
-      timeAtPlay = Date.now();
-      
-    }
-  }
-
-  return timeAtPlay;
 
 }
 
 
 let timeAtPlay;
-let timeNoStart =  Date.now();
+
+let Isdone = false;
 function animate() {
 
   if(isStarted){
-    timeAtPlay =  gameLoop(timeAtPlay);
-  }
-
-  clickLoop();
-
+    gameLoop(timeAtPlay);
+  }else{
+    if(effects.loaded){
+      effects.addButtons(scene);
+      effects.loaded = false; 
+    }
   
+    if(letters.IsReady){
+      letters.showLetters(scene, alias);
+    }
+  }
 
   requestAnimationFrame(animate);
   renderer.render(scene, cam);

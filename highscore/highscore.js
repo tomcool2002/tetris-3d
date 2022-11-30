@@ -134,13 +134,9 @@ document.onkeydown = function (e) {
 
 init();
 
-function clearClickPosition() {
-    clickPosition.x = -100000;
-    clickPosition.y = -100000;
-}
+
 const clickPosition = { x: 0, y: 0 };
 let mouseClicker = new MouseClicker();
-clearClickPosition();
 let canvas = document.querySelector("#bg");
 
 function getCanvasRelativePosition(event) {
@@ -155,26 +151,20 @@ function setClickPosition(event) {
     const pos = getCanvasRelativePosition(event);
     clickPosition.x = (pos.x / canvas.clientWidth) * 2 - 1;
     clickPosition.y = (pos.y / canvas.clientHeight) * -2 + 1;  // note we flip Y
+
+    if((mouseClicker.click(clickPosition, scene, cam,"BTG001_1") 
+    || mouseClicker.click(clickPosition, scene, cam,"BTG001") )){
+        document.location.href = '../index.html';
+    }
 }
 
 window.addEventListener('mousedown', setClickPosition);
-window.addEventListener('mouseup', clearClickPosition);
 
 
 // let timeAtAbout =  Date.now();
 
 let timeAtAbout =  Date.now();
 function animate() {
-
-    let deltaTime = Date.now() - timeAtAbout;
-    let enoughTime = ( deltaTime >= 500);
-    if((mouseClicker.click(clickPosition, scene, cam,"BTG001_1") 
-    || mouseClicker.click(clickPosition, scene, cam,"BTG001") )
-        && enoughTime){
-        document.location.href = '../index.html';
-        timeAtAbout = Date.now();
-        // debugger
-    }
     if(score.IsReady ){
         score.ShowScoresFR(scene,scores);
     }

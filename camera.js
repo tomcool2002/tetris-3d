@@ -47,7 +47,6 @@ export class Camera extends THREE.PerspectiveCamera{
         this.controls.autoRotateSpeed = 0;
         this.controls.enablePan = true;
         this.controls.enableRotate = true;
-        console.log("paused");
     }
     
     speedUp(){

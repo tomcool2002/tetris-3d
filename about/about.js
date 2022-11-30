@@ -66,12 +66,20 @@ function init(){
             superviseur_mesh.position.y = 30;
             superviseur_mesh.material = new THREE.MeshStandardMaterial({color:0x6cfe7c});
 
+            // Music
+            const music_mesh = gltf.scene.children.find((child) => child.name == "Music" );
+            music_mesh.scale.set(music_mesh.scale.x * scale, music_mesh.scale.y * scale, music_mesh.scale.z * scale);
+            music_mesh.position.x = -60;
+            music_mesh.position.y = -7;
+            music_mesh.material = new THREE.MeshStandardMaterial({color:0x25BBE7});
+
             scene.add(email_julian_mesh);
             scene.add(email_thom_mesh);
             scene.add(text_thom_mesh);
             scene.add(text_julian_mesh);
             scene.add(description_mesh);
             scene.add(superviseur_mesh);
+            scene.add(music_mesh);
         }
     );
 
@@ -208,13 +216,9 @@ document.onkeydown = function (e) {
 
 init();
 
-function clearClickPosition() {
-    clickPosition.x = -100000;
-    clickPosition.y = -100000;
-}
+
 const clickPosition = { x: 0, y: 0 };
 let mouseClicker = new MouseClicker();
-clearClickPosition();
 let canvas = document.querySelector("#bg");
 
 function getCanvasRelativePosition(event) {
@@ -229,24 +233,15 @@ function setClickPosition(event) {
     const pos = getCanvasRelativePosition(event);
     clickPosition.x = (pos.x / canvas.clientWidth) * 2 - 1;
     clickPosition.y = (pos.y / canvas.clientHeight) * -2 + 1;  // note we flip Y
+
+    if((mouseClicker.click(clickPosition, scene, cam,"BTG001") 
+    || mouseClicker.click(clickPosition, scene, cam,"BTG001_1") )){
+        document.location.href = '../index.html';
+    }
 }
 
 window.addEventListener('mousedown', setClickPosition);
-window.addEventListener('mouseup', clearClickPosition);
-
-let timeAtAbout =  Date.now();
 function animate() {
-
-    let deltaTime = Date.now() - timeAtAbout;
-    let enoughTime = ( deltaTime >= 500);
-    if((mouseClicker.click(clickPosition, scene, cam,"BTG001") 
-    || mouseClicker.click(clickPosition, scene, cam,"BTG001_1") )
-        && enoughTime){
-        document.location.href = '../index.html';
-        timeAtAbout = Date.now();
-        // debugger
-    }
-
 
     cam.reposition(); 
     requestAnimationFrame(animate);
